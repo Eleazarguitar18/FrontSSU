@@ -1,0 +1,26 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Agrega más estilos según tus preferencias */
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  /* Ajusta el espaciado entre los campos */
+}
+
+label {
+  font-weight: bold;
+  /* Estilo para las etiquetas */
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  /* Estilo para los campos de entrada */
+}
+
+button {
+  /* Estilo para el botón de enviar */
+}
