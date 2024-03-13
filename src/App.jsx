@@ -1,16 +1,16 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import './App.css'
-import Formulario from "./Components/Formulario"
+import "./App.css";
+import Formulario from "./Components/Formulario";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-     <Formulario></Formulario> 
+      <Formulario />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,96 +1,116 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import './Formulario.css'
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useFormSubmit } from "./context/DispositivoContext";
+import "./Formulario.css";
 const Formulario = () => {
-  const initialValues = {
-    nroSerie: '',
-    nroActivo: '',
-    estado: '',
-    ubicacion: '',
-    unidad: '',
-    marca: '',
-    detalle: '',
-    tipo: '',
-    nombreEquipo: '',
-    procesador: '',
-    ram: '',
-    memoriaInterna: '',
-  };
-
-  const validationSchema = Yup.object({
-    nroSerie: Yup.string().required('Campo requerido'),
-    nroActivo: Yup.string().required('Campo requerido'),
-    estado: Yup.string().required('Campo requerido'),
-    ubicacion: Yup.string().required('Campo requerido'),
-    unidad: Yup.string().required('Campo requerido'),
-    marca: Yup.string().required('Campo requerido'),
-    detalle: Yup.string().required('Campo requerido'),
-    tipo: Yup.string().required('Campo requerido'),
-    nombreEquipo: Yup.string().required('Campo requerido'),
-    procesador: Yup.string().required('Campo requerido'),
-    ram: Yup.string().required('Campo requerido'),
-    memoriaInterna: Yup.string().required('Campo requerido'),
-    // Agrega validaciones para los demás campos aquí
-    // Por ejemplo:
-    // estado: Yup.string().required('Campo requerido'),
+  // Define el esquema de validación utilizando Yup
+  const validationSchema = Yup.object().shape({
+    NroSerie: Yup.string().required("El número de serie es requerido"),
+    NroActivo: Yup.string().required("El número activo es requerido"),
+    Estado: Yup.string().required("El Estado es requerido"),
+    Ubicacion: Yup.string().required("La ubicación es requerida"),
+    Unidad: Yup.string().required("La Unidad es requerida"),
+    Marca: Yup.string().required("La Marca es requerida"),
+    Detalle: Yup.string().required("El Detalle es requerido"),
+    Tipo: Yup.string().required("El Tipo es requerido"),
+    NombreEquipo: Yup.string().required("El nombre del equipo es requerido"),
+    Procesador: Yup.string().required("El Procesador es requerido"),
+    RAM: Yup.string().required("La RAM es requerida"),
+    Memoria_Interna: Yup.string().required("La memoria interna es requerida"),
   });
 
+  // Función para manejar el envío del formulario
   const handleSubmit = (values) => {
-    // Aquí puedes enviar los datos al backend o realizar otras acciones
-    console.log('Datos enviados:', values);
+    // Aquí podrías enviar los datos al backend o realizar otras acciones
+    console.log("Datos enviados:", values);
   };
 
   return (
     <div>
-      <h1>Formulario de Computadora</h1>
+      <h1>Formulario de Equipo de Computadora</h1>
       <Formik
-        initialValues={initialValues}
+        initialValues={{
+          NroSerie: "",
+          NroActivo: "",
+          Estado: "",
+          Ubicacion: "",
+          Unidad: "",
+          Marca: "",
+          Detalle: "",
+          Tipo: "",
+          NombreEquipo: "",
+          Procesador: "",
+          RAM: "",
+          Memoria_Interna: "",
+        }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
         <Form>
           <div>
-            <label htmlFor="nroSerie">Número de Serie:</label>
-            <Field type="text" id="nroSerie" name="nroSerie" />
-            <ErrorMessage name="nroSerie" component="div" />
+            <label htmlFor="NroSerie">Número de Serie:</label>
+            <Field type="text" id="NroSerie" name="NroSerie" />
+            <ErrorMessage name="NroSerie" component="div" />
           </div>
           <div>
-            <label htmlFor="nroActivo">Número de activo:</label>
-            <Field type="text" id="nroActivo" name="nroActivo" />
-            <ErrorMessage name="nroActivo" component="div" />
+            <label htmlFor="NroActivo">Número de Activo:</label>
+            <Field type="text" id="NroActivo" name="NroActivo" />
+            <ErrorMessage name="NroActivo" component="div" />
           </div>
           <div>
-            <label htmlFor="estado">Estado:</label>
-            <Field type="text" id="estado" name="estado" />
-            <ErrorMessage name="estado" component="div" />
+            <label htmlFor="Estado">Estado:</label>
+            <Field type="text" id="Estado" name="Estado" />
+            <ErrorMessage name="Estado" component="div" />
           </div>
           <div>
-            <label htmlFor="ubicacion">Ubicacion:</label>
-            <Field type="text" id="ubicacion" name="ubicacion" />
-            <ErrorMessage name="ubicacion" component="div" />
+            <label htmlFor="Ubicacion">Ubicación:</label>
+            <Field type="text" id="Ubicacion" name="Ubicacion" />
+            <ErrorMessage name="Ubicacion" component="div" />
           </div>
           <div>
-            <label htmlFor="unidad">Unidad:</label>
-            <Field type="text" id="unidad" name="unidad" />
-            <ErrorMessage name="unidad" component="div" />
+            <label htmlFor="Unidad">Unidad:</label>
+            <Field type="text" id="Unidad" name="Unidad" />
+            <ErrorMessage name="Unidad" component="div" />
           </div>
           <div>
-            <label htmlFor="marca">Marca:</label>
-            <Field type="text" id="marca" name="marca" />
-            <ErrorMessage name="marca" component="div" />
+            <label htmlFor="Marca">Marca:</label>
+            <Field type="text" id="Marca" name="Marca" />
+            <ErrorMessage name="Marca" component="div" />
           </div>
           <div>
-            <label htmlFor="detalle">Detalle:</label>
-            <Field type="text" id="detalle" name="detalle" />
-            <ErrorMessage name="detalle" component="div" />
+            <label htmlFor="Detalle">Detalle:</label>
+            <Field type="text" id="Detalle" name="Detalle" />
+            <ErrorMessage name="Detalle" component="div" />
           </div>
-          {/* Repite lo mismo para los demás campos */}
-          {/* ... */}
+          <div>
+            <label htmlFor="Tipo">Tipo:</label>
+            <Field type="text" id="Tipo" name="Tipo" />
+            <ErrorMessage name="Tipo" component="div" />
+          </div>
+          <div>
+            <label htmlFor="NombreEquipo">Nombre del Equipo:</label>
+            <Field type="text" id="NombreEquipo" name="NombreEquipo" />
+            <ErrorMessage name="NombreEquipo" component="div" />
+          </div>
+          <div>
+            <label htmlFor="Procesador">Procesador:</label>
+            <Field type="text" id="Procesador" name="Procesador" />
+            <ErrorMessage name="Procesador" component="div" />
+          </div>
+          <div>
+            <label htmlFor="RAM">RAM:</label>
+            <Field type="text" id="RAM" name="RAM" />
+            <ErrorMessage name="RAM" component="div" />
+          </div>
+          <div>
+            <label htmlFor="Memoria_Interna">Memoria Interna:</label>
+            <Field type="text" id="Memoria_Interna" name="Memoria_Interna" />
+            <ErrorMessage name="Memoria_Interna" component="div" />
+          </div>
           <button type="submit">Enviar</button>
         </Form>
       </Formik>
-      
     </div>
   );
 };
