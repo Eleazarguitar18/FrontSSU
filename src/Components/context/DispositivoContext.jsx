@@ -9,7 +9,7 @@ const FormSubmitProvider = ({ children }) => {
   const handleSubmit = async (values) => {
     try {
       // Realizar la solicitud POST al backend con Axios
-      const response = await axios.post(`${url_base}/api/dispositivo`, values);
+      const response = await axios.post(`${url_base}/api/pc`, values);
       console.log("Respuesta del backend:", response.data);
       return response.data; // Opcional: puedes devolver la respuesta del backend si es necesario
     } catch (error) {

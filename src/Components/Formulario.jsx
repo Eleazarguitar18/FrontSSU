@@ -5,6 +5,7 @@ import { useFormSubmit } from "./context/DispositivoContext";
 import "./Formulario.css";
 const Formulario = () => {
   // Define el esquema de validación utilizando Yup
+  const handleSubmit = useFormSubmit();
   const validationSchema = Yup.object().shape({
     NroSerie: Yup.string().required("El número de serie es requerido"),
     NroActivo: Yup.string().required("El número activo es requerido"),
@@ -17,13 +18,21 @@ const Formulario = () => {
     NombreEquipo: Yup.string().required("El nombre del equipo es requerido"),
     Procesador: Yup.string().required("El Procesador es requerido"),
     RAM: Yup.string().required("La RAM es requerida"),
-    Memoria_Interna: Yup.string().required("La memoria interna es requerida"),
+    MemoriaInterna: Yup.string().required("La memoria interna es requerida"),
+    SistemaOperativo: Yup.string().required(
+      "La Sistema Operativo es requerida"
+    ),
   });
 
   // Función para manejar el envío del formulario
-  const handleSubmit = (values) => {
-    // Aquí podrías enviar los datos al backend o realizar otras acciones
-    console.log("Datos enviados:", values);
+  const enviarFormulario = async (values, { resetForm }) => {
+    try {
+      const response = await handleSubmit(values);
+      // Realizar acciones adicionales según sea necesario
+      resetForm();
+    } catch (error) {
+      // Manejar el error de envío del formulario
+    }
   };
 
   return (
@@ -42,10 +51,11 @@ const Formulario = () => {
           NombreEquipo: "",
           Procesador: "",
           RAM: "",
-          Memoria_Interna: "",
+          MemoriaInterna: "",
+          SistemaOperativo: "",
         }}
         validationSchema={validationSchema}
-        onSubmit={handleSubmit}
+        onSubmit={enviarFormulario}
       >
         <Form>
           <div>
@@ -104,9 +114,14 @@ const Formulario = () => {
             <ErrorMessage name="RAM" component="div" />
           </div>
           <div>
-            <label htmlFor="Memoria_Interna">Memoria Interna:</label>
-            <Field type="text" id="Memoria_Interna" name="Memoria_Interna" />
-            <ErrorMessage name="Memoria_Interna" component="div" />
+            <label htmlFor="MemoriaInterna">Memoria Interna:</label>
+            <Field type="text" id="MemoriaInterna" name="MemoriaInterna" />
+            <ErrorMessage name="MemoriaInterna" component="div" />
+          </div>
+          <div>
+            <label htmlFor="SistemaOperativo">Sistema Operativo:</label>
+            <Field type="text" id="SistemaOperativo" name="SistemaOperativo" />
+            <ErrorMessage name="SistemaOperativo" component="div" />
           </div>
           <button type="submit">Enviar</button>
         </Form>
