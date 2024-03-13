@@ -2,10 +2,10 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import './Formulario.css'
-const Formulario = () => {
+const FormComputadora = () => {
   const initialValues = {
-    nroSerie: '',
-    nroActivo: '',
+    NroSerie: '',
+    NroActivo: '',
     estado: '',
     ubicacion: '',
     unidad: '',
@@ -95,4 +95,4 @@ const Formulario = () => {
   );
 };
 
-export default Formulario;
+export default FormComputadora;

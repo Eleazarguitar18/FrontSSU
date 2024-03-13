@@ -1,14 +1,17 @@
 import { useState } from 'react'
 
 import './App.css'
-import Formulario from "./Components/Formulario"
+import NavBar from './Components/NavBar'
+import FormComputadora from './Components/FormComputadora'
+import FormPeriferico from './Components/FormPeriferico'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-     <Formulario></Formulario> 
+    <FormComputadora/>
+    <FormPeriferico/>
     </>
   )
 }
