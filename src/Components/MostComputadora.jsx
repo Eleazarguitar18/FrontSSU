@@ -1,62 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import DataTable from "./DataTable";
 
-const MostComputadora = ({
-  NroSerie,
-  NroActivo,
-  Estado,
-  Ubicacion,
-  Unidad,
-  Marca,
-  Detalle,
-  Tipo,
-  NombreEquipo,
-  Procesador,
-  RAM,
-  MemoriaInterna,
-  SistemaOperativo,
-}) => {
+const MostComputadora = () => {
+  const url_base = "http://localhost:3000";
+  const [datos, setDatos] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${url_base}/api/pc`);
+        setDatos(response.data);
+      } catch (error) {
+        console.error("Error al obtener datos:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (!datos) {
+    return <div>Cargando datos...</div>;
+  }
+
   return (
     <div>
       <h2>Detalles del Periférico</h2>
-      <p>
-        <strong>Número de Serie:</strong> {NroSerie}
-      </p>
-      <p>
-        <strong>Número Activo:</strong> {NroActivo}
-      </p>
-      <p>
-        <strong>Estado:</strong> {Estado}
-      </p>
-      <p>
-        <strong>Ubicación:</strong> {Ubicacion}
-      </p>
-      <p>
-        <strong>Unidad:</strong> {Unidad}
-      </p>
-      <p>
-        <strong>Marca:</strong> {Marca}
-      </p>
-      <p>
-        <strong>Detalle:</strong> {Detalle}
-      </p>
-      <p>
-        <strong>Tipo:</strong> {Tipo}
-      </p>
-      <p>
-        <strong>Nombre del Equipo:</strong> {NombreEquipo}
-      </p>
-      <p>
-        <strong>Procesador:</strong> {Procesador}
-      </p>
-      <p>
-        <strong>RAM:</strong> {RAM}
-      </p>
-      <p>
-        <strong>Memoria Intera:</strong> {MemoriaInterna}
-      </p>
-      <p>
-        <strong>Sistema Operativo:</strong> {SistemaOperativo}
-      </p>
+      <DataTable data={datos} />
     </div>
   );
 };

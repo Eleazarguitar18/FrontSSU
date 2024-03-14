@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useFormSubmit } from "./context/DispositivoContext";
 import "./Formulario.css";
-const Formulario = () => {
+const FormComputadora = () => {
   // Define el esquema de validación utilizando Yup
   const handleSubmit = useFormSubmit();
   const validationSchema = Yup.object().shape({
@@ -15,7 +15,9 @@ const Formulario = () => {
     Marca: Yup.string().required("La Marca es requerida"),
     Detalle: Yup.string().required("El Detalle es requerido"),
     Tipo: Yup.string().required("El Tipo es requerido"),
-    NombreEquipo: Yup.string().required("El nombre del equipo es requerido"),
+    NonmbreDelEquipo: Yup.string().required(
+      "El nombre del equipo es requerido"
+    ),
     Procesador: Yup.string().required("El Procesador es requerido"),
     RAM: Yup.string().required("La RAM es requerida"),
     MemoriaInterna: Yup.string().required("La memoria interna es requerida"),
@@ -48,7 +50,7 @@ const Formulario = () => {
           Marca: "",
           Detalle: "",
           Tipo: "",
-          NombreEquipo: "",
+          NonmbreDelEquipo: "",
           Procesador: "",
           RAM: "",
           MemoriaInterna: "",
@@ -99,9 +101,9 @@ const Formulario = () => {
             <ErrorMessage name="Tipo" component="div" />
           </div>
           <div>
-            <label htmlFor="NombreEquipo">Nombre del Equipo:</label>
-            <Field type="text" id="NombreEquipo" name="NombreEquipo" />
-            <ErrorMessage name="NombreEquipo" component="div" />
+            <label htmlFor="NonmbreDelEquipo">Nombre del Equipo:</label>
+            <Field type="text" id="NonmbreDelEquipo" name="NonmbreDelEquipo" />
+            <ErrorMessage name="NonmbreDelEquipo" component="div" />
           </div>
           <div>
             <label htmlFor="Procesador">Procesador:</label>
@@ -130,4 +132,4 @@ const Formulario = () => {
   );
 };
 
-export default Formulario;
+export default FormComputadora;
