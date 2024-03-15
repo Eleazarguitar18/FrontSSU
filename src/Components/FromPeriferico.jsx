@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./Formulario.css";
+import { useFormSubmit } from "./context/DispositivoContext";
+
 const FormPeriferico = () => {
+  // const handleSubmit = handleSubmitPeriferico;
+  const { handleSubmitPeriferico } = useFormSubmit();
   const initialValues = {
     NroSerie: "",
     NroActivo: "",
@@ -25,23 +29,25 @@ const FormPeriferico = () => {
     Detalle: Yup.string().required("Campo requerido"),
     Tipo: Yup.string().required("Campo requerido"),
     Descripcion: Yup.string().required("Campo requerido"),
-    // Agrega validaciones para los demás campos aquí
-    // Por ejemplo:
-    // Estado: Yup.string().required('Campo requerido'),
   });
 
-  const handleSubmit = (values) => {
-    // Aquí puedes enviar los datos al backend o realizar otras acciones
-    console.log("Datos enviados:", values);
+  const enviarFormulario = async (values, { resetForm }) => {
+    try {
+      const response = await handleSubmitPeriferico(values);
+      // Realizar acciones adicionales según sea necesario
+      resetForm();
+    } catch (error) {
+      // Manejar el error de envío del formulario
+    }
   };
 
   return (
     <div>
-      <h1>Formulario de Perifericos</h1>
+      <h1>Formulario de Periféricos</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={handleSubmit}
+        onSubmit={enviarFormulario}
       >
         <Form>
           <div>
@@ -50,7 +56,7 @@ const FormPeriferico = () => {
             <ErrorMessage name="NroSerie" component="div" />
           </div>
           <div>
-            <label htmlFor="NroActivo">Número de activo:</label>
+            <label htmlFor="NroActivo">Número de Activo:</label>
             <Field type="text" id="NroActivo" name="NroActivo" />
             <ErrorMessage name="NroActivo" component="div" />
           </div>
@@ -60,12 +66,12 @@ const FormPeriferico = () => {
             <ErrorMessage name="Estado" component="div" />
           </div>
           <div>
-            <label htmlFor="Ubicacion">Ubicacion:</label>
+            <label htmlFor="Ubicacion">Ubicación:</label>
             <Field type="text" id="Ubicacion" name="Ubicacion" />
             <ErrorMessage name="Ubicacion" component="div" />
           </div>
           <div>
-            <label htmlFor="Unidad">U:</label>
+            <label htmlFor="Unidad">Unidad:</label>
             <Field type="text" id="Unidad" name="Unidad" />
             <ErrorMessage name="Unidad" component="div" />
           </div>
@@ -81,13 +87,13 @@ const FormPeriferico = () => {
           </div>
           <div>
             <label htmlFor="Tipo">Tipo:</label>
-            <Field type="text" id="Detalle" name="Detalle" />
-            <ErrorMessage name="Detalle" component="div" />
+            <Field type="text" id="Tipo" name="Tipo" />
+            <ErrorMessage name="Tipo" component="div" />
           </div>
           <div>
-            <label htmlFor="Detalle">Detalle:</label>
-            <Field type="text" id="Detalle" name="Detalle" />
-            <ErrorMessage name="Detalle" component="div" />
+            <label htmlFor="Descripcion">Descripción:</label>
+            <Field type="text" id="Descripcion" name="Descripcion" />
+            <ErrorMessage name="Descripcion" component="div" />
           </div>
           {/* Repite lo mismo para los demás campos */}
           {/* ... */}

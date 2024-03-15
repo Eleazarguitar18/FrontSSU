@@ -5,7 +5,7 @@ import { useFormSubmit } from "./context/DispositivoContext";
 import "./Formulario.css";
 const FormComputadora = () => {
   // Define el esquema de validación utilizando Yup
-  const handleSubmit = useFormSubmit();
+  const { handleSubmitPC } = useFormSubmit();
   const validationSchema = Yup.object().shape({
     NroSerie: Yup.string().required("El número de serie es requerido"),
     NroActivo: Yup.string().required("El número activo es requerido"),
@@ -29,7 +29,7 @@ const FormComputadora = () => {
   // Función para manejar el envío del formulario
   const enviarFormulario = async (values, { resetForm }) => {
     try {
-      const response = await handleSubmit(values);
+      const response = await handleSubmitPC(values);
       // Realizar acciones adicionales según sea necesario
       resetForm();
     } catch (error) {

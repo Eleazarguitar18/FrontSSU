@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import DataTable from "./DataTable";
+import DataTablePC from "./DataTablePC";
 
 const MostComputadora = () => {
   const url_base = "http://localhost:3000";
@@ -10,7 +10,12 @@ const MostComputadora = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${url_base}/api/pc`);
-        setDatos(response.data);
+        console.log(response.data);
+        const datosCombinados = response.data.map((item) => ({
+          ...item,
+          ...item.Dispositivo,
+        }));
+        setDatos(datosCombinados);
       } catch (error) {
         console.error("Error al obtener datos:", error);
       }
@@ -25,8 +30,8 @@ const MostComputadora = () => {
 
   return (
     <div>
-      <h2>Detalles del Periférico</h2>
-      <DataTable data={datos} />
+      <h2>Detalles del Computadora</h2>
+      <DataTablePC data={datos} />
     </div>
   );
 };

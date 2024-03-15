@@ -1,0 +1,41 @@
+/* Estilo para la tabla */
+.TableContainer {
+  margin: 2px;
+  padding: 0px;
+  border: 2px solid white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para las celdas de encabezado */
+.TableHead {
+  background-color: #3e869e;
+  font-weight: bold;
+}
+
+/* Estilo para las celdas de datos */
+.TableCell {
+  padding: 8px;
+  border-bottom: 1px solid #814545;
+}
+
+/* Estilo para las filas alternas */
+.TableRow:nth-child(even) {
+  background-color: #8b7e7e;
+}
+.ButtonEliminar {
+  margin: 2px;
+  width: 85px; 
+  height: 33px; 
+  background-color: rgba(255, 0, 0, 0.644);
+}
+.ButtonEditar {
+  margin: 2px;
+  width: 85px; 
+  height: 33px; 
+  background-color: rgba(0, 128, 0, 0.603);
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+}

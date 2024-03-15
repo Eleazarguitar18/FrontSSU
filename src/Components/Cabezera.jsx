@@ -4,12 +4,12 @@ import { NavLink } from "react-router-dom";
 const Cabezera = () => {
   return (
     <div className="header">
-      <img
-        src="/src/image/logoEyG2.png"
-        alt="Logo de nuestra institución"
-        style={{ maxWidth: "100px" }} // Ajusta el tamaño del logo aquí
-      />
       <div className="button-container">
+        <img
+          src="/src/image/logoEyG2.png"
+          alt="Logo de nuestra institución"
+          style={{ maxWidth: "100px" }} // Ajusta el tamaño del logo aquí
+        />
         <NavLink to="/pc">
           <button className="header-button">Computadoras</button>
         </NavLink>

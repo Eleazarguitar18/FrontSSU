@@ -1,48 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import DataTablePeriferico from "./DataTablePeriferico";
 
-const MostPeriferico = ({
-  NroSerie,
-  NroActivo,
-  Estado,
-  Ubicacion,
-  Unidad,
-  Marca,
-  Detalle,
-  Tipo,
-  Descripcion,
-}) => {
+const MostComputadora = () => {
+  const url_base = "http://localhost:3000";
+  const [datos, setDatos] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${url_base}/api/periferico`);
+        console.log(response.data);
+        const datosCombinados = response.data.map((item) => ({
+          ...item,
+          ...item.Dispositivo,
+        }));
+        setDatos(datosCombinados);
+      } catch (error) {
+        console.error("Error al obtener datos:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (!datos) {
+    return <div>Cargando datos...</div>;
+  }
+
   return (
     <div>
       <h2>Detalles del Periférico</h2>
-      <p>
-        <strong>Número de Serie:</strong> {NroSerie}
-      </p>
-      <p>
-        <strong>Número Activo:</strong> {NroActivo}
-      </p>
-      <p>
-        <strong>Estado:</strong> {Estado}
-      </p>
-      <p>
-        <strong>Ubicación:</strong> {Ubicacion}
-      </p>
-      <p>
-        <strong>Unidad:</strong> {Unidad}
-      </p>
-      <p>
-        <strong>Marca:</strong> {Marca}
-      </p>
-      <p>
-        <strong>Detalle:</strong> {Detalle}
-      </p>
-      <p>
-        <strong>Tipo:</strong> {Tipo}
-      </p>
-      <p>
-        <strong>Descripción:</strong> {Descripcion}
-      </p>
+      <DataTablePeriferico data={datos} />
     </div>
   );
 };
 
-export default MostPeriferico;
+export default MostComputadora;
