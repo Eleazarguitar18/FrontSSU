@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { url_base } from "../data/base.routes.js";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-import { useData } from "./context/DataContext.jsx";
 import "./DataTable.css";
 import {
   Table,
@@ -15,11 +14,6 @@ import {
 } from "@mui/material";
 
 const DataTableWithDeleteButton = () => {
-  const { setDataDispositivo } = useData();
-
-  const handleEdit = (datosDispositivo) => {
-    setDataDispositivo(datosDispositivo); // Establece el id_Dispositivo en el contexto
-  };
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -29,7 +23,6 @@ const DataTableWithDeleteButton = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(`${url_base}/pc`);
-
       //   setData(response.data);
       const datosCombinados = response.data.map((item) => ({
         ...item,
@@ -43,11 +36,9 @@ const DataTableWithDeleteButton = () => {
 
   const handleDelete = async (row_id) => {
     try {
-      const respuesta = await axios.delete(`${url_base}/pc/${row_id}`);
+      await axios.delete(`${url_base}/pc/${row_id}`);
       console.log(`Eliminando fila con id ${row_id}`);
-      if (respuesta.status === 204) {
-        console.log("eliminacion exitosa");
-      }
+      // Actualiza los datos después de eliminar la fila
       fetchData();
     } catch (error) {
       console.error("Error al eliminar la fila:", error);
@@ -63,13 +54,15 @@ const DataTableWithDeleteButton = () => {
     "Marca",
     "Detalle",
     "Tipo",
-    "NombreDelEquipo",
+    "NonmbreDelEquipo",
     "Procesador",
     "RAM",
     "MemoriaInterna",
     "SistemaOperativo",
     "Acciones", // Agregamos una nueva columna "Eliminar"
   ];
+
+  const handleEdit = async (row_id) => {};
 
   return (
     <TableContainer
@@ -102,7 +95,7 @@ const DataTableWithDeleteButton = () => {
                       </button>
                       <NavLink to={`/perifericoEdit`}>
                         <button
-                          onClick={() => handleEdit(row)}
+                          onClick={() => handleEdit(row.id_Dispositivo)}
                           className="ButtonEditar"
                         >
                           Editar

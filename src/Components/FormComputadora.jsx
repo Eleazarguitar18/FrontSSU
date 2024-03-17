@@ -15,9 +15,7 @@ const FormComputadora = () => {
     Marca: Yup.string().required("La Marca es requerida"),
     Detalle: Yup.string().required("El Detalle es requerido"),
     Tipo: Yup.string().required("El Tipo es requerido"),
-    NonmbreDelEquipo: Yup.string().required(
-      "El nombre del equipo es requerido"
-    ),
+    NombreDelEquipo: Yup.string().required("El nombre del equipo es requerido"),
     Procesador: Yup.string().required("El Procesador es requerido"),
     RAM: Yup.string().required("La RAM es requerida"),
     MemoriaInterna: Yup.string().required("La memoria interna es requerida"),
@@ -50,7 +48,7 @@ const FormComputadora = () => {
           Marca: "",
           Detalle: "",
           Tipo: "",
-          NonmbreDelEquipo: "",
+          NombreDelEquipo: "",
           Procesador: "",
           RAM: "",
           MemoriaInterna: "",
@@ -101,9 +99,9 @@ const FormComputadora = () => {
             <ErrorMessage name="Tipo" component="div" />
           </div>
           <div>
-            <label htmlFor="NonmbreDelEquipo">Nombre del Equipo:</label>
-            <Field type="text" id="NonmbreDelEquipo" name="NonmbreDelEquipo" />
-            <ErrorMessage name="NonmbreDelEquipo" component="div" />
+            <label htmlFor="NombreDelEquipo">Nombre del Equipo:</label>
+            <Field type="text" id="NombreDelEquipo" name="NombreDelEquipo" />
+            <ErrorMessage name="NombreDelEquipo" component="div" />
           </div>
           <div>
             <label htmlFor="Procesador">Procesador:</label>
