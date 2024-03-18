@@ -23,7 +23,14 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { url_base } from "../data/base.routes.js";
+import { useNavigate } from "react-router-dom";
+
 const EditarDispositivo = () => {
+  const navigate = useNavigate();
+
+  const MostrarPC = () => {
+    navigate("/mostrarpc");
+  };
   const { dataDispositivo } = useData();
   console.log("id del dispositivo a editar es:", dataDispositivo);
 
@@ -59,19 +66,25 @@ const EditarDispositivo = () => {
     SistemaOperativo: Yup.string().required("Sistema Operativo es requerido"),
   });
 
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       console.log("estoy enviando estos datos", values);
-      await axios.put(
+      const respuesta = await axios.put(
         `${url_base}/pc/${dataDispositivo.id_Dispositivo}`,
         values
       );
-      console.log("Dispositivo actualizado exitosamente");
+
+      if (respuesta.status == 200) {
+        console.log("Dispositivo actualizado exitosamente");
+        // initialValues = null;
+        setSubmitting(false);
+        resetForm();
+        MostrarPC();
+      }
       // Puedes redirigir al usuario a otra página o realizar otras acciones después de la edición exitosa
     } catch (error) {
       console.error("Error al actualizar el dispositivo:", error);
     }
-    setSubmitting(false);
   };
 
   return (
