@@ -100,7 +100,7 @@ const DataTableWithDeleteButton = () => {
                       >
                         Eliminar
                       </button>
-                      <NavLink to={`/perifericoEdit`}>
+                      <NavLink to={`/pcEdit`}>
                         <button
                           onClick={() => handleEdit(row)}
                           className="ButtonEditar"

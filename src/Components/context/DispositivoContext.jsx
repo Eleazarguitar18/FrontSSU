@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from "react";
 import axios from "axios";
 
-const url_base = "http://localhost:3000";
+import { url_base } from "../data/base.routes.js";
 
 // Creamos un nuevo contexto para el envío del formulario al backend
 const FormSubmitContext = createContext();
@@ -11,7 +11,7 @@ const FormSubmitProvider = ({ children }) => {
   const handleSubmitPC = async (values) => {
     try {
       // Realizar la solicitud POST al backend con Axios
-      const response = await axios.post(`${url_base}/api/pc`, values);
+      const response = await axios.post(`${url_base}/pc`, values);
       console.log("Respuesta del backend para PC:", response.data);
       return response.data; // Devuelve la respuesta del backend si es necesario
     } catch (error) {
@@ -24,7 +24,7 @@ const FormSubmitProvider = ({ children }) => {
   const handleSubmitPeriferico = async (values) => {
     try {
       // Realizar la solicitud POST al backend con Axios
-      const response = await axios.post(`${url_base}/api/periferico`, values);
+      const response = await axios.post(`${url_base}/periferico`, values);
       console.log("Respuesta del backend para periférico:", response.data);
       return response.data; // Devuelve la respuesta del backend si es necesario
     } catch (error) {

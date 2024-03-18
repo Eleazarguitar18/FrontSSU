@@ -1,5 +1,7 @@
+// Cabezera.jsx
 import React from "react";
 import { NavLink } from "react-router-dom";
+import "./Cabezera.css"; // Importa el archivo CSS
 
 const Cabezera = () => {
   return (
@@ -21,6 +23,12 @@ const Cabezera = () => {
         </NavLink>
         <NavLink to={`/mostrarperi`}>
           <button className="header-button">Mostrar Periféricos</button>
+        </NavLink>
+        <NavLink to={`/mostrarperi`}>
+          <button className="header-button">Mantenimientos</button>
+        </NavLink>
+        <NavLink to={`/mostrarperi`}>
+          <button className="header-button">Prestamos</button>
         </NavLink>
       </div>
     </div>

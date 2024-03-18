@@ -8,6 +8,7 @@ import FromPeriferico from "../Components/FromPeriferico";
 import MostComputadora from "../Components/MostComputadora";
 import MostPeriferico from "../Components/MostPeriferico";
 import EditarDispositivo from "../Components/EditarDispositivo";
+import EditarPeriferico from "../Components/EditarPeriferico";
 export default function AppRoutes() {
   return (
     <BrowserRouter>
@@ -19,7 +20,8 @@ export default function AppRoutes() {
 
         <Route path="/mostrarpc" element={<MostComputadora />} />
         <Route path="/mostrarperi" element={<MostPeriferico />} />
-        <Route path="/perifericoEdit" element={<EditarDispositivo />} />
+        <Route path="/pcEdit" element={<EditarDispositivo />} />
+        <Route path="/perifericoEdit" element={<EditarPeriferico />} />
         {/* <Route path="/perifericoEdit/:id" component={<EditarDispositivo />} /> */}
 
         <Route path="*" element={<NotFound />} />
