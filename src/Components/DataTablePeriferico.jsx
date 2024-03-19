@@ -9,8 +9,8 @@ import {
   Paper,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import { url_base } from "../data/base.routes.js";
 import axios from "axios";
+import { url_base } from "./data/base.routes.js";
 import { NavLink } from "react-router-dom";
 import { useData } from "./context/DataContext.jsx";
 

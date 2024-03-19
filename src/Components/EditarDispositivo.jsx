@@ -1,28 +1,9 @@
-// import React from "react";
-// import { useData } from "./context/DataContext";
-// import axios from "axios";
-
-// const EditarDispositivo = () => {
-//   const { dataDispositivo } = useData();
-//   console.log("id del dispositivo a editar es:", dataDispositivo);
-//   // Utiliza el id_Dispositivo del contexto en tu lógica
-//   // Puedes realizar una solicitud para obtener los datos del dispositivo según el id
-
-//   return (
-//     <div>
-//       <h2>Editar Dispositivo</h2>
-//       <p>ID del Dispositivo: {dataDispositivo.id_Dispositivo}</p>
-//     </div>
-//   );
-// };
-
-// export default EditarDispositivo;
 import React from "react";
 import { useData } from "./context/DataContext";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { url_base } from "../data/base.routes.js";
+import { url_base } from "./data/base.routes.js";
 import { useNavigate } from "react-router-dom";
 
 const EditarDispositivo = () => {
@@ -197,3 +178,22 @@ const EditarDispositivo = () => {
 };
 
 export default EditarDispositivo;
+// import React from "react";
+// import { useData } from "./context/DataContext";
+// import axios from "axios";
+
+// const EditarDispositivo = () => {
+//   const { dataDispositivo } = useData();
+//   console.log("id del dispositivo a editar es:", dataDispositivo);
+//   // Utiliza el id_Dispositivo del contexto en tu lógica
+//   // Puedes realizar una solicitud para obtener los datos del dispositivo según el id
+
+//   return (
+//     <div>
+//       <h2>Editar Dispositivo</h2>
+//       <p>ID del Dispositivo: {dataDispositivo.id_Dispositivo}</p>
+//     </div>
+//   );
+// };
+
+// export default EditarDispositivo;

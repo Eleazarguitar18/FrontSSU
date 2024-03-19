@@ -22,14 +22,14 @@ import { useData } from "./context/DataContext";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { url_base } from "../data/base.routes.js";
+import { url_base } from "./data/base.routes.js";
 import { useNavigate } from "react-router-dom";
 
 const EditarPeriferico = () => {
   const navigate = useNavigate();
 
   const MostrarPC = () => {
-    navigate("/mostrarpc");
+    navigate("/mostrarperi");
   };
   const { dataDispositivo } = useData();
   console.log("id del dispositivo a editar es:", dataDispositivo);
@@ -62,7 +62,7 @@ const EditarPeriferico = () => {
     try {
       console.log("estoy enviando estos datos", values);
       const respuesta = await axios.put(
-        `${url_base}/pc/${dataDispositivo.id_Dispositivo}`,
+        `${url_base}/periferico/${dataDispositivo.id_Dispositivo}`,
         values
       );
 
