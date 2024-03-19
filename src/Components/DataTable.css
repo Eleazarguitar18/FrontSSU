@@ -1,7 +1,7 @@
 /* Estilo para la tabla */
 .TableContainer {
-  margin: 2px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   border: 2px solid white;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -15,12 +15,14 @@
 
 /* Estilo para las celdas de datos */
 .TableCell {
-  padding: 8px;
+  padding: 1px;
   border-bottom: 1px solid #814545;
 }
 
 /* Estilo para las filas alternas */
 .TableRow:nth-child(even) {
+  padding: 0px;
+  height: 20px; 
   background-color: #8b7e7e;
 }
 .ButtonEliminar {

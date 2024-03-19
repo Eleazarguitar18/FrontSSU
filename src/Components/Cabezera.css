@@ -1,31 +1,28 @@
-/* Cabezera.css */
-
-/* Estilo para el contenedor de la cabecera */
+/* Estilos específicos para la cabecera */
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #2b414e;
-    /* Otros estilos personalizados según tus necesidades */
-  }
-  
-/* Estilo para los botones en la cabecera */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #2b414e;
+  z-index: 1000; /* Asegura que la cabecera esté por encima de otros elementos */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px; /* Ajusta el relleno para separar los elementos */
+}
+
 .header-button {
-  /* Agrega estilos aquí, como colores, bordes, márgenes, etc. */
   margin-top: 20px;
   padding-top: 10px;
   margin-right: 10px; /* Espacio entre los botones */
 }
 
-/* Estilo para la imagen del logo */
 .header img {
   max-width: 100px;
-  /* Otros estilos para la imagen */
-  vertical-align: middle; /* Alinea verticalmente con los botones */
+  vertical-align: middle;
 }
 
-/* Estilo para los enlaces de navegación */
 .header a {
   /* Agrega estilos para los enlaces, como colores, subrayados, etc. */
 }

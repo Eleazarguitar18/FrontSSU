@@ -9,10 +9,25 @@ import MostComputadora from "../Components/MostComputadora";
 import MostPeriferico from "../Components/MostPeriferico";
 import EditarDispositivo from "../Components/EditarDispositivo";
 import EditarPeriferico from "../Components/EditarPeriferico";
+import Tabla from "../Components/Tabla";
+
 export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Cabezera />
+      {/* <Tabla
+        columnas={[
+          "ID",
+          "Nombre",
+          "Descripción",
+          "Precio",
+          "Stock",
+          "Acciones",
+          "Otro",
+          "Otra columna",
+        ]}
+      /> */}
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/pc" element={<FormComputadora />} />
