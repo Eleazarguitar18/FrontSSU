@@ -10,6 +10,8 @@ import MostPeriferico from "../Components/MostPeriferico";
 import EditarDispositivo from "../Components/EditarDispositivo";
 import EditarPeriferico from "../Components/EditarPeriferico";
 import Tabla from "../Components/Tabla";
+import Datos_red from "../Components/red/Datos_red";
+import DataTableHistorial from "../historial/DataTableHistorial";
 
 export default function AppRoutes() {
   return (
@@ -27,7 +29,6 @@ export default function AppRoutes() {
           "Otra columna",
         ]}
       /> */}
-
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/pc" element={<FormComputadora />} />
@@ -37,6 +38,8 @@ export default function AppRoutes() {
         <Route path="/mostrarperi" element={<MostPeriferico />} />
         <Route path="/pcEdit" element={<EditarDispositivo />} />
         <Route path="/perifericoEdit" element={<EditarPeriferico />} />
+        <Route path="/datosred" element={<Datos_red />} />
+        <Route path="/historial" element={<DataTableHistorial />} />
         {/* <Route path="/perifericoEdit/:id" component={<EditarDispositivo />} /> */}
 
         <Route path="*" element={<NotFound />} />

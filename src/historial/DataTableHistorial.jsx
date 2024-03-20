@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-import { useData } from "./context/DataContext.jsx";
-import { url_base } from "./data/base.routes.js";
-import "./Tabla.css";
+import { url_base } from "../Components/data/base.routes.js";
+import { useData } from "../Components/context/DataContext.jsx";
 import {
   Table,
   TableBody,
@@ -14,23 +13,21 @@ import {
   Paper,
 } from "@mui/material";
 
-const DataTableWithDeleteButton = () => {
-  const { setDataDispositivo } = useData();
-
-  const handleEdit = (datosDispositivo) => {
-    setDataDispositivo(datosDispositivo); // Establece el id_Dispositivo en el contexto
+export default function Historial() {
+  const { setDataHistorial } = useData();
+  const handleEdit = (datos) => {
+    setDataHistorial(datos);
   };
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
     fetchData();
-  }, []); // Este efecto se ejecutará solo una vez al montar el componente
+  }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${url_base}/pc`);
-
-      //   setData(response.data);
+      const response = await axios.get(`${url_base}/historial`);
       const datosCombinados = response.data.map((item) => ({
         ...item,
         ...item.Dispositivo,
@@ -43,7 +40,7 @@ const DataTableWithDeleteButton = () => {
 
   const handleDelete = async (row_id) => {
     try {
-      const respuesta = await axios.delete(`${url_base}/pc/${row_id}`);
+      const respuesta = await axios.delete(`${url_base}/historial/${row_id}`);
       console.log(`Eliminando fila con id ${row_id}`);
       if (respuesta.status === 204) {
         console.log("eliminacion exitosa");
@@ -55,31 +52,22 @@ const DataTableWithDeleteButton = () => {
   };
 
   const columns = [
-    "NroSerie",
-    "NroActivo",
-    "Estado",
-    "Ubicacion",
-    "Unidad",
-    "Marca",
-    "Detalle",
-    "Tipo",
-    "NombreDelEquipo",
-    "Procesador",
-    "RAM",
-    "MemoriaInterna",
-    "SistemaOperativo",
-    "Acciones", // Agregamos una nueva columna "Eliminar"
+    "id_Historial",
+    "Fecha",
+    "Detalles",
+    "Encargado",
+    "Motivo",
+    "id_Dispositivo",
+    "Acciones",
   ];
 
   return (
     <TableContainer
       style={{ backgroundColor: "#242424" }}
       component={Paper}
-      className="TableContainer table-wrapper" // Añadimos las clases CSS necesarias
+      className="TableContainer table-wrapper"
     >
       <Table className="fl-table">
-        {" "}
-        {/* Añadimos la clase fl-table */}
         <TableHead className="TableHead">
           <TableRow className="TableRow">
             {columns.map((column) => (
@@ -88,8 +76,6 @@ const DataTableWithDeleteButton = () => {
                 style={{ color: "white" }}
                 className="fl-table thead th"
               >
-                {" "}
-                {/* Añadimos la clase fl-table para los encabezados */}
                 {column}
               </TableCell>
             ))}
@@ -97,19 +83,17 @@ const DataTableWithDeleteButton = () => {
         </TableHead>
         <TableBody>
           {data.map((row) => (
-            <TableRow key={row.id_Dispositivo}>
+            <TableRow key={row.id_Historial}>
               {columns.map((column) => (
                 <TableCell
                   key={column}
                   style={{ color: "white" }}
                   className="fl-table td"
                 >
-                  {" "}
-                  {/* Añadimos la clase fl-table para las celdas */}
                   {column === "Acciones" ? (
                     <div>
                       <button
-                        onClick={() => handleDelete(row.id_Dispositivo)}
+                        onClick={() => handleDelete(row.id_Historial)}
                         className="ButtonEliminar"
                       >
                         Eliminar
@@ -134,6 +118,4 @@ const DataTableWithDeleteButton = () => {
       </Table>
     </TableContainer>
   );
-};
-
-export default DataTableWithDeleteButton;
+}

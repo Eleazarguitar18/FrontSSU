@@ -24,10 +24,10 @@ const Cabezera = () => {
         <NavLink to={`/mostrarperi`}>
           <button className="header-button">Mostrar Periféricos</button>
         </NavLink>
-        <NavLink to={`/mostrarperi`}>
+        <NavLink to={`/datosred`}>
           <button className="header-button">Datos Red</button>
         </NavLink>
-        <NavLink to={`/mostrarperi`}>
+        <NavLink to={`/historial`}>
           <button className="header-button">Historial</button>
         </NavLink>
       </div>

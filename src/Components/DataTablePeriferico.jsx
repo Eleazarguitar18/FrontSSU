@@ -74,13 +74,21 @@ const DataTable = () => {
     <TableContainer
       style={{ backgroundColor: "#242424" }}
       component={Paper}
-      className="TableContainer"
+      className="TableContainer table-wrapper" // Añadimos las clases CSS necesarias
     >
-      <Table>
+      <Table className="fl-table">
+        {" "}
+        {/* Añadimos la clase fl-table */}
         <TableHead className="TableHead">
           <TableRow className="TableRow">
             {columns.map((column) => (
-              <TableCell key={column} style={{ color: "white" }}>
+              <TableCell
+                key={column}
+                style={{ color: "white" }}
+                className="fl-table thead th"
+              >
+                {" "}
+                {/* Añadimos la clase fl-table para los encabezados */}
                 {column}
               </TableCell>
             ))}
@@ -90,7 +98,13 @@ const DataTable = () => {
           {data.map((row) => (
             <TableRow key={row.id_Dispositivo}>
               {columns.map((column) => (
-                <TableCell key={column} style={{ color: "white" }}>
+                <TableCell
+                  key={column}
+                  style={{ color: "white" }}
+                  className="fl-table td"
+                >
+                  {" "}
+                  {/* Añadimos la clase fl-table para las celdas */}
                   {column === "Acciones" ? (
                     <div>
                       <button
@@ -99,7 +113,7 @@ const DataTable = () => {
                       >
                         Eliminar
                       </button>
-                      <NavLink to={`/perifericoEdit`}>
+                      <NavLink to={`/pcEdit`}>
                         <button
                           onClick={() => handleEdit(row)}
                           className="ButtonEditar"
@@ -111,7 +125,6 @@ const DataTable = () => {
                   ) : (
                     row[column]
                   )}
-                  {/* {row[column]} */}
                 </TableCell>
               ))}
             </TableRow>
