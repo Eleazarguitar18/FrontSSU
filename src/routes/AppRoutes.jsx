@@ -11,7 +11,10 @@ import EditarDispositivo from "../Components/EditarDispositivo";
 import EditarPeriferico from "../Components/EditarPeriferico";
 import Tabla from "../Components/Tabla";
 import Datos_red from "../Components/red/Datos_red";
-import DataTableHistorial from "../historial/DataTableHistorial";
+import DataTableHistorial from "../Components/historial/DataTableHistorial";
+import FormHistorial from "../Components/historial/FormHistorial";
+import EditHistorial from "../Components/historial/EditHistorial";
+import DataHistorialGeneral from "../Components/historial/DataHistorialGeneral";
 
 export default function AppRoutes() {
   return (
@@ -40,6 +43,9 @@ export default function AppRoutes() {
         <Route path="/perifericoEdit" element={<EditarPeriferico />} />
         <Route path="/datosred" element={<Datos_red />} />
         <Route path="/historial" element={<DataTableHistorial />} />
+        <Route path="/registrarHistorial" element={<FormHistorial />} />
+        <Route path="/historialEdit" element={<EditHistorial />} />
+        <Route path="/historialGeneral" element={<DataHistorialGeneral />} />
         {/* <Route path="/perifericoEdit/:id" component={<EditarDispositivo />} /> */}
 
         <Route path="*" element={<NotFound />} />

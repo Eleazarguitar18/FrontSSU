@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-import { useData } from "./context/DataContext.jsx";
-import { url_base } from "./data/base.routes.js";
-import "./Tabla.css";
+import { url_base } from "../data/base.routes.js";
+import { useData } from "../context/DataContext.jsx";
+import FormHistorial from "./FormHistorial.jsx";
 import {
   Table,
   TableBody,
@@ -14,28 +14,36 @@ import {
   Paper,
 } from "@mui/material";
 
-const DataTableWithDeleteButton = () => {
-  const { setDataDispositivo } = useData();
-
-  const handleEdit = (datosDispositivo) => {
-    setDataDispositivo(datosDispositivo); // Establece el id_Dispositivo en el contexto
+export default function Historial() {
+  const { setDataHistorial, dataDispositivo } = useData();
+  console.log("traendo datos", dataDispositivo);
+  const handleEdit = (datos) => {
+    setDataHistorial(datos);
   };
+  setDataHistorial(dataDispositivo.id_Dispositivo);
   const [data, setData] = useState([]);
 
   useEffect(() => {
     fetchData();
-  }, []); // Este efecto se ejecutará solo una vez al montar el componente
+  }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${url_base}/pc`);
-
-      //   setData(response.data);
-      const datosCombinados = response.data.map((item) => ({
-        ...item,
-        ...item.Dispositivo,
-      }));
-      setData(datosCombinados);
+      const response = await axios.get(
+        `${url_base}/historial/pc/${dataDispositivo.id_Dispositivo}`
+      );
+      console.log("Me llego esto", response.data.data.length);
+      if (response.data.data.length != 0) {
+        const datosCombinados = response.data.data.map((item) => ({
+          ...item,
+          ...item.Dispositivo,
+        }));
+        console.log(datosCombinados);
+        setData(datosCombinados);
+        // nuevoHistorial(datosCombinados.id_Dispositivo);
+        return;
+      }
+      console.log("no existen datos");
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }
@@ -43,7 +51,7 @@ const DataTableWithDeleteButton = () => {
 
   const handleDelete = async (row_id) => {
     try {
-      const respuesta = await axios.delete(`${url_base}/pc/${row_id}`);
+      const respuesta = await axios.delete(`${url_base}/historial/${row_id}`);
       console.log(`Eliminando fila con id ${row_id}`);
       if (respuesta.status === 204) {
         console.log("eliminacion exitosa");
@@ -55,33 +63,26 @@ const DataTableWithDeleteButton = () => {
   };
 
   const columns = [
-    "NroSerie",
-    "NroActivo",
-    "Estado",
-    "Ubicacion",
-    "Unidad",
-    "Marca",
-    "Detalle",
-    "Tipo",
-    "NombreDelEquipo",
-    "Procesador",
-    "RAM",
-    "MemoriaInterna",
-    "SistemaOperativo",
-    "Acciones", // Agregamos una nueva columna "Eliminar"
-    "Historial", // Agregamos una nueva columna "Eliminar"
+    "id_Historial",
+    "Fecha",
+    "Detalles",
+    "Encargado",
+    "Motivo",
+    "id_Dispositivo",
+    "Acciones",
   ];
 
   return (
     <div>
+      {/* <NavLink to={`/registrarHistorial`}>
+        <button className="ButtonEditar">Crear historial</button>
+      </NavLink> */}
       <TableContainer
         style={{ backgroundColor: "#242424" }}
         component={Paper}
-        className="TableContainer table-wrapper" // Añadimos las clases CSS necesarias
+        className="TableContainer table-wrapper"
       >
         <Table className="fl-table">
-          {" "}
-          {/* Añadimos la clase fl-table */}
           <TableHead className="TableHead">
             <TableRow className="TableRow">
               {columns.map((column) => (
@@ -90,8 +91,6 @@ const DataTableWithDeleteButton = () => {
                   style={{ color: "white" }}
                   className="fl-table thead th"
                 >
-                  {" "}
-                  {/* Añadimos la clase fl-table para los encabezados */}
                   {column}
                 </TableCell>
               ))}
@@ -99,36 +98,27 @@ const DataTableWithDeleteButton = () => {
           </TableHead>
           <TableBody>
             {data.map((row) => (
-              <TableRow key={row.id_Dispositivo}>
+              <TableRow key={row.id_Historial}>
                 {columns.map((column) => (
                   <TableCell
                     key={column}
                     style={{ color: "white" }}
                     className="fl-table td"
                   >
-                    {/* Añadimos la clase fl-table para las celdas */}
                     {column === "Acciones" ? (
                       <div>
                         <button
-                          onClick={() => handleDelete(row.id_Dispositivo)}
+                          onClick={() => handleDelete(row.id_Historial)}
                           className="ButtonEliminar"
                         >
                           Eliminar
                         </button>
-                        <NavLink to={`/pcEdit`}>
+                        <NavLink to={`/pdEdit`}>
                           <button
                             onClick={() => handleEdit(row)}
                             className="ButtonEditar"
                           >
                             Editar
-                          </button>
-                        </NavLink>
-                      </div>
-                    ) : column === "Historial" ? (
-                      <div>
-                        <NavLink to={`/historial`}>
-                          <button onClick={() => handleEdit(row)}>
-                            Historial
                           </button>
                         </NavLink>
                       </div>
@@ -142,9 +132,6 @@ const DataTableWithDeleteButton = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <FormHistorial /> */}
     </div>
   );
-};
-
-export default DataTableWithDeleteButton;
+}

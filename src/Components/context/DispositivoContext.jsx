@@ -4,7 +4,7 @@ import axios from "axios";
 import { url_base } from "../data/base.routes.js";
 
 // Creamos un nuevo contexto para el envío del formulario al backend
-const FormSubmitContext = createContext();
+export const FormSubmitContext = createContext();
 
 const FormSubmitProvider = ({ children }) => {
   // Función para manejar el envío del formulario para PC
@@ -32,10 +32,22 @@ const FormSubmitProvider = ({ children }) => {
       throw error; // Lanza el error para que los componentes puedan manejarlo según sea necesario
     }
   };
+  const crearHistorial = async (values) => {
+    try {
+      // Realizar la solicitud POST al backend con Axios
+      // console.log("listo para enviar", values);
 
+      const response = await axios.post(`${url_base}/historial`, values);
+      console.log("Respuesta del backend para historial:", response.data);
+      return response.data; // Devuelve la respuesta del backend si es necesario
+    } catch (error) {
+      console.error("Error al enviar el formulario para historial:", error);
+      throw error; // Lanza el error para que los componentes puedan manejarlo según sea necesario
+    }
+  };
   return (
     <FormSubmitContext.Provider
-      value={{ handleSubmitPC, handleSubmitPeriferico }}
+      value={{ handleSubmitPC, handleSubmitPeriferico, crearHistorial }}
     >
       {children}
     </FormSubmitContext.Provider>

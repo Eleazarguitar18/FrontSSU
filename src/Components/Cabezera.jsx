@@ -27,7 +27,7 @@ const Cabezera = () => {
         <NavLink to={`/datosred`}>
           <button className="header-button">Datos Red</button>
         </NavLink>
-        <NavLink to={`/historial`}>
+        <NavLink to={`/historialGeneral`}>
           <button className="header-button">Historial</button>
         </NavLink>
       </div>

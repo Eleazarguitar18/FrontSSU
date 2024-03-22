@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { url_base } from "./data/base.routes.js";
 import { useNavigate } from "react-router-dom";
-
+import EditHistorial from "./historial/EditHistorial.jsx";
 const EditarDispositivo = () => {
   const navigate = useNavigate();
 
@@ -173,6 +173,7 @@ const EditarDispositivo = () => {
           </Form>
         )}
       </Formik>
+      <EditHistorial />
     </div>
   );
 };
