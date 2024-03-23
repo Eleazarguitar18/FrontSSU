@@ -130,7 +130,6 @@ const Datos_red = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <FormHistorial /> */}
     </div>
   );
 };
