@@ -1,8 +1,32 @@
+/* Estilos para la cabecera */
+.header {
+  /* Estilos para la cabecera */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 50px; /* Por ejemplo, establece aquí la altura mínima deseada */
+  background-color: #2b414e;
+  z-index: 1000; /* Asegura que la cabecera esté por encima de otros elementos */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px; 
+}
+
+/* Estilos para el contenedor del formulario */
 .form-container {
+  position: relative; /* Establece la posición relativa */
+  top: 100px; /* Ajusta esta propiedad según la altura de tu cabecera */
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Agrega más estilos según tus preferencias */
+  background-color: #2b414e; /* Color de fondo */
+  padding: 20px;
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra */
+  width: 80%; /* Ancho del formulario */
+  max-width: 400px; /* Ancho máximo del formulario */
 }
 
 .form-group {
@@ -18,9 +42,18 @@ label {
 input {
   width: 100%;
   padding: 0.5rem;
+  background-color: rgb(85, 85, 85);
+  border: 1px solid #ccc; /* Borde */
+  border-radius: 5px; /* Bordes redondeados */
   /* Estilo para los campos de entrada */
 }
 
-button {
+.botonEnviar {
   /* Estilo para el botón de enviar */
+  border-color: white;
+  width: 100%;
+  
+}
+button:hover {
+  background-color: #333; /* Cambio de color al pasar el ratón */
 }

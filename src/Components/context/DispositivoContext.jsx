@@ -45,9 +45,47 @@ const FormSubmitProvider = ({ children }) => {
       throw error; // Lanza el error para que los componentes puedan manejarlo según sea necesario
     }
   };
+  const editarHistorial = async (values) => {
+    try {
+      // Realizar la solicitud POST al backend con Axios
+      // console.log("listo para enviar", values);
+
+      const response = await axios.put(
+        `${url_base}/historial/${values.id_Historial}`,
+        values
+      );
+      console.log("Respuesta del backend para historial:", response.data);
+      return response.data; // Devuelve la respuesta del backend si es necesario
+    } catch (error) {
+      console.error("Error al enviar el formulario para historial:", error);
+      throw error; // Lanza el error para que los componentes puedan manejarlo según sea necesario
+    }
+  };
+  const eliminarHistorial = async (values) => {
+    try {
+      // Realizar la solicitud POST al backend con Axios
+      // console.log("listo para enviar", values);
+
+      const response = await axios.delete(
+        `${url_base}/historial/${values.id_Historial}`,
+        values
+      );
+      console.log("Respuesta del backend para historial:", response.data);
+      return response.data; // Devuelve la respuesta del backend si es necesario
+    } catch (error) {
+      console.error("Error al enviar el formulario para historial:", error);
+      throw error; // Lanza el error para que los componentes puedan manejarlo según sea necesario
+    }
+  };
   return (
     <FormSubmitContext.Provider
-      value={{ handleSubmitPC, handleSubmitPeriferico, crearHistorial }}
+      value={{
+        handleSubmitPC,
+        handleSubmitPeriferico,
+        crearHistorial,
+        editarHistorial,
+        eliminarHistorial,
+      }}
     >
       {children}
     </FormSubmitContext.Provider>

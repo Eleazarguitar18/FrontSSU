@@ -1,80 +1,136 @@
-// import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
+import { url_base } from "../data/base.routes.js";
+import { useData } from "../context/DataContext";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 
-// export default function Datos_red() {
-//   return <div>Datos_red</div>;
-// }
-import React from "react";
+const columns = [
+  "id_Datos_red",
+  "DireccionIP",
+  "DireccionMAC",
+  "id_Dispositivo",
+  "Unidad",
+  "Marca",
+  "Tipo",
+  "Ubicacion",
+  "Acciones", // Agregamos una nueva columna "Eliminar"
+  "Historial", // Agregamos una nueva columna "Eliminar"
+];
 
-const Datos_red = (/* { dispositivos, redes } */) => {
-  const dispositivos = [
-    {
-      id: 1,
-      nombre: "PC1",
-      ip: "192.168.1.2",
-      mac: "AB:CD:EF:01:23:45",
-      idRed: 1,
-    },
-    {
-      id: 2,
-      nombre: "PC2",
-      ip: "192.168.1.3",
-      mac: "AB:CD:EF:12:34:56",
-      idRed: 2,
-    },
-  ];
+const Datos_red = () => {
+  const [data, setData] = useState([]);
+  const { setDataRed, setDataDispositivo } = useData();
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  const redes = [
-    { id: 1, nombre: "Red 1", tipo: "Ethernet" },
-    { id: 2, nombre: "Red 2", tipo: "WiFi" },
-  ];
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${url_base}/datos_red`);
+      console.log("Me llego esto", response);
+      if (response.data.length !== 0) {
+        const datosCombinados = response.data.map((item) => ({
+          ...item,
+          ...item.Dispositivo,
+        }));
+        console.log(datosCombinados);
+        setData(datosCombinados);
+        // nuevoHistorial(datosCombinados.id_Dispositivo);
+        return;
+      }
+      console.log("no existen datos");
+    } catch (error) {
+      console.error("Error al obtener los datos:", error);
+    }
+  };
 
+  const handleEdit = (datosRed) => {
+    setDataDispositivo(datosRed);
+    setDataRed(datosRed);
+  };
+  const visitarHstorial = () => {
+    setData;
+  };
   return (
     <div>
-      <h2>Dispositivos de Red</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>IP</th>
-            <th>MAC</th>
-            <th>Red</th>
-          </tr>
-        </thead>
-        <tbody>
-          {dispositivos.map((dispositivo) => (
-            <tr key={dispositivo.id}>
-              <td>{dispositivo.id}</td>
-              <td>{dispositivo.nombre}</td>
-              <td>{dispositivo.ip}</td>
-              <td>{dispositivo.mac}</td>
-              <td>
-                {redes.find((red) => red.id === dispositivo.idRed)?.nombre}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <h2>Redes</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Tipo</th>
-          </tr>
-        </thead>
-        <tbody>
-          {redes.map((red) => (
-            <tr key={red.id}>
-              <td>{red.id}</td>
-              <td>{red.nombre}</td>
-              <td>{red.tipo}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <TableContainer
+        style={{ backgroundColor: "#242424" }}
+        component={Paper}
+        className="TableContainer table-wrapper" // Añadimos las clases CSS necesarias
+      >
+        <Table className="fl-table">
+          {" "}
+          {/* Añadimos la clase fl-table */}
+          <TableHead className="TableHead">
+            <TableRow className="TableRow">
+              {columns.map((column) => (
+                <TableCell
+                  key={column}
+                  style={{ color: "white" }}
+                  className="fl-table thead th"
+                >
+                  {" "}
+                  {/* Añadimos la clase fl-table para los encabezados */}
+                  {column}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((row) => (
+              <TableRow key={row.id_Datos_red}>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column}
+                    style={{ color: "white" }}
+                    className="fl-table td"
+                  >
+                    {/* Añadimos la clase fl-table para las celdas */}
+                    {column === "Acciones" ? (
+                      <div>
+                        {/* <button
+                          onClick={() => handleDelete(row.id_Dispositivo)}
+                          className="ButtonEliminar"
+                        >
+                          Eliminar
+                        </button> */}
+                        <NavLink to={`/datosredEdit`}>
+                          <button
+                            onClick={() => handleEdit(row)}
+                            className="ButtonEditar"
+                          >
+                            Cambiar IP
+                          </button>
+                        </NavLink>
+                      </div>
+                    ) : column === "Historial" ? (
+                      <div>
+                        <NavLink to={`/historial`}>
+                          <button onClick={() => handleEdit(row)}>
+                            Historial
+                          </button>
+                        </NavLink>
+                      </div>
+                    ) : (
+                      row[column]
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {/* <FormHistorial /> */}
     </div>
   );
 };

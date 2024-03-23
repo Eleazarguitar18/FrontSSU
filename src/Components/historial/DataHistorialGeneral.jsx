@@ -72,6 +72,9 @@ export default function Historial() {
 
   return (
     <div>
+      <div>
+        <h1>Historial General</h1>
+      </div>
       <TableContainer
         style={{ backgroundColor: "#242424" }}
         component={Paper}

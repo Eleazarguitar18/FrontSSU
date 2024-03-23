@@ -68,6 +68,7 @@ const DataTable = () => {
     "Tipo",
     "Descripcion",
     "Acciones", // Agregamos una nueva columna "Eliminar"
+    "Historial",
   ];
 
   return (
@@ -113,12 +114,20 @@ const DataTable = () => {
                       >
                         Eliminar
                       </button>
-                      <NavLink to={`/pcEdit`}>
+                      <NavLink to={`/perifericoEdit`}>
                         <button
                           onClick={() => handleEdit(row)}
                           className="ButtonEditar"
                         >
                           Editar
+                        </button>
+                      </NavLink>
+                    </div>
+                  ) : column === "Historial" ? (
+                    <div>
+                      <NavLink to={`/historial`}>
+                        <button onClick={() => handleEdit(row)}>
+                          Historial
                         </button>
                       </NavLink>
                     </div>

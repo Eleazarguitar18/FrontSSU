@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { useFormSubmit } from "../context/DispositivoContext";
 import { useData } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
+import Historial from "./DataTableHistorial";
 
 function formatearFecha(fecha) {
   fecha = new Date(fecha);
@@ -21,7 +22,7 @@ function formatearFecha(fecha) {
   return `${diaFormateado}-${mesFormateado}-${año}`;
 }
 const EditHistorial = () => {
-  const { crearHistorial } = useFormSubmit();
+  const { editarHistorial } = useFormSubmit();
   const { dataHistorial } = useData();
   //   console.log("tengo estos datos", dataHistorial);
   const validationSchema = Yup.object().shape({
@@ -38,7 +39,7 @@ const EditHistorial = () => {
   const enviarFormulario = async (values, { resetForm }) => {
     try {
       console.log("Tengo esto", values);
-      const response = await crearHistorial(values);
+      const response = await editarHistorial(values);
       // Realizar acciones adicionales según sea necesario
       resetForm();
       MostrarHistorial();
@@ -52,7 +53,10 @@ const EditHistorial = () => {
       <h1>Historial</h1>
       <Formik
         initialValues={{
-          Fecha: formatearFecha(dataHistorial.Fecha),
+          id_Historial: dataHistorial.id_Historial,
+          Fecha: dataHistorial.Fecha
+            ? new Date(dataHistorial.Fecha).toISOString().substring(0, 10)
+            : "",
           Detalles: dataHistorial.Detalles,
           Encargado: dataHistorial.Encargado,
           Motivo: dataHistorial.Motivo,
@@ -84,9 +88,10 @@ const EditHistorial = () => {
           </div>
 
           <button type="submit">Enviar</button>
-          <NavLink to={`/historial`}>
-            <button className="header-button">Cancelar</button>
-          </NavLink>
+
+          <button onClick={MostrarHistorial} className="header-button">
+            Cancelar
+          </button>
         </Form>
       </Formik>
     </div>

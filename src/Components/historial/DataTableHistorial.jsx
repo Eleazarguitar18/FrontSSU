@@ -113,12 +113,12 @@ export default function Historial() {
                         >
                           Eliminar
                         </button>
-                        <NavLink to={`/pdEdit`}>
+                        <NavLink to={`/historialEdit`}>
                           <button
                             onClick={() => handleEdit(row)}
                             className="ButtonEditar"
                           >
-                            Editar
+                            Modificar
                           </button>
                         </NavLink>
                       </div>

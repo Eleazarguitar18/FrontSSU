@@ -123,7 +123,9 @@ const FormComputadora = () => {
             <Field type="text" id="SistemaOperativo" name="SistemaOperativo" />
             <ErrorMessage name="SistemaOperativo" component="div" />
           </div>
-          <button type="submit">Enviar</button>
+          <button type="submit" className="botonEnviar">
+            Enviar
+          </button>
         </Form>
       </Formik>
     </div>

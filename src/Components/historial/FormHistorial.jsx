@@ -22,7 +22,7 @@ const obtenerFechaActual = () => {
 };
 const FormHistorial = () => {
   const { crearHistorial } = useFormSubmit();
-  const { dataHistorial } = useData();
+  const { dataHistorial, dataDispositivo } = useData();
   const validationSchema = Yup.object().shape({
     Fecha: Yup.date().required(),
     Detalles: Yup.string().nullable(),
@@ -55,7 +55,7 @@ const FormHistorial = () => {
           Detalles: "",
           Encargado: "",
           Motivo: "",
-          id_Dispositivo: dataHistorial,
+          id_Dispositivo: dataDispositivo.id_Dispositivo,
         }}
         validationSchema={validationSchema}
         onSubmit={enviarFormulario}

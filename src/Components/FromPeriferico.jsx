@@ -97,7 +97,9 @@ const FormPeriferico = () => {
           </div>
           {/* Repite lo mismo para los demás campos */}
           {/* ... */}
-          <button type="submit">Enviar</button>
+          <button type="submit" className="botonEnviar">
+            Enviar
+          </button>
         </Form>
       </Formik>
     </div>

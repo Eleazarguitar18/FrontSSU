@@ -1,11 +1,11 @@
 import React from "react";
 import { useData } from "./context/DataContext";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { NavLink } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
 import { url_base } from "./data/base.routes.js";
 import { useNavigate } from "react-router-dom";
-import EditHistorial from "./historial/EditHistorial.jsx";
 const EditarDispositivo = () => {
   const navigate = useNavigate();
 
@@ -167,13 +167,14 @@ const EditarDispositivo = () => {
                 className="error"
               />
             </div>
-            <button type="submit" disabled={isSubmitting}>
-              Guardar Cambios
-            </button>
+            <NavLink to={"/registrarHistorial"}>
+              <button type="submit" disabled={isSubmitting}>
+                Guardar Cambios
+              </button>
+            </NavLink>
           </Form>
         )}
       </Formik>
-      <EditHistorial />
     </div>
   );
 };
