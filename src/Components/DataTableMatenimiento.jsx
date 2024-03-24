@@ -28,13 +28,15 @@ const DataTableMantenimiento = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${url_base}/pc`);
-
+      const response = await axios.get(`${url_base}/mantenimiento`);
+      console.log(response.data);
       //   setData(response.data);
       const datosCombinados = response.data.map((item) => ({
         ...item,
         ...item.Dispositivo,
+        TipoEquipo: item.Dispositivo.Tipo,
       }));
+      console.log("DATOS COMBINADOS", datosCombinados);
       setData(datosCombinados);
     } catch (error) {
       console.error("Error al obtener los datos:", error);
@@ -43,7 +45,9 @@ const DataTableMantenimiento = () => {
 
   const handleDelete = async (row_id) => {
     try {
-      const respuesta = await axios.delete(`${url_base}/pc/${row_id}`);
+      const respuesta = await axios.delete(
+        `${url_base}/mantenimiento/${row_id}`
+      );
       console.log(`Eliminando fila con id ${row_id}`);
       if (respuesta.status === 204) {
         console.log("eliminacion exitosa");
@@ -96,7 +100,7 @@ const DataTableMantenimiento = () => {
           </TableHead>
           <TableBody>
             {data.map((row) => (
-              <TableRow key={row.id_Dispositivo}>
+              <TableRow key={row.id_Mantenimiento}>
                 {columns.map((column) => (
                   <TableCell
                     key={column}
@@ -107,7 +111,7 @@ const DataTableMantenimiento = () => {
                     {column === "Acciones" ? (
                       <div>
                         <button
-                          onClick={() => handleDelete(row.id_Dispositivo)}
+                          onClick={() => handleDelete(row.id_Mantenimiento)}
                           className="ButtonEliminar"
                         >
                           Atentido

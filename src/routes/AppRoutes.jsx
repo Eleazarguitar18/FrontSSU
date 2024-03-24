@@ -17,7 +17,6 @@ import FormHistorial from "../Components/historial/FormHistorial";
 import EditHistorial from "../Components/historial/EditHistorial";
 import DataHistorialGeneral from "../Components/historial/DataHistorialGeneral";
 import EditDatos_red from "../Components/red/EditDatos_red";
-import SliderButton from "../Components/SliderButton";
 
 export default function AppRoutes() {
   return (

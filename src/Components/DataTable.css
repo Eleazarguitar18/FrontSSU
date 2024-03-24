@@ -35,16 +35,6 @@
   cursor: pointer;
 }
 
-.ButtonEliminar {
-  background-color: rgba(255, 0, 0, 0.644);
-  color: white;
-}
-
-.ButtonEditar {
-  background-color: rgba(0, 128, 0, 0.603);
-  color: white;
-}
-
 .button-container {
   display: flex;
   justify-content: center;
