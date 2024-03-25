@@ -1,6 +1,6 @@
 /* Estilos específicos para la cabecera */
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -12,13 +12,11 @@
   align-items: center;
   padding: 5px 20px; /* Ajusta el relleno para separar los elementos */
 }
-
 .header-button {
   margin-top: 20px;
   padding-top: 10px;
   margin-right: 10px; /* Espacio entre los botones */
 }
-
 .header img {
   max-width: 100px;
   vertical-align: middle;

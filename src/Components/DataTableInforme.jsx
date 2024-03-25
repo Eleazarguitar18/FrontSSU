@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
-import { url_base } from "../data/base.routes.js";
-import { useData } from "../context/DataContext";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useData } from "./context/DataContext.jsx";
+import { url_base } from "./data/base.routes.js";
+import { useFormSubmit } from "./context/DispositivoContext.jsx";
+import "./Tabla.css";
 import {
   Table,
   TableBody,
@@ -13,53 +15,69 @@ import {
   Paper,
 } from "@mui/material";
 
-const columns = [
-  "id_Datos_red",
-  "DireccionIP",
-  "DireccionMAC",
-  "id_Dispositivo",
-  "Unidad",
-  "Marca",
-  "Tipo",
-  "Ubicacion",
-  "Acciones", // Agregamos una nueva columna "Eliminar"
-  "Historial", // Agregamos una nueva columna "Eliminar"
-];
-
-const Datos_red = () => {
+const DataTableInforme = () => {
+  const { setDataMantenimiento } = useData();
+  const posponerMantenimiento = (datosDispositivo) => {
+    console.log(datosDispositivo.id_Mantenimiento);
+    setDataMantenimiento(datosDispositivo); // Establece el id_Dispositivo en el contexto
+    useNavigate("/editarMantenimiento");
+  };
+  const atenderMantenimiento = (datosDispositivo) => {
+    // datosDispositivo.estado = "atendido";
+    // datosDispositivo.fecha_final = new Date();
+    // editarMantenimiento(datosDispositivo);
+    setDataMantenimiento(datosDispositivo); // Establece el id_Dispositivo en el contexto
+  };
   const [data, setData] = useState([]);
-  const { setDataRed, setDataDispositivo } = useData();
+
   useEffect(() => {
     fetchData();
-  }, []);
+  }, []); // Este efecto se ejecutará solo una vez al montar el componente
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${url_base}/datos_red`);
-      console.log("Me llego esto", response);
-      if (response.data.length !== 0) {
-        const datosCombinados = response.data.map((item) => ({
-          ...item,
-          ...item.Dispositivo,
-        }));
-        console.log(datosCombinados);
-        setData(datosCombinados);
-        // nuevoHistorial(datosCombinados.id_Dispositivo);
-        return;
-      }
-      console.log("no existen datos");
+      const response = await axios.get(`${url_base}/mantenimiento`);
+      console.log(response.data);
+      //   setData(response.data);
+      const datosCombinados = response.data.map((item) => ({
+        ...item,
+        ...item.Dispositivo,
+        TipoEquipo: item.Dispositivo.Tipo,
+      }));
+      console.log("DATOS COMBINADOS", datosCombinados);
+      setData(datosCombinados);
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }
   };
 
-  const handleEdit = (datosRed) => {
-    setDataDispositivo(datosRed);
-    setDataRed(datosRed);
+  const handleDelete = async (row_id) => {
+    try {
+      const respuesta = await axios.delete(
+        `${url_base}/mantenimiento/${row_id}`
+      );
+      console.log(`Eliminando fila con id ${row_id}`);
+      if (respuesta.status === 204) {
+        console.log("eliminacion exitosa");
+      }
+      fetchData();
+    } catch (error) {
+      console.error("Error al eliminar la fila:", error);
+    }
   };
-  const visitarHstorial = () => {
-    setData;
-  };
+
+  const columns = [
+    "idInforme",
+    "fecha",
+    "observaciones",
+    "encargado",
+    "estado",
+    "Recomendaciones",
+    "TipoFalla",
+    "Acciones", // Agregamos una nueva columna "Eliminar"
+    "Historial", // Agregamos una nueva columna "Eliminar"
+  ];
+
   return (
     <div>
       <TableContainer
@@ -87,7 +105,7 @@ const Datos_red = () => {
           </TableHead>
           <TableBody>
             {data.map((row) => (
-              <TableRow key={row.id_Datos_red}>
+              <TableRow key={row.id_Mantenimiento}>
                 {columns.map((column) => (
                   <TableCell
                     key={column}
@@ -97,18 +115,18 @@ const Datos_red = () => {
                     {/* Añadimos la clase fl-table para las celdas */}
                     {column === "Acciones" ? (
                       <div>
-                        {/* <button
-                          onClick={() => handleDelete(row.id_Dispositivo)}
+                        <button
+                          onClick={() => atenderMantenimiento(row)}
                           className="ButtonEliminar"
                         >
-                          Eliminar
-                        </button> */}
-                        <NavLink to={`/datosredEdit`}>
+                          Atentido
+                        </button>
+                        <NavLink to={`/posponerMantenimiento`}>
                           <button
-                            onClick={() => handleEdit(row)}
+                            onClick={() => posponerMantenimiento(row)}
                             className="ButtonEditar"
                           >
-                            Cambiar IP
+                            Posponer
                           </button>
                         </NavLink>
                       </div>
@@ -130,8 +148,9 @@ const Datos_red = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      {/* <FormHistorial /> */}
     </div>
   );
 };
 
-export default Datos_red;
+export default DataTableInforme;

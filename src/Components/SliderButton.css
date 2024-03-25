@@ -21,7 +21,7 @@
   transform: translateY(0);
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .botones-container {
     width: 100%; /* Ocupa todo el ancho disponible en dispositivos móviles */
     left: 0; /* Alinear los botones al borde izquierdo */
