@@ -7,6 +7,9 @@ export const DataProvider = ({ children }) => {
   const [dataDispositivo, setDataDispositivo] = useState(null);
   const [dataHistorial, setDataHistorial] = useState(null);
   const [dataRed, setDataRed] = useState(null);
+
+  // variable para mantenimiento
+  const [dataMantenimiento, setDataMantenimiento] = useState(null);
   return (
     <DataContext.Provider
       value={{
@@ -16,6 +19,8 @@ export const DataProvider = ({ children }) => {
         setDataHistorial,
         dataRed,
         setDataRed,
+        dataMantenimiento,
+        setDataMantenimiento,
       }}
     >
       {children}

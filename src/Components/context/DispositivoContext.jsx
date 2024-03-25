@@ -77,6 +77,42 @@ const FormSubmitProvider = ({ children }) => {
       throw error; // Lanza el error para que los componentes puedan manejarlo según sea necesario
     }
   };
+  // rutas para mantenimiento
+  const nuevoMantenimiento = async (values) => {
+    try {
+      const response = await axios.post(`${url_base}/mantenimiento`, values);
+      console.log("Respuesta del Backend para Mantenimiento", response);
+      return response;
+    } catch (error) {
+      console.error("Error al enviar el formulario para Mantenimiento:", error);
+      throw error;
+    }
+  };
+  const editarMantenimiento = async (values) => {
+    try {
+      const response = await axios.put(
+        `${url_base}/mantenimiento/${values.id_Mantenimiento}`,
+        values
+      );
+      console.log("Respuesta del Backend para Mantenimiento", response.data);
+      return response;
+    } catch (error) {
+      console.error("Error al enviar el formulario para Mantenimiento:", error);
+      throw error;
+    }
+  };
+  const eliminarMantenimiento = async (values) => {
+    try {
+      const response = await axios.delete(
+        `${url_base}/mantenimiento/${values.id_Mantenimiento}`
+      );
+      console.log("Respuesta del Backend para Mantenimiento", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error al eliminar para Mantenimiento:", error);
+      throw error;
+    }
+  };
   return (
     <FormSubmitContext.Provider
       value={{
@@ -85,6 +121,9 @@ const FormSubmitProvider = ({ children }) => {
         crearHistorial,
         editarHistorial,
         eliminarHistorial,
+        nuevoMantenimiento,
+        editarMantenimiento,
+        eliminarMantenimiento,
       }}
     >
       {children}

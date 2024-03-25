@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import "./SliderButton.css"; // Archivo CSS para estilos
+import "./SliderButton.css"; // Archivo de estilos CSS para el componente
 
-const SliderButton = ({ buttonText, beforeSlideText, buttons }) => {
-  const [isHovered, setIsHovered] = useState(false);
+const SliderButton = ({ nombreContenedor, botones }) => {
+  const [mostrarBotones, setMostrarBotones] = useState(false);
+
+  const toggleMostrarBotones = () => {
+    setMostrarBotones(!mostrarBotones);
+  };
 
   return (
-    <div
-      className="slider-button-container"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <button className="header-button">{buttonText}</button>
-      <div className={`button-group ${isHovered ? "slide-down" : ""}`}>
-        {buttons.map((button, index) => (
-          <NavLink key={index} to={button.to}>
-            <button className="header-button">{button.text}</button>
+    <div>
+      <button className="boton-contenedor" onClick={toggleMostrarBotones}>
+        {nombreContenedor}
+      </button>
+      <div
+        className={
+          mostrarBotones ? "botones-container visible" : "botones-container"
+        }
+      >
+        {botones.map((boton, index) => (
+          <NavLink key={index} to={boton.enlace} activeClassName="active">
+            <button>{boton.nombre}</button>
           </NavLink>
         ))}
       </div>

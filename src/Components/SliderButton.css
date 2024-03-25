@@ -1,34 +1,33 @@
-.slider-button-container {
-    position: relative;
+.boton-contenedor {
+  vertical-align: middle;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
+.botones-container {
+  display: none;
+  transition: all 0.3s ease; /* Agregamos una transición para el efecto deslizante */
+  opacity: 0; /* Comenzamos con opacidad 0 para que no se muestren inicialmente */
+  transform: translateY(-10px); /* Iniciamos ligeramente desplazados hacia arriba */
+  display: flex; /* Usamos flexbox */
+  flex-direction: column; /* Colocamos los botones uno debajo del otro */
+  position: absolute;
+  top: calc(100% + 5px);
+  z-index: 100; /* Asegura que los botones estén por encima de otros elementos */
+}
+
+.botones-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media only screen and (max-width: 600px) {
+  .botones-container {
+    width: 100%; /* Ocupa todo el ancho disponible en dispositivos móviles */
+    left: 0; /* Alinear los botones al borde izquierdo */
+    top: auto; /* Eliminar la posición absoluta en dispositivos móviles */
+    bottom: 0; /* Fijar los botones al borde inferior */
+    transform: translateY(0); /* Asegurar que los botones estén visibles */
+    border-top: 1px solid #ccc; /* Agregar un borde superior para separar los botones del contenido */
   }
-  
-  .button-group {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: calc(100% + 5px); /* Ajusta la distancia vertical entre el botón y los botones desplegables */
-    left: 0;
-    background-color: #fff; /* Color de fondo para los botones desplegables */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para los botones desplegables */
-    border-radius: 5px; /* Borde redondeado para los botones desplegables */
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    transform: translateY(-100%);
-  }
-  
-  .button-group.slide-down {
-    transform: translateY(0);
-  }
-  
-  .header-button {
-    padding: 10px 15px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .header-button:hover {
-    background-color: #f0f0f0; /* Color de fondo al pasar el cursor sobre los botones */
-  }
-  
+}

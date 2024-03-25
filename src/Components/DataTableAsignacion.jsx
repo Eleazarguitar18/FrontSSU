@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useData } from "./context/DataContext.jsx";
 import { url_base } from "./data/base.routes.js";
 import { useFormSubmit } from "./context/DispositivoContext.jsx";
@@ -16,12 +16,13 @@ import {
   Paper,
 } from "@mui/material";
 
-const DataTableMantenimiento = () => {
+const DataTableAsignacion = () => {
   const { setDataMantenimiento } = useData();
+  const { editarMantenimiento } = useFormSubmit();
   const posponerMantenimiento = (datosDispositivo) => {
-    console.log(datosDispositivo.id_Mantenimiento);
-    setDataMantenimiento(datosDispositivo); // Establece el id_Dispositivo en el contexto
-    useNavigate("/editarMantenimiento");
+    datosDispositivo.estado = "pendiente";
+    editarMantenimiento(datosDispositivo);
+    // setDataMantenimiento(datosDispositivo); // Establece el id_Dispositivo en el contexto
   };
   const atenderMantenimiento = (datosDispositivo) => {
     // datosDispositivo.estado = "atendido";
@@ -68,17 +69,16 @@ const DataTableMantenimiento = () => {
   };
 
   const columns = [
-    // "id_Mantenimiento",
-    "fecha_inicial",
-    "actividad",
-    "fecha_final",
-    "estado",
-    "Detalles",
-    "tipo",
-    "Unidad",
-    "Marca",
-    "TipoEquipo",
-    "Ubicacion",
+    "idAsignacion",
+    "Nro",
+    "fecha y hora_salida",
+    "fecha y hora_regreso",
+    "tiempo de prestamo",
+    "datos_solicitante",
+    "TipoAsignacion",
+    "observaciones",
+    "encargado_de_recepcion",
+    "encargado_de_entrega",
     // "id_Dispositivo",
     // "id_PersonalSSU",
     "Acciones", // Agregamos una nueva columna "Eliminar"
@@ -126,14 +126,14 @@ const DataTableMantenimiento = () => {
                           onClick={() => atenderMantenimiento(row)}
                           className="ButtonEliminar"
                         >
-                          Atentido
+                          Eliminar
                         </button>
                         <NavLink to={`/posponerMantenimiento`}>
                           <button
                             onClick={() => posponerMantenimiento(row)}
                             className="ButtonEditar"
                           >
-                            Posponer
+                            Editar
                           </button>
                         </NavLink>
                       </div>
@@ -160,4 +160,4 @@ const DataTableMantenimiento = () => {
   );
 };
 
-export default DataTableMantenimiento;
+export default DataTableAsignacion;

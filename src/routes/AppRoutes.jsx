@@ -7,6 +7,7 @@ import FormComputadora from "../Components/FormComputadora";
 import FromPeriferico from "../Components/FromPeriferico";
 import MostComputadora from "../Components/MostComputadora";
 import MostPeriferico from "../Components/MostPeriferico";
+import MostAsignacion from "../Components/MostAsignacion";
 import EditarDispositivo from "../Components/EditarDispositivo";
 import EditarPeriferico from "../Components/EditarPeriferico";
 import MostMantenimiento from "../Components/MostMantenimiento";
@@ -17,6 +18,8 @@ import FormHistorial from "../Components/historial/FormHistorial";
 import EditHistorial from "../Components/historial/EditHistorial";
 import DataHistorialGeneral from "../Components/historial/DataHistorialGeneral";
 import EditDatos_red from "../Components/red/EditDatos_red";
+import RegistrarMantenimiento from "../Components/Mantenimiento/RegistrarMantenimiento";
+import PosponerMantenimiento from "../Components/Mantenimiento/PosponerMantenimiento";
 
 export default function AppRoutes() {
   return (
@@ -46,7 +49,14 @@ export default function AppRoutes() {
           <Route path="/mostrarperi" element={<MostPeriferico />} />
           <Route path="/pcEdit" element={<EditarDispositivo />} />
           <Route path="/perifericoEdit" element={<EditarPeriferico />} />
+
           <Route path="/mostrarMant" element={<MostMantenimiento />} />
+          <Route path="/mostrarAsig" element={<MostAsignacion />} />
+          <Route path="/registrarMant" element={<RegistrarMantenimiento />} />
+          <Route
+            path="/posponerMantenimiento"
+            element={<PosponerMantenimiento />}
+          />
 
           <Route path="/datosred" element={<Datos_red />} />
           <Route path="/datosredEdit" element={<EditDatos_red />} />

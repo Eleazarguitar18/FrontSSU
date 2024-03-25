@@ -24,10 +24,6 @@
   vertical-align: middle;
 }
 
-.header a {
-  /* Agrega estilos para los enlaces, como colores, subrayados, etc. */
-}
-
 /* Media query para dispositivos móviles */
 @media (max-width: 768px) {
   .header {

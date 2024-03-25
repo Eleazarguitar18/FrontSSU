@@ -13,18 +13,24 @@ const Cabezera = () => {
           alt="Logo de nuestra institución"
           style={{ maxWidth: "100px" }} // Ajusta el tamaño del logo aquí
         />
-        <NavLink to="/pc">
+        <SliderButton
+          nombreContenedor={`Computadoras`}
+          botones={[
+            { enlace: "/mostrarpc", nombre: "Mostrar" },
+            { enlace: "/pc", nombre: "Registrar" },
+          ]}
+        />
+        {/* <NavLink to="/pc">
           <button className="header-button">Computadoras</button>
         </NavLink>
         <NavLink to={`/periferico`}>
           <button className="header-button">Periféricos</button>
-        </NavLink>
+        </NavLink> */}
         <SliderButton
-          buttonText={`Opciones`}
-          beforeSlideText={`Opciones`}
-          buttons={[
-            { to: "/mostrarpc", text: "Mostrar Computadoras" },
-            { to: "/mostrarperi", text: "Mostrar Periferico" },
+          nombreContenedor={`Perifericos`}
+          botones={[
+            { enlace: "/mostrarperi", nombre: "Mostrar" },
+            { enlace: "/periferico", nombre: "Registrar" },
           ]}
         />
         {/* <NavLink to={`/mostrarpc`}>
@@ -39,8 +45,15 @@ const Cabezera = () => {
         <NavLink to={`/historialGeneral`}>
           <button className="header-button">Historial</button>
         </NavLink>
-        <NavLink to={`/mostrarMant`}>
-          <button className="header-button">Mantenimientos</button>
+        <SliderButton
+          nombreContenedor={`Mantenimientos`}
+          botones={[
+            { enlace: "/registrarMant", nombre: "Registrar" },
+            { enlace: "/mostrarMant", nombre: "Mostrar" },
+          ]}
+        />
+        <NavLink to={`/mostrarAsig`}>
+          <button className="header-button">Asignaciones</button>
         </NavLink>
       </div>
     </div>
