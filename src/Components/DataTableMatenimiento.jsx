@@ -17,18 +17,23 @@ import {
 } from "@mui/material";
 
 const DataTableMantenimiento = () => {
-  const { setDataMantenimiento } = useData();
+  const { setDataMantenimiento,setDataDispositivo } = useData();
+  const {editarMantenimiento}=useFormSubmit()
   const posponerMantenimiento = (datosDispositivo) => {
     console.log(datosDispositivo.id_Mantenimiento);
     setDataMantenimiento(datosDispositivo); // Establece el id_Dispositivo en el contexto
     useNavigate("/editarMantenimiento");
   };
   const atenderMantenimiento = (datosDispositivo) => {
-    // datosDispositivo.estado = "atendido";
+    datosDispositivo.estado = "atendido";
     // datosDispositivo.fecha_final = new Date();
-    // editarMantenimiento(datosDispositivo);
     setDataMantenimiento(datosDispositivo); // Establece el id_Dispositivo en el contexto
+    editarMantenimiento(datosDispositivo);
+    fetchData();
   };
+  const handleHistorial=(datos)=>{
+    setDataDispositivo(datosDispositivo);
+  }
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -52,20 +57,20 @@ const DataTableMantenimiento = () => {
     }
   };
 
-  const handleDelete = async (row_id) => {
-    try {
-      const respuesta = await axios.delete(
-        `${url_base}/mantenimiento/${row_id}`
-      );
-      console.log(`Eliminando fila con id ${row_id}`);
-      if (respuesta.status === 204) {
-        console.log("eliminacion exitosa");
-      }
-      fetchData();
-    } catch (error) {
-      console.error("Error al eliminar la fila:", error);
-    }
-  };
+  // const handleDelete = async (row_id) => {
+  //   try {
+  //     const respuesta = await axios.delete(
+  //       `${url_base}/mantenimiento/${row_id}`
+  //     );
+  //     console.log(`Eliminando fila con id ${row_id}`);
+  //     if (respuesta.status === 204) {
+  //       console.log("eliminacion exitosa");
+  //     }
+  //     fetchData();
+  //   } catch (error) {
+  //     console.error("Error al eliminar la fila:", error);
+  //   }
+  // };
 
   const columns = [
     // "id_Mantenimiento",
@@ -140,7 +145,7 @@ const DataTableMantenimiento = () => {
                     ) : column === "Historial" ? (
                       <div>
                         <NavLink to={`/historial`}>
-                          <button onClick={() => handleEdit(row)}>
+                          <button onClick={() => handleHistorial(row)}>
                             Historial
                           </button>
                         </NavLink>

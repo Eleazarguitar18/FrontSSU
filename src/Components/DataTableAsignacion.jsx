@@ -17,34 +17,36 @@ import {
 } from "@mui/material";
 
 const DataTableAsignacion = () => {
-  const { setDataMantenimiento } = useData();
-  const { editarMantenimiento } = useFormSubmit();
-  const posponerMantenimiento = (datosDispositivo) => {
-    datosDispositivo.estado = "pendiente";
-    editarMantenimiento(datosDispositivo);
-    // setDataMantenimiento(datosDispositivo); // Establece el id_Dispositivo en el contexto
+  const { setDataDispositivo, setDataAsignacion } = useData();
+  const { editarAsignacion, eliminarAsignacion } = useFormSubmit();
+
+  // const editAsignacion=async (values)=>{
+  //   setDataAsignacion(values)
+  //   editarAsignacion()
+  // }
+  const deleteAsignacion = async (values) => {
+    eliminarAsignacion(values);
+    fetchData();
   };
-  const atenderMantenimiento = (datosDispositivo) => {
-    // datosDispositivo.estado = "atendido";
-    // datosDispositivo.fecha_final = new Date();
-    // editarMantenimiento(datosDispositivo);
-    setDataMantenimiento(datosDispositivo); // Establece el id_Dispositivo en el contexto
+
+  const redirecHistorial = (datosDispositivo) => {
+    setDataDispositivo(datosDispositivo);
+    console.log("enviando a historial");
   };
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
     fetchData();
-  }, []); // Este efecto se ejecutará solo una vez al montar el componente
+  }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${url_base}/mantenimiento`);
+      const response = await axios.get(`${url_base}/asignacion`);
       console.log(response.data);
-      //   setData(response.data);
       const datosCombinados = response.data.map((item) => ({
         ...item,
-        ...item.Dispositivo,
-        TipoEquipo: item.Dispositivo.Tipo,
+        // TipoEquipo: item.Dispositivo.Tipo,
       }));
       console.log("DATOS COMBINADOS", datosCombinados);
       setData(datosCombinados);
@@ -53,36 +55,20 @@ const DataTableAsignacion = () => {
     }
   };
 
-  const handleDelete = async (row_id) => {
-    try {
-      const respuesta = await axios.delete(
-        `${url_base}/mantenimiento/${row_id}`
-      );
-      console.log(`Eliminando fila con id ${row_id}`);
-      if (respuesta.status === 204) {
-        console.log("eliminacion exitosa");
-      }
-      fetchData();
-    } catch (error) {
-      console.error("Error al eliminar la fila:", error);
-    }
-  };
-
   const columns = [
-    "idAsignacion",
+    "id_Asignacion",
     "Nro",
-    "fecha y hora_salida",
-    "fecha y hora_regreso",
-    "tiempo de prestamo",
+    "fecha_salida",
+    "fecha_regreso",
+    "hora_salida",
+    "hora_llegada",
     "datos_solicitante",
     "TipoAsignacion",
     "observaciones",
     "encargado_de_recepcion",
     "encargado_de_entrega",
-    // "id_Dispositivo",
-    // "id_PersonalSSU",
-    "Acciones", // Agregamos una nueva columna "Eliminar"
-    "Historial", // Agregamos una nueva columna "Eliminar"
+    "Acciones",
+    "Historial",
   ];
 
   return (
@@ -90,11 +76,9 @@ const DataTableAsignacion = () => {
       <TableContainer
         style={{ backgroundColor: "#242424" }}
         component={Paper}
-        className="TableContainer table-wrapper" // Añadimos las clases CSS necesarias
+        className="TableContainer table-wrapper"
       >
         <Table className="fl-table">
-          {" "}
-          {/* Añadimos la clase fl-table */}
           <TableHead className="TableHead">
             <TableRow className="TableRow">
               {columns.map((column) => (
@@ -103,8 +87,6 @@ const DataTableAsignacion = () => {
                   style={{ color: "white" }}
                   className="fl-table thead th"
                 >
-                  {" "}
-                  {/* Añadimos la clase fl-table para los encabezados */}
                   {column}
                 </TableCell>
               ))}
@@ -112,25 +94,26 @@ const DataTableAsignacion = () => {
           </TableHead>
           <TableBody>
             {data.map((row) => (
-              <TableRow key={row.id_Mantenimiento}>
+              <TableRow key={row.id_Asignacion}>
                 {columns.map((column) => (
                   <TableCell
                     key={column}
                     style={{ color: "white" }}
                     className="fl-table td"
                   >
-                    {/* Añadimos la clase fl-table para las celdas */}
                     {column === "Acciones" ? (
                       <div>
                         <button
-                          onClick={() => atenderMantenimiento(row)}
+                          onClick={() => deleteAsignacion(row)}
                           className="ButtonEliminar"
                         >
                           Eliminar
                         </button>
-                        <NavLink to={`/posponerMantenimiento`}>
+                        <NavLink to={`/editarAsignacion`}>
                           <button
-                            onClick={() => posponerMantenimiento(row)}
+                            onClick={() => {
+                              setDataAsignacion(row);
+                            }}
                             className="ButtonEditar"
                           >
                             Editar
@@ -140,7 +123,7 @@ const DataTableAsignacion = () => {
                     ) : column === "Historial" ? (
                       <div>
                         <NavLink to={`/historial`}>
-                          <button onClick={() => handleEdit(row)}>
+                          <button onClick={() => redirecHistorial(row)}>
                             Historial
                           </button>
                         </NavLink>
@@ -155,7 +138,6 @@ const DataTableAsignacion = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <FormHistorial /> */}
     </div>
   );
 };

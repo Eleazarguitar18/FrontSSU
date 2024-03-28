@@ -8,7 +8,9 @@ function App() {
   return (
     <>
       {/* <HomePage /> */}
-      <AppRoutes />
+      <div className="bg-background border-background">
+        <AppRoutes />
+      </div>
       {/* <Formulario /> */}
     </>
   );

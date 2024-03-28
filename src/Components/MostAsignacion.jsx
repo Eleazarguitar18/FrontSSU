@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 import DataTableAsignacion from "./DataTableAsignacion.jsx";
 import { url_base } from "./data/base.routes.js";
 const MostAsignacion = () => {
@@ -31,6 +32,10 @@ const MostAsignacion = () => {
   return (
     <div>
       <h2>Detalles de la Asignacion</h2>
+
+      <NavLink to={"/registrarAsig"}>
+        <button>Nueva asignacion</button>
+      </NavLink>
       <DataTableAsignacion data={datos} />
     </div>
   );

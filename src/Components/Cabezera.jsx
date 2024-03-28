@@ -2,16 +2,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import SliderButton from "./SliderButton";
-import "./Cabezera.css"; // Importa el archivo CSS
 
 const Cabezera = () => {
   return (
-    <div className="header">
-      <div className="button-container">
+    <div className="header bg-primary text-white">
+      <div className="flex justify-between items-center px-5 py-2">
         <img
           src="/src/image/logoEyG2.png"
           alt="Logo de nuestra institución"
-          style={{ maxWidth: "100px" }} // Ajusta el tamaño del logo aquí
+          className="max-w-100"
+          style={{ maxWidth: "100px" }}
         />
         <SliderButton
           nombreContenedor={`Computadoras`}
@@ -20,12 +20,6 @@ const Cabezera = () => {
             { enlace: "/pc", nombre: "Registrar" },
           ]}
         />
-        {/* <NavLink to="/pc">
-          <button className="header-button">Computadoras</button>
-        </NavLink>
-        <NavLink to={`/periferico`}>
-          <button className="header-button">Periféricos</button>
-        </NavLink> */}
         <SliderButton
           nombreContenedor={`Perifericos`}
           botones={[
@@ -33,17 +27,11 @@ const Cabezera = () => {
             { enlace: "/periferico", nombre: "Registrar" },
           ]}
         />
-        {/* <NavLink to={`/mostrarpc`}>
-          <button className="header-button">Mostrar Computadoras</button>
+        <NavLink to={`/datosred`} className="header-button">
+          Datos Red
         </NavLink>
-        <NavLink to={`/mostrarperi`}>
-          <button className="header-button">Mostrar Periféricos</button>
-        </NavLink> */}
-        <NavLink to={`/datosred`}>
-          <button className="header-button">Datos Red</button>
-        </NavLink>
-        <NavLink to={`/historialGeneral`}>
-          <button className="header-button">Historial</button>
+        <NavLink to={`/historialGeneral`} className="header-button">
+          Historial
         </NavLink>
         <SliderButton
           nombreContenedor={`Mantenimientos`}
@@ -52,8 +40,8 @@ const Cabezera = () => {
             { enlace: "/mostrarMant", nombre: "Mostrar" },
           ]}
         />
-        <NavLink to={`/mostrarAsig`}>
-          <button className="header-button">Asignaciones</button>
+        <NavLink to={`/mostrarAsig`} className="header-button">
+          Asignaciones
         </NavLink>
       </div>
     </div>

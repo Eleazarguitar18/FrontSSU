@@ -77,6 +77,7 @@ const FormSubmitProvider = ({ children }) => {
       throw error; // Lanza el error para que los componentes puedan manejarlo según sea necesario
     }
   };
+  //* rutas para mantenimiento
   // rutas para mantenimiento
   const nuevoMantenimiento = async (values) => {
     try {
@@ -113,6 +114,42 @@ const FormSubmitProvider = ({ children }) => {
       throw error;
     }
   };
+  const nuevoAsignacion = async (values) => {
+    try {
+      const response = await axios.post(`${url_base}/asignacion`, values);
+      console.log("Respuesta del Backend para Mantenimiento", response);
+      return response;
+    } catch (error) {
+      console.error("Error al enviar el formulario para Mantenimiento:", error);
+      throw error;
+    }
+  };
+  const editarAsignacion = async (values) => {
+    console.log("Datos que estoy enviando: ", values);
+    try {
+      const response = await axios.put(
+        `${url_base}/asignacion/${values.id_Asignacion}`,
+        values
+      );
+      console.log("Respuesta del Backend para Mantenimiento", response.data);
+      return response;
+    } catch (error) {
+      console.error("Error al enviar el formulario para Mantenimiento:", error);
+      throw error;
+    }
+  };
+  const eliminarAsignacion = async (values) => {
+    try {
+      const response = await axios.delete(
+        `${url_base}/asignacion/${values.id_Asignacion}`
+      );
+      console.log("Respuesta del Backend para Mantenimiento", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error al eliminar para Mantenimiento:", error);
+      throw error;
+    }
+  };
   return (
     <FormSubmitContext.Provider
       value={{
@@ -124,6 +161,9 @@ const FormSubmitProvider = ({ children }) => {
         nuevoMantenimiento,
         editarMantenimiento,
         eliminarMantenimiento,
+        nuevoAsignacion,
+        editarAsignacion,
+        eliminarAsignacion,
       }}
     >
       {children}

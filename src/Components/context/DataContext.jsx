@@ -7,6 +7,7 @@ export const DataProvider = ({ children }) => {
   const [dataDispositivo, setDataDispositivo] = useState(null);
   const [dataHistorial, setDataHistorial] = useState(null);
   const [dataRed, setDataRed] = useState(null);
+  const [dataAsignacion, setDataAsignacion] = useState(null);
 
   // variable para mantenimiento
   const [dataMantenimiento, setDataMantenimiento] = useState(null);
@@ -21,6 +22,8 @@ export const DataProvider = ({ children }) => {
         setDataRed,
         dataMantenimiento,
         setDataMantenimiento,
+        dataAsignacion,
+        setDataAsignacion,
       }}
     >
       {children}

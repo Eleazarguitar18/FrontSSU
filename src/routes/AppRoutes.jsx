@@ -20,6 +20,8 @@ import DataHistorialGeneral from "../Components/historial/DataHistorialGeneral";
 import EditDatos_red from "../Components/red/EditDatos_red";
 import RegistrarMantenimiento from "../Components/Mantenimiento/RegistrarMantenimiento";
 import PosponerMantenimiento from "../Components/Mantenimiento/PosponerMantenimiento";
+import FormAsignacion from "../Components/Asignacion/FormAsignacion";
+import EditAsignacion from "../Components/Asignacion/EditAsignacion";
 
 export default function AppRoutes() {
   return (
@@ -49,18 +51,18 @@ export default function AppRoutes() {
           <Route path="/mostrarperi" element={<MostPeriferico />} />
           <Route path="/pcEdit" element={<EditarDispositivo />} />
           <Route path="/perifericoEdit" element={<EditarPeriferico />} />
-
           <Route path="/mostrarMant" element={<MostMantenimiento />} />
-          <Route path="/mostrarAsig" element={<MostAsignacion />} />
           <Route path="/registrarMant" element={<RegistrarMantenimiento />} />
           <Route
             path="/posponerMantenimiento"
             element={<PosponerMantenimiento />}
           />
+          <Route path="/mostrarAsig" element={<MostAsignacion />} />
+          <Route path="/registrarAsig" element={<FormAsignacion />} />
+          <Route path="/editarAsignacion" element={<EditAsignacion />} />
 
           <Route path="/datosred" element={<Datos_red />} />
           <Route path="/datosredEdit" element={<EditDatos_red />} />
-
           <Route path="/historial" element={<DataTableHistorial />} />
           <Route path="/registrarHistorial" element={<FormHistorial />} />
           <Route path="/historialEdit" element={<EditHistorial />} />
