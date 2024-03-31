@@ -6,7 +6,7 @@ import { FormSubmitProvider } from "./Components/context/DispositivoContext.jsx"
 import { DataProvider } from "./Components/context/DataContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <div className="bg-background p-0">
+  <div>
     <React.StrictMode>
       <FormSubmitProvider>
         <DataProvider>

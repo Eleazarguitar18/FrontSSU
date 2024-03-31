@@ -26,11 +26,12 @@ import EditAsignacion from "../Components/Asignacion/EditAsignacion";
 import { AsignaIP } from "../Components/red/AsignarIP";
 export default function AppRoutes() {
   return (
-    <BrowserRouter>
-      <div>
-        <Cabezera />
-      </div>
-      {/* <Tabla
+    <div className="bg-white">
+      <BrowserRouter>
+        <div>
+          <Cabezera />
+        </div>
+        {/* <Tabla
         columnas={[
           "ID",
           "Nombre",
@@ -42,39 +43,46 @@ export default function AppRoutes() {
           "Otra columna",
         ]}
       /> */}
-      <div style={{ marginTop: "100px" }}>
-        <Routes>
-          {/* Estilo en línea con objeto de estilo */}
-          <Route path="/" element={<HomePage />} />
-          <Route path="/pc" element={<FormComputadora />} />
-          <Route path="/periferico" element={<FromPeriferico />} />
-          <Route path="/mostrarpc" element={<MostComputadora />} />
-          <Route path="/mostrarperi" element={<MostPeriferico />} />
-          <Route path="/pcEdit" element={<EditarDispositivo />} />
-          <Route path="/perifericoEdit" element={<EditarPeriferico />} />
-          <Route path="/mostrarMant" element={<MostMantenimiento />} />
-          <Route path="/registrarMant" element={<RegistrarMantenimiento />} />
-          <Route
-            path="/posponerMantenimiento"
-            element={<PosponerMantenimiento />}
-          />
-          <Route path="/mostrarAsig" element={<MostAsignacion />} />
-          <Route path="/registrarAsig" element={<FormAsignacion />} />
-          <Route path="/editarAsignacion" element={<EditAsignacion />} />
+        <div style={{ marginTop: "100px" }}>
+          <Routes>
+            {/* Estilo en línea con objeto de estilo */}
+            <Route path="/" element={<HomePage />} />
+            <Route path="/pc" element={<FormComputadora />} />
+            <Route path="/periferico" element={<FromPeriferico />} />
+            <Route path="/mostrarpc" element={<MostComputadora />} />
+            <Route path="/mostrarperi" element={<MostPeriferico />} />
+            <Route path="/pcEdit" element={<EditarDispositivo />} />
+            <Route path="/perifericoEdit" element={<EditarPeriferico />} />
+            <Route path="/mostrarMant" element={<MostMantenimiento />} />
+            <Route path="/registrarMant" element={<RegistrarMantenimiento />} />
+            <Route
+              path="/posponerMantenimiento"
+              element={<PosponerMantenimiento />}
+            />
+            <Route path="/mostrarAsig" element={<MostAsignacion />} />
+            <Route path="/registrarAsig" element={<FormAsignacion />} />
+            <Route path="/editarAsignacion" element={<EditAsignacion />} />
 
-          <Route path="/datosred" element={<Datos_red />} />
-          <Route path="/registrarRed" element={<RegistrarRed />} />
-          <Route path="/asignarIP" element={<AsignaIP />} />
+            <Route path="/datosred" element={<Datos_red />} />
+            <Route path="/registrarRed" element={<RegistrarRed />} />
+            <Route path="/asignarIP" element={<AsignaIP />} />
 
-          <Route path="/datosredEdit" element={<EditDatos_red />} />
-          <Route path="/historial" element={<DataTableHistorial />} />
-          <Route path="/registrarHistorial" element={<FormHistorial />} />
-          <Route path="/historialEdit" element={<EditHistorial />} />
-          <Route path="/historialGeneral" element={<DataHistorialGeneral />} />
-          <Route path="/perifericoEdit/:id" component={<EditarDispositivo />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+            <Route path="/datosredEdit" element={<EditDatos_red />} />
+            <Route path="/historial" element={<DataTableHistorial />} />
+            <Route path="/registrarHistorial" element={<FormHistorial />} />
+            <Route path="/historialEdit" element={<EditHistorial />} />
+            <Route
+              path="/historialGeneral"
+              element={<DataHistorialGeneral />}
+            />
+            <Route
+              path="/perifericoEdit/:id"
+              component={<EditarDispositivo />}
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </div>
   );
 }

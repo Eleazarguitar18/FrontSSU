@@ -46,98 +46,113 @@ const FormComputadora = () => {
   };
 
   return (
-    <div>
-      <h1>Formulario de Equipo de Computadora</h1>
-      <Formik
-        initialValues={{
-          NroSerie: "",
-          NroActivo: "",
-          Estado: "",
-          Ubicacion: "",
-          Unidad: "",
-          Marca: "",
-          Detalle: "",
-          Tipo: "",
-          NombreDelEquipo: "",
-          Procesador: "",
-          RAM: "",
-          MemoriaInterna: "",
-          SistemaOperativo: "",
-        }}
-        validationSchema={validationSchema}
-        onSubmit={enviarFormulario}
-      >
-        <Form>
-          <div>
-            <label htmlFor="NroSerie">Número de Serie:</label>
-            <Field type="text" id="NroSerie" name="NroSerie" />
-            <ErrorMessage name="NroSerie" component="div" />
-          </div>
-          <div>
-            <label htmlFor="NroActivo">Número de Activo:</label>
-            <Field type="text" id="NroActivo" name="NroActivo" />
-            <ErrorMessage name="NroActivo" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Estado">Estado:</label>
-            <Field type="text" id="Estado" name="Estado" />
-            <ErrorMessage name="Estado" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Ubicacion">Ubicación:</label>
-            <Field type="text" id="Ubicacion" name="Ubicacion" />
-            <ErrorMessage name="Ubicacion" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Unidad">Unidad:</label>
-            <Field type="text" id="Unidad" name="Unidad" />
-            <ErrorMessage name="Unidad" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Marca">Marca:</label>
-            <Field type="text" id="Marca" name="Marca" />
-            <ErrorMessage name="Marca" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Detalle">Detalle:</label>
-            <Field type="text" id="Detalle" name="Detalle" />
-            <ErrorMessage name="Detalle" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Tipo">Tipo:</label>
-            <Field type="text" id="Tipo" name="Tipo" />
-            <ErrorMessage name="Tipo" component="div" />
-          </div>
-          <div>
-            <label htmlFor="NombreDelEquipo">Nombre del Equipo:</label>
-            <Field type="text" id="NombreDelEquipo" name="NombreDelEquipo" />
-            <ErrorMessage name="NombreDelEquipo" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Procesador">Procesador:</label>
-            <Field type="text" id="Procesador" name="Procesador" />
-            <ErrorMessage name="Procesador" component="div" />
-          </div>
-          <div>
-            <label htmlFor="RAM">RAM:</label>
-            <Field type="text" id="RAM" name="RAM" />
-            <ErrorMessage name="RAM" component="div" />
-          </div>
-          <div>
-            <label htmlFor="MemoriaInterna">Memoria Interna:</label>
-            <Field type="text" id="MemoriaInterna" name="MemoriaInterna" />
-            <ErrorMessage name="MemoriaInterna" component="div" />
-          </div>
-          <div>
-            <label htmlFor="SistemaOperativo">Sistema Operativo:</label>
-            <Field type="text" id="SistemaOperativo" name="SistemaOperativo" />
-            <ErrorMessage name="SistemaOperativo" component="div" />
-          </div>
-          <button type="submit" className="botonEnviar">
-            Enviar
-          </button>
-        </Form>
-      </Formik>
+    <div className="bg-slate-300 w-full p-7">
+      <div className="bg-amber-200">
+        <h1>Registro de Equipo de Computadora</h1>
+        <Formik
+          initialValues={{
+            NroSerie: "",
+            NroActivo: "",
+            Estado: "",
+            Ubicacion: "",
+            Unidad: "",
+            Marca: "",
+            Detalle: "",
+            Tipo: "",
+            NombreDelEquipo: "",
+            Procesador: "",
+            RAM: "",
+            MemoriaInterna: "",
+            SistemaOperativo: "",
+          }}
+          validationSchema={validationSchema}
+          onSubmit={enviarFormulario}
+        >
+          <Form>
+            <div>
+              <div>
+                <label htmlFor="NroSerie">Número de Serie:</label>
+                <Field type="text" id="NroSerie" name="NroSerie" />
+                <ErrorMessage name="NroSerie" component="div" />
+              </div>
+              <div>
+                <label htmlFor="NroActivo">Número de Activo:</label>
+                <Field type="text" id="NroActivo" name="NroActivo" />
+                <ErrorMessage name="NroActivo" component="div" />
+              </div>
+              <div>
+                <label htmlFor="Estado">Estado:</label>
+                <Field type="text" id="Estado" name="Estado" />
+                <ErrorMessage name="Estado" component="div" />
+              </div>
+              <div>
+                <label htmlFor="Ubicacion">Ubicación:</label>
+                <Field type="text" id="Ubicacion" name="Ubicacion" />
+                <ErrorMessage name="Ubicacion" component="div" />
+              </div>
+              <div>
+                <label htmlFor="Unidad">Unidad:</label>
+                <Field type="text" id="Unidad" name="Unidad" />
+                <ErrorMessage name="Unidad" component="div" />
+              </div>
+              <div>
+                <label htmlFor="Marca">Marca:</label>
+                <Field type="text" id="Marca" name="Marca" />
+                <ErrorMessage name="Marca" component="div" />
+              </div>
+              <div>
+                <label htmlFor="Detalle">Detalle:</label>
+                <Field type="text" id="Detalle" name="Detalle" />
+                <ErrorMessage name="Detalle" component="div" />
+              </div>
+              <div>
+                <label htmlFor="Tipo">Tipo:</label>
+                <Field type="text" id="Tipo" name="Tipo" />
+                <ErrorMessage name="Tipo" component="div" />
+              </div>
+              <div>
+                <label htmlFor="NombreDelEquipo">Nombre del Equipo:</label>
+                <Field
+                  type="text"
+                  id="NombreDelEquipo"
+                  name="NombreDelEquipo"
+                />
+                <ErrorMessage name="NombreDelEquipo" component="div" />
+              </div>
+              <div>
+                <label htmlFor="Procesador">Procesador:</label>
+                <Field type="text" id="Procesador" name="Procesador" />
+                <ErrorMessage name="Procesador" component="div" />
+              </div>
+              <div>
+                <label htmlFor="RAM">RAM:</label>
+                <Field type="text" id="RAM" name="RAM" />
+                <ErrorMessage name="RAM" component="div" />
+              </div>
+              <div>
+                <label htmlFor="MemoriaInterna">Memoria Interna:</label>
+                <Field type="text" id="MemoriaInterna" name="MemoriaInterna" />
+                <ErrorMessage name="MemoriaInterna" component="div" />
+              </div>
+              <div>
+                <label htmlFor="SistemaOperativo">Sistema Operativo:</label>
+                <Field
+                  type="text"
+                  id="SistemaOperativo"
+                  name="SistemaOperativo"
+                />
+                <ErrorMessage name="SistemaOperativo" component="div" />
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="bg-slate-800 font-bold text-white p-2"
+            >
+              Enviar
+            </button>
+          </Form>
+        </Formik>
+      </div>
     </div>
   );
 };

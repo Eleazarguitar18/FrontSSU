@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       {/* <HomePage /> */}
-      <div className="bg-background border-background">
+      <div className="bg-background">
         <AppRoutes />
       </div>
       {/* <Formulario /> */}
