@@ -18,11 +18,12 @@ import FormHistorial from "../Components/historial/FormHistorial";
 import EditHistorial from "../Components/historial/EditHistorial";
 import DataHistorialGeneral from "../Components/historial/DataHistorialGeneral";
 import EditDatos_red from "../Components/red/EditDatos_red";
+import RegistrarRed from "../Components/red/RegistrarRed";
 import RegistrarMantenimiento from "../Components/Mantenimiento/RegistrarMantenimiento";
 import PosponerMantenimiento from "../Components/Mantenimiento/PosponerMantenimiento";
 import FormAsignacion from "../Components/Asignacion/FormAsignacion";
 import EditAsignacion from "../Components/Asignacion/EditAsignacion";
-
+import { AsignaIP } from "../Components/red/AsignarIP";
 export default function AppRoutes() {
   return (
     <BrowserRouter>
@@ -62,6 +63,9 @@ export default function AppRoutes() {
           <Route path="/editarAsignacion" element={<EditAsignacion />} />
 
           <Route path="/datosred" element={<Datos_red />} />
+          <Route path="/registrarRed" element={<RegistrarRed />} />
+          <Route path="/asignarIP" element={<AsignaIP />} />
+
           <Route path="/datosredEdit" element={<EditDatos_red />} />
           <Route path="/historial" element={<DataTableHistorial />} />
           <Route path="/registrarHistorial" element={<FormHistorial />} />

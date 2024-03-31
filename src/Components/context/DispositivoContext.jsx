@@ -19,6 +19,19 @@ const FormSubmitProvider = ({ children }) => {
       throw error; // Lanza el error para que los componentes puedan manejarlo según sea necesario
     }
   };
+  const eliminarPC = async (values) => {
+    try {
+      // Realizar la solicitud POST al backend con Axios
+      const response = await axios.delete(
+        `${url_base}/pc/${values.id_Dispositivo}`
+      );
+      console.log("Respuesta del backend para PC:", response.data);
+      return response.data; // Devuelve la respuesta del backend si es necesario
+    } catch (error) {
+      console.error("Error al enviar el formulario para PC:", error);
+      throw error; // Lanza el error para que los componentes puedan manejarlo según sea necesario
+    }
+  };
 
   // Función para manejar el envío del formulario para periférico
   const handleSubmitPeriferico = async (values) => {
@@ -154,6 +167,7 @@ const FormSubmitProvider = ({ children }) => {
     <FormSubmitContext.Provider
       value={{
         handleSubmitPC,
+        eliminarPC,
         handleSubmitPeriferico,
         crearHistorial,
         editarHistorial,

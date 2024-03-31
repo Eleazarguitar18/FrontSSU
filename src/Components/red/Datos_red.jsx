@@ -11,6 +11,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  TablePagination,
 } from "@mui/material";
 
 const columns = [
@@ -29,6 +30,9 @@ const columns = [
 const Datos_red = () => {
   const [data, setData] = useState([]);
   const { setDataRed, setDataDispositivo } = useData();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -59,6 +63,14 @@ const Datos_red = () => {
   };
   const visitarHstorial = () => {
     setData;
+  };
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
   return (
     <div>
@@ -130,6 +142,15 @@ const Datos_red = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25, 50]} // Opciones de 5, 10, 25 y 50 filas por página
+        component="div"
+        count={data.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </div>
   );
 };

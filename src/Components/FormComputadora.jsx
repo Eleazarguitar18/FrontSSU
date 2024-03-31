@@ -1,9 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useFormSubmit } from "./context/DispositivoContext";
 import "./Formulario.css";
+import { useData } from "./context/DataContext";
 const FormComputadora = () => {
+  const navigate = useNavigate();
   // Define el esquema de validación utilizando Yup
   const { handleSubmitPC } = useFormSubmit();
   const validationSchema = Yup.object().shape({
@@ -23,13 +26,20 @@ const FormComputadora = () => {
       "La Sistema Operativo es requerida"
     ),
   });
-
+  const { setDataRed } = useData();
+  const mostrarDatosRed = () => {
+    navigate("/registrarRed");
+  };
   // Función para manejar el envío del formulario
+
   const enviarFormulario = async (values, { resetForm }) => {
     try {
       const response = await handleSubmitPC(values);
       // Realizar acciones adicionales según sea necesario
+      // console.log("saco el id", response.data.id_Dispositivo);
+      setDataRed(response.data.id_Dispositivo);
       resetForm();
+      mostrarDatosRed();
     } catch (error) {
       // Manejar el error de envío del formulario
     }

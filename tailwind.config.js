@@ -7,6 +7,8 @@ module.exports = {
         secondary: "#00ff00", // Color secundario personalizado
         // Puedes definir más colores según tus #182934 necesidades #324960
         background: "#182934",
+        colorBoton1: "blue-500",
+        colorBoton2: "blue-400",
       },
     },
   },

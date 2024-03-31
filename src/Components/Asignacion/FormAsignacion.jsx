@@ -13,7 +13,7 @@ const initialValues = {
   hora_llegada: "",
   encargado_de_entrega: "",
   encargado_de_recepcion: "",
-  TipoAsigancion: "",
+  TipoAsignacion: "",
   datos_solicitante: "",
   observaciones: "",
   id_Dispositivo: "",
@@ -27,7 +27,7 @@ const validationSchema = Yup.object().shape({
   hora_llegada: Yup.string().required("Campo requerido"),
   encargado_de_entrega: Yup.string().required("Campo requerido"),
   encargado_de_recepcion: Yup.string().required("Campo requerido"),
-  TipoAsigancion: Yup.string().required("Campo requerido"),
+  TipoAsignacion: Yup.string().required("Campo requerido"),
   datos_solicitante: Yup.string().required("Campo requerido"),
   observaciones: Yup.string(),
   id_Dispositivo: Yup.number().required("Campo requerido"),
@@ -123,9 +123,9 @@ const FormAsignacion = () => {
 
             <div>
               <label>Tipo de Asignación:</label>
-              <Field type="text" name="TipoAsigancion" />
+              <Field type="text" name="TipoAsignacion" />
               <ErrorMessage
-                name="TipoAsigancion"
+                name="TipoAsignacion"
                 component="div"
                 className="error"
               />

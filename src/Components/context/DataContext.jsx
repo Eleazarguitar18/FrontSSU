@@ -8,7 +8,8 @@ export const DataProvider = ({ children }) => {
   const [dataHistorial, setDataHistorial] = useState(null);
   const [dataRed, setDataRed] = useState(null);
   const [dataAsignacion, setDataAsignacion] = useState(null);
-
+  // ! dato para la confirmacion de eliminacion
+  const [confirmDelete, setConfirmDelete] = useState(false);
   // variable para mantenimiento
   const [dataMantenimiento, setDataMantenimiento] = useState(null);
   return (
@@ -24,6 +25,8 @@ export const DataProvider = ({ children }) => {
         setDataMantenimiento,
         dataAsignacion,
         setDataAsignacion,
+        confirmDelete,
+        setConfirmDelete,
       }}
     >
       {children}

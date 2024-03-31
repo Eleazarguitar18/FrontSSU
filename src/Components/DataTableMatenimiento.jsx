@@ -17,63 +17,47 @@ import {
 } from "@mui/material";
 
 const DataTableMantenimiento = () => {
-  const { setDataMantenimiento,setDataDispositivo } = useData();
-  const {editarMantenimiento}=useFormSubmit()
+  const { setDataMantenimiento, setDataDispositivo } = useData();
+  const { editarMantenimiento } = useFormSubmit();
+  const navigate = useNavigate();
+
   const posponerMantenimiento = (datosDispositivo) => {
-    console.log(datosDispositivo.id_Mantenimiento);
-    setDataMantenimiento(datosDispositivo); // Establece el id_Dispositivo en el contexto
-    useNavigate("/editarMantenimiento");
+    setDataMantenimiento(datosDispositivo);
+    navigate("/editarMantenimiento");
   };
+
   const atenderMantenimiento = (datosDispositivo) => {
     datosDispositivo.estado = "atendido";
-    // datosDispositivo.fecha_final = new Date();
-    setDataMantenimiento(datosDispositivo); // Establece el id_Dispositivo en el contexto
+    setDataMantenimiento(datosDispositivo);
     editarMantenimiento(datosDispositivo);
     fetchData();
   };
-  const handleHistorial=(datos)=>{
+
+  const handleHistorial = (datosDispositivo) => {
     setDataDispositivo(datosDispositivo);
-  }
+  };
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
     fetchData();
-  }, []); // Este efecto se ejecutará solo una vez al montar el componente
+  }, []);
 
   const fetchData = async () => {
     try {
       const response = await axios.get(`${url_base}/mantenimiento`);
-      console.log(response.data);
-      //   setData(response.data);
       const datosCombinados = response.data.map((item) => ({
         ...item,
         ...item.Dispositivo,
         TipoEquipo: item.Dispositivo.Tipo,
       }));
-      console.log("DATOS COMBINADOS", datosCombinados);
       setData(datosCombinados);
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }
   };
 
-  // const handleDelete = async (row_id) => {
-  //   try {
-  //     const respuesta = await axios.delete(
-  //       `${url_base}/mantenimiento/${row_id}`
-  //     );
-  //     console.log(`Eliminando fila con id ${row_id}`);
-  //     if (respuesta.status === 204) {
-  //       console.log("eliminacion exitosa");
-  //     }
-  //     fetchData();
-  //   } catch (error) {
-  //     console.error("Error al eliminar la fila:", error);
-  //   }
-  // };
-
   const columns = [
-    // "id_Mantenimiento",
     "fecha_inicial",
     "actividad",
     "fecha_final",
@@ -84,10 +68,8 @@ const DataTableMantenimiento = () => {
     "Marca",
     "TipoEquipo",
     "Ubicacion",
-    // "id_Dispositivo",
-    // "id_PersonalSSU",
-    "Acciones", // Agregamos una nueva columna "Eliminar"
-    "Historial", // Agregamos una nueva columna "Eliminar"
+    "Acciones",
+    "Historial",
   ];
 
   return (
@@ -95,11 +77,9 @@ const DataTableMantenimiento = () => {
       <TableContainer
         style={{ backgroundColor: "#242424" }}
         component={Paper}
-        className="TableContainer table-wrapper" // Añadimos las clases CSS necesarias
+        className="TableContainer table-wrapper"
       >
         <Table className="fl-table">
-          {" "}
-          {/* Añadimos la clase fl-table */}
           <TableHead className="TableHead">
             <TableRow className="TableRow">
               {columns.map((column) => (
@@ -108,8 +88,6 @@ const DataTableMantenimiento = () => {
                   style={{ color: "white" }}
                   className="fl-table thead th"
                 >
-                  {" "}
-                  {/* Añadimos la clase fl-table para los encabezados */}
                   {column}
                 </TableCell>
               ))}
@@ -124,14 +102,13 @@ const DataTableMantenimiento = () => {
                     style={{ color: "white" }}
                     className="fl-table td"
                   >
-                    {/* Añadimos la clase fl-table para las celdas */}
                     {column === "Acciones" ? (
                       <div>
                         <button
                           onClick={() => atenderMantenimiento(row)}
                           className="ButtonEliminar"
                         >
-                          Atentido
+                          Atendido
                         </button>
                         <NavLink to={`/posponerMantenimiento`}>
                           <button
@@ -160,7 +137,6 @@ const DataTableMantenimiento = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <FormHistorial /> */}
     </div>
   );
 };
