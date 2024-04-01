@@ -46,9 +46,11 @@ const FormComputadora = () => {
   };
 
   return (
-    <div className="bg-slate-300 w-full p-7">
-      <div className="bg-amber-200">
-        <h1>Registro de Equipo de Computadora</h1>
+    <div className="bg-slate-100 w-full p-10">
+      <div className=" text-slate-800 p-7 px-16 rounded-lg bg-gradient-to-r from-slate-400 via-slate-200 to-slate-400 shadow-lg shadow-indigo-500/40">
+        <h1 className="text-2xl font-bold text-center pb-10">
+          Registro de Equipo de Computadora
+        </h1>
         <Formik
           initialValues={{
             NroSerie: "",
@@ -68,8 +70,8 @@ const FormComputadora = () => {
           validationSchema={validationSchema}
           onSubmit={enviarFormulario}
         >
-          <Form>
-            <div>
+          <Form className="mt-5">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <label htmlFor="NroSerie">Número de Serie:</label>
                 <Field type="text" id="NroSerie" name="NroSerie" />
@@ -146,7 +148,7 @@ const FormComputadora = () => {
             </div>
             <button
               type="submit"
-              className="bg-slate-800 font-bold text-white p-2"
+              className="bg-slate-800 font-bold text-white p-2 rounded mt-3"
             >
               Enviar
             </button>

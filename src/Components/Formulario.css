@@ -26,10 +26,10 @@ label {
 input {
   width: 100%;
   padding: 0.5rem;
-  background-color: rgb(85, 85, 85);
+  background-color: rgb(247, 247, 247);
   border: 1px solid #ccc; /* Borde */
   border-radius: 5px; /* Bordes redondeados */
-  color: white; /* !important;  /* Agregamos !important para asegurar la prioridad */
+  color: black; /* !important;  Agregamos !important para asegurar la prioridad
   /* Estilo para los campos de entrada */
 }
 

@@ -8,10 +8,14 @@ const SliderButton = ({ nombreContenedor, botones }) => {
     setMostrarBotones(!mostrarBotones);
   };
 
+  const handleBotonClick = () => {
+    setMostrarBotones(false);
+  };
+
   return (
     <div className="relative">
       <button
-        className="boton-contenedor mt-5 mr-3 text-white bg-primary px-4 py-2 rounded"
+        className="text-white px-4 py-9 rounded hover:bg-red-950"
         onClick={toggleMostrarBotones}
       >
         {nombreContenedor}
@@ -28,7 +32,8 @@ const SliderButton = ({ nombreContenedor, botones }) => {
           <NavLink
             key={index}
             to={boton.enlace}
-            className="block px-4 py-2 hover:bg-gray-200"
+            className=" text-black block px-4 py-2 hover:bg-gray-200"
+            onClick={handleBotonClick}
           >
             {boton.nombre}
           </NavLink>

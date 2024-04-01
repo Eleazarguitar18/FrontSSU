@@ -8,7 +8,9 @@
   display: none;
   transition: all 0.3s ease; /* Agregamos una transición para el efecto deslizante */
   opacity: 0; /* Comenzamos con opacidad 0 para que no se muestren inicialmente */
-  transform: translateY(-10px); /* Iniciamos ligeramente desplazados hacia arriba */
+  transform: translateY(
+    -10px
+  ); /* Iniciamos ligeramente desplazados hacia arriba */
   display: flex; /* Usamos flexbox */
   flex-direction: column; /* Colocamos los botones uno debajo del otro */
   position: absolute;

@@ -3,10 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const botonSimple = ({ to, children }) => {
   return (
-    <NavLink
-      to={to}
-      className="bg-colorBoton1 hover:bg-colorBoton2 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-colorBoton1 rounded"
-    >
+    <NavLink to={to} className="text-white px-4 py-9 rounded hover:bg-red-950">
       {children}
     </NavLink>
   );

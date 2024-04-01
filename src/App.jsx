@@ -4,13 +4,9 @@ function App() {
   // const [count, setCount] = useState(0);
 
   return (
-    <>
-      {/* <HomePage /> */}
-      <div className="bg-background">
-        <AppRoutes />
-      </div>
-      {/* <Formulario /> */}
-    </>
+    <div className="bg-slate-200">
+      <AppRoutes />
+    </div>
   );
 }
 

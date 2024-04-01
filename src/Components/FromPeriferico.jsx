@@ -42,66 +42,73 @@ const FormPeriferico = () => {
   };
 
   return (
-    <div>
-      <h1>Formulario de Periféricos</h1>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={enviarFormulario}
-      >
-        <Form>
-          <div>
-            <label htmlFor="NroSerie">Número de Serie:</label>
-            <Field type="text" id="NroSerie" name="NroSerie" />
-            <ErrorMessage name="NroSerie" component="div" />
-          </div>
-          <div>
-            <label htmlFor="NroActivo">Número de Activo:</label>
-            <Field type="text" id="NroActivo" name="NroActivo" />
-            <ErrorMessage name="NroActivo" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Estado">Estado:</label>
-            <Field type="text" id="Estado" name="Estado" />
-            <ErrorMessage name="Estado" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Ubicacion">Ubicación:</label>
-            <Field type="text" id="Ubicacion" name="Ubicacion" />
-            <ErrorMessage name="Ubicacion" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Unidad">Unidad:</label>
-            <Field type="text" id="Unidad" name="Unidad" />
-            <ErrorMessage name="Unidad" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Marca">Marca:</label>
-            <Field type="text" id="Marca" name="Marca" />
-            <ErrorMessage name="Marca" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Detalle">Detalle:</label>
-            <Field type="text" id="Detalle" name="Detalle" />
-            <ErrorMessage name="Detalle" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Tipo">Tipo:</label>
-            <Field type="text" id="Tipo" name="Tipo" />
-            <ErrorMessage name="Tipo" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Descripcion">Descripción:</label>
-            <Field type="text" id="Descripcion" name="Descripcion" />
-            <ErrorMessage name="Descripcion" component="div" />
-          </div>
-          {/* Repite lo mismo para los demás campos */}
-          {/* ... */}
-          <button type="submit" className="botonEnviar">
-            Enviar
-          </button>
-        </Form>
-      </Formik>
+    <div className="bg-slate-100 w-full p-10">
+      <div className=" text-slate-800 p-7 px-16  rounded-lg bg-gradient-to-r from-slate-400 via-slate-200 to-slate-400 shadow-lg shadow-indigo-500/40">
+        <h1 className="text-2xl font-bold text-center pb-10">
+          Formulario de Periféricos
+        </h1>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={enviarFormulario}
+        >
+          <Form className="mt-5">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label htmlFor="NroSerie">Número de Serie:</label>
+                <Field type="text" id="NroSerie" name="NroSerie" />
+                <ErrorMessage name="NroSerie" component="div" />
+              </div>
+              <div>
+                <label htmlFor="NroActivo">Número de Activo:</label>
+                <Field type="text" id="NroActivo" name="NroActivo" />
+                <ErrorMessage name="NroActivo" component="div" />
+              </div>
+              <div>
+                <label htmlFor="Estado">Estado:</label>
+                <Field type="text" id="Estado" name="Estado" />
+                <ErrorMessage name="Estado" component="div" />
+              </div>
+              <div>
+                <label htmlFor="Ubicacion">Ubicación:</label>
+                <Field type="text" id="Ubicacion" name="Ubicacion" />
+                <ErrorMessage name="Ubicacion" component="div" />
+              </div>
+              <div>
+                <label htmlFor="Unidad">Unidad:</label>
+                <Field type="text" id="Unidad" name="Unidad" />
+                <ErrorMessage name="Unidad" component="div" />
+              </div>
+              <div>
+                <label htmlFor="Marca">Marca:</label>
+                <Field type="text" id="Marca" name="Marca" />
+                <ErrorMessage name="Marca" component="div" />
+              </div>
+              <div>
+                <label htmlFor="Detalle">Detalle:</label>
+                <Field type="text" id="Detalle" name="Detalle" />
+                <ErrorMessage name="Detalle" component="div" />
+              </div>
+              <div>
+                <label htmlFor="Tipo">Tipo:</label>
+                <Field type="text" id="Tipo" name="Tipo" />
+                <ErrorMessage name="Tipo" component="div" />
+              </div>
+              <div>
+                <label htmlFor="Descripcion">Descripción:</label>
+                <Field type="text" id="Descripcion" name="Descripcion" />
+                <ErrorMessage name="Descripcion" component="div" />
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="bg-slate-800 font-bold text-white p-2 rounded mt-3"
+            >
+              Enviar
+            </button>
+          </Form>
+        </Formik>
+      </div>
     </div>
   );
 };
