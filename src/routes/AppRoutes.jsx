@@ -24,6 +24,9 @@ import PosponerMantenimiento from "../Components/Mantenimiento/PosponerMantenimi
 import FormAsignacion from "../Components/Asignacion/FormAsignacion";
 import EditAsignacion from "../Components/Asignacion/EditAsignacion";
 import { AsignaIP } from "../Components/red/AsignarIP";
+// import DataTablePlantilla from "../Components/tools/DataTablePlantilla.jsx";
+import TablaPage from "../Components/tools/TablaPage";
+
 export default function AppRoutes() {
   return (
     <div className="bg-slate-200 text-slate-800">
@@ -79,6 +82,8 @@ export default function AppRoutes() {
               path="/perifericoEdit/:id"
               component={<EditarDispositivo />}
             />
+            <Route path="/tabla" element={<TablaPage />} />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

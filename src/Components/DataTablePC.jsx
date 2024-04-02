@@ -15,7 +15,7 @@ import {
   TablePagination,
 } from "@mui/material";
 import { MensajeEliminar } from "./componenes_emergentes/MensajeEliminar.jsx";
-import { jsPDF } from "jspdf";
+import jsPDF from "jspdf";
 import "jspdf-autotable";
 
 const DataTablePC = () => {
@@ -96,34 +96,69 @@ const DataTablePC = () => {
   };
 
   const generarPDF = (row) => {
-    // Crea un nuevo documento PDF
     const doc = new jsPDF();
 
-    // Convierte los datos de la fila en un formato legible para el PDF
-    const datosFila = objetoAString(row);
+    const topHeaders = [["Nro ACTIVO FIJO", "N° DE SERIE"]];
+    const caracteristicasHeader = [["CARACTERISTICAS"]];
 
-    // Agrega los datos de la fila al PDF
-    doc.text(datosFila, 10, 10);
+    const bottomHeaders = [["OBSERVACIONES", "DETALLE"]];
 
-    // Descarga el PDF
+    // Datos
+    const topTableData = [
+      [row.NroActivo, row.NroSerie],
+      ...caracteristicasHeader,
+      ["Procesador:", row.Procesador],
+      ["RAM:", row.RAM],
+      ["Memoria Interna:", row.MemoriaInterna],
+      ["Tipo:", row.Tipo],
+      ["Estado:", row.Estado],
+      ["Ubicacion: ", row.Ubicacion],
+      ["Unidad: ", row.Unidad],
+      ["Marca: ", row.Marca],
+      ["Nombre del equipo: ", row.NombreDelEquipo],
+      ["Sistema Operativo: ", row.SistemaOperativo],
+    ];
+
+    const bottomTableData = [["ninguna observacion", row.Detalle]];
+
+    doc.autoTable({
+      startY: 10,
+      head: topHeaders,
+      body: topTableData,
+      tableWidth: "wrap",
+      autoWidth: true,
+    });
+
+    const topSectionHeight = doc.previousAutoTable.finalY || 10;
+    const space = 10; // Adjust as needed
+    const bottomSectionStartY = topSectionHeight + space;
+
+    doc.autoTable({
+      startY: bottomSectionStartY,
+      head: bottomHeaders,
+      body: bottomTableData,
+      tableWidth: "wrap",
+      autoWidth: true,
+    });
+
     doc.save("fila_seleccionada.pdf");
   };
 
   return (
-    <div>
+    <div className="p-7">
       <TableContainer
-        style={{ backgroundColor: "#242424" }}
+        // style={{ backgroundColor: "#242424" }}
         component={Paper}
-        className="TableContainer table-wrapper"
+        className=""
       >
-        <Table className="fl-table">
-          <TableHead className="TableHead">
-            <TableRow className="TableRow">
+        <Table className="text-white">
+          <TableHead className=" text-white">
+            <TableRow className="">
               {columns.map((column) => (
                 <TableCell
                   key={column}
-                  style={{ color: "white" }}
-                  className="fl-table thead th"
+                  // style={{ color: "white" }}
+                  className=""
                 >
                   {column}
                 </TableCell>
@@ -138,8 +173,8 @@ const DataTablePC = () => {
                   {columns.map((column) => (
                     <TableCell
                       key={column}
-                      style={{ color: "white" }}
-                      className="fl-table td"
+                      // style={{ color: "white" }}
+                      className=""
                     >
                       {column === "Acciones" ? (
                         <div>
