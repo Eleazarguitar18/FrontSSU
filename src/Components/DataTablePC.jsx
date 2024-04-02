@@ -3,7 +3,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { useData } from "./context/DataContext.jsx";
 import { url_base } from "./data/base.routes.js";
-import "./Tabla.css";
+// import "./Tabla.css";
 import {
   Table,
   TableBody,
@@ -15,6 +15,8 @@ import {
   TablePagination,
 } from "@mui/material";
 import { MensajeEliminar } from "./componenes_emergentes/MensajeEliminar.jsx";
+import { jsPDF } from "jspdf";
+import "jspdf-autotable";
 
 const DataTablePC = () => {
   const { setDataDispositivo } = useData();
@@ -93,6 +95,20 @@ const DataTablePC = () => {
     setPage(0);
   };
 
+  const generarPDF = (row) => {
+    // Crea un nuevo documento PDF
+    const doc = new jsPDF();
+
+    // Convierte los datos de la fila en un formato legible para el PDF
+    const datosFila = objetoAString(row);
+
+    // Agrega los datos de la fila al PDF
+    doc.text(datosFila, 10, 10);
+
+    // Descarga el PDF
+    doc.save("fila_seleccionada.pdf");
+  };
+
   return (
     <div>
       <TableContainer
@@ -141,6 +157,11 @@ const DataTablePC = () => {
                               Editar
                             </button>
                           </NavLink>
+                          <div>
+                            <button onClick={() => generarPDF(row)}>
+                              Generar PDF
+                            </button>
+                          </div>
                         </div>
                       ) : column === "Historial" ? (
                         <div>

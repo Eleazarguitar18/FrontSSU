@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import SliderButton from "./SliderButton";
+import SliderButton from "./tools/SliderButton";
 import BotonSimple from "./tools/BotonSimple";
 
 const Cabezera = () => {

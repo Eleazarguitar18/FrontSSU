@@ -26,7 +26,7 @@ import EditAsignacion from "../Components/Asignacion/EditAsignacion";
 import { AsignaIP } from "../Components/red/AsignarIP";
 export default function AppRoutes() {
   return (
-    <div className="bg-background">
+    <div className="bg-slate-200 text-slate-800">
       <BrowserRouter>
         <div>
           <Cabezera />
@@ -43,7 +43,7 @@ export default function AppRoutes() {
           "Otra columna",
         ]}
       /> */}
-        <div style={{ marginTop: "50px" }}>
+        <div>
           <Routes>
             {/* Estilo en línea con objeto de estilo */}
             <Route path="/" element={<HomePage />} />
