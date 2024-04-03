@@ -1,4 +1,4 @@
-import "./DataTable.css";
+
 import {
   Table,
   TableBody,

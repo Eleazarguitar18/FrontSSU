@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useFormSubmit } from "./context/DispositivoContext";
-import "./Formulario.css";
+// import "./Formulario.css";
 import { useData } from "./context/DataContext";
 const FormComputadora = () => {
   const navigate = useNavigate();

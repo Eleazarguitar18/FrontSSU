@@ -15,14 +15,14 @@ export const MensajeEliminar = ({ dato, mensaje, funcion, id_row }) => {
   return (
     <div>
       <button
-        className="bg-red-700 p-2 rounded"
+        className="bg-red-700 text-white font-semibold p-2 rounded hover:bg-red-600"
         onClick={() => setIsopen(true)}
       >
         Eliminar
       </button>
       {isopen && (
         <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center text-black">
-          <div className="bg-white p-5 rounded flex flex-col justify-center items-center gap-3 text-black ">
+          <div className="bg-white p-5 rounded flex flex-col justify-center items-center gap-3 text-black sm:p-1 text-xl ">
             <h1 className="text-blue-900 font-bold text-2xl">{mensaje}</h1>
             {/* <h2 className="text-black color pb-2">{mensaje}</h2> */}
             <div className="text-justify">

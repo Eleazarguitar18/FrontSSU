@@ -5,7 +5,7 @@ import { useData } from "./context/DataContext.jsx";
 import { url_base } from "./data/base.routes.js";
 import { useFormSubmit } from "./context/DispositivoContext.jsx";
 
-import "./Tabla.css";
+// import "./Tabla.css";
 import {
   Table,
   TableBody,

@@ -26,6 +26,8 @@ import EditAsignacion from "../Components/Asignacion/EditAsignacion";
 import { AsignaIP } from "../Components/red/AsignarIP";
 // import DataTablePlantilla from "../Components/tools/DataTablePlantilla.jsx";
 import TablaPage from "../Components/tools/TablaPage";
+import PlantillaTabla from "../Components/tools/PlantillaTabla";
+import ExampleComponent from "../Components/tools/ExampleComponent";
 
 export default function AppRoutes() {
   return (
@@ -83,6 +85,7 @@ export default function AppRoutes() {
               component={<EditarDispositivo />}
             />
             <Route path="/tabla" element={<TablaPage />} />
+            <Route path="/tabla2" element={<ExampleComponent />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -1,4 +1,4 @@
-/* Estilo para la tabla */
+/* /* Estilo para la tabla
 .TableContainer {
   margin: 0;
   padding: 0;
@@ -7,7 +7,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para las celdas de encabezado */
+/* Estilo para las celdas de encabezado
 .TableHead {
   background-color: #3e869e;
   color: white;
@@ -15,13 +15,13 @@
   padding: 8px;
 }
 
-/* Estilo para las celdas de datos */
+/* Estilo para las celdas de datos
 .TableCell {
   padding: 8px;
   border-bottom: 1px solid #ccc;
 }
 
-/* Estilo para las filas alternas */
+/* Estilo para las filas alternas
 .TableRow:nth-child(even) {
   background-color: #f2f2f2;
 }
@@ -38,4 +38,4 @@
 .button-container {
   display: flex;
   justify-content: center;
-}
+} */
