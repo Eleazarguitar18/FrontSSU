@@ -9,16 +9,44 @@ import {
   TableRow,
   TablePagination,
   TextField,
+  TableSortLabel,
 } from "@mui/material";
 
 const PlantillaTabla = ({ columns, data, title }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [orderBy, setOrderBy] = useState("");
+  const [order, setOrder] = useState("asc");
+
+  const handleRequestSort = (property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
+
+  const filteredData = data.filter((row) => {
+    return Object.values(row).some((value) =>
+      String(value).toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
+
+  const sortData = (data) => {
+    if (orderBy === "") return data;
+    return data.slice().sort((a, b) => {
+      if (order === "asc") {
+        return a[orderBy] > b[orderBy] ? 1 : -1;
+      } else {
+        return a[orderBy] < b[orderBy] ? 1 : -1;
+      }
+    });
+  };
+
+  const sortedData = sortData(filteredData);
 
   useEffect(() => {
-    // Puedes añadir lógica adicional si necesitas realizar alguna acción cuando cambian los datos
-  }, [data]);
+    setPage(0); // Reset page when data changes
+  }, [filteredData]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -28,12 +56,6 @@ const PlantillaTabla = ({ columns, data, title }) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  const filteredData = data.filter((row) => {
-    return Object.values(row).some((value) =>
-      String(value).toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  });
 
   return (
     <div className="p-7 w-full">
@@ -62,13 +84,19 @@ const PlantillaTabla = ({ columns, data, title }) => {
                   key={index}
                   style={{ color: "white", textAlign: "center" }}
                 >
-                  {column.name}
+                  <TableSortLabel
+                    active={orderBy === column.key}
+                    direction={orderBy === column.key ? order : "asc"}
+                    onClick={() => handleRequestSort(column.key)}
+                  >
+                    {column.name}
+                  </TableSortLabel>
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody className="bg-slate-200">
-            {filteredData
+            {sortedData
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, rowIndex) => (
                 <TableRow key={rowIndex} style={{ borderColor: "red" }}>

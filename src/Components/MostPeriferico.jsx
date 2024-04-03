@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DataTablePeriferico from "./DataTablePeriferico";
 import { url_base } from "./data/base.routes.js";
+import PlantillaTabla from "./tools/PlantillaTabla.jsx";
+import {
+  BotonEditar,
+  BotonGenerarPDF,
+  BotonHistorial,
+  BotonEliminar,
+} from "./tools/BotonesCRUD.jsx";
 const MostComputadora = () => {
   // const url_base = "http://localhost:3000";
   const [datos, setDatos] = useState(null);

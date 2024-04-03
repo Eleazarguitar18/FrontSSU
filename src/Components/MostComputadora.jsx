@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import DataTablePC from "./DataTablePC";
 import { url_base } from "./data/base.routes.js";
 import PlantillaTabla from "./tools/PlantillaTabla.jsx";
 import {
@@ -12,9 +11,6 @@ import {
 const MostComputadora = () => {
   // const url_base = "http://localhost:3000";
   const [datos, setDatos] = useState(null);
-  const handleClickButton = (rowData) => {
-    console.log("Datos de la fila:", rowData);
-  };
 
   useEffect(() => {
     fetchData();
@@ -55,8 +51,12 @@ const MostComputadora = () => {
       key: "acciones",
       render: (row) => (
         <div className="space-y-2">
-          <BotonEditar rowData={row} />
-          <BotonEliminar rowData={row} fetchData={fetchData} />
+          <BotonEditar rowData={row} urlEdit={"/pcEdit"} />
+          <BotonEliminar
+            rowData={row}
+            fetchData={fetchData}
+            routeComponent={"pc"}
+          />
           <BotonGenerarPDF rowData={row} />
         </div>
       ),
@@ -77,7 +77,6 @@ const MostComputadora = () => {
         data={datos}
         columns={columns}
         title={"Detalles de Computadoras"}
-        onButtonClick={handleClickButton}
       />
     </div>
   );

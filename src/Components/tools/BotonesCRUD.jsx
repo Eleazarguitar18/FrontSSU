@@ -6,7 +6,7 @@ import { url_base } from "../data/base.routes.js";
 import { generarPDF } from "./generarPDF.js";
 import { MensajeEliminar } from "../componenes_emergentes/MensajeEliminar.jsx";
 
-export const BotonEditar = ({ rowData }) => {
+export const BotonEditar = ({ rowData, urlEdit }) => {
   const { setDataDispositivo } = useData();
   // const handleClick = () => {
   //   console.log("Editar clickeado", rowData);
@@ -15,7 +15,7 @@ export const BotonEditar = ({ rowData }) => {
     setDataDispositivo(datosDispositivo);
   };
   return (
-    <NavLink to={`/pcEdit`}>
+    <NavLink to={urlEdit}>
       <button
         className="bg-green-700 text-white font-semibold p-2 rounded hover:bg-green-600"
         onClick={() => handleEdit(rowData)}
@@ -26,7 +26,7 @@ export const BotonEditar = ({ rowData }) => {
   );
 };
 
-export const BotonEliminar = ({ rowData, fetchData }) => {
+export const BotonEliminar = ({ rowData, fetchData, routeComponent }) => {
   // const actualizar = ();
   function objetoAString(row) {
     const dato = `
@@ -42,7 +42,7 @@ export const BotonEliminar = ({ rowData, fetchData }) => {
   }
   const handleDelete = async (row_id) => {
     try {
-      await axios.delete(`${url_base}/pc/${row_id}`);
+      await axios.delete(`${url_base}/${routeComponent}/${row_id}`);
       console.log(`Eliminando fila con id ${row_id}`);
       fetchData();
     } catch (error) {
