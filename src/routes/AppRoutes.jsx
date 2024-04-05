@@ -13,7 +13,7 @@ import EditarPeriferico from "../Components/EditarPeriferico";
 import MostMantenimiento from "../Components/MostMantenimiento";
 // import Tabla from "../Components/Tabla";
 import Datos_red from "../Components/red/Datos_red";
-import DataTableHistorial from "../Components/historial/DataTableHistorial";
+import { MostHistorial } from "../Components/MostHistorial";
 import FormHistorial from "../Components/historial/FormHistorial";
 import EditHistorial from "../Components/historial/EditHistorial";
 import DataHistorialGeneral from "../Components/historial/DataHistorialGeneral";
@@ -26,8 +26,7 @@ import EditAsignacion from "../Components/Asignacion/EditAsignacion";
 import { AsignaIP } from "../Components/red/AsignarIP";
 // import DataTablePlantilla from "../Components/tools/DataTablePlantilla.jsx";
 import TablaPage from "../Components/tools/TablaPage";
-import PlantillaTabla from "../Components/tools/PlantillaTabla";
-import ExampleComponent from "../Components/tools/ExampleComponent";
+import { FormComputadoraExample } from "../Components/tools/FormComputadoraExample";
 
 export default function AppRoutes() {
   return (
@@ -73,7 +72,7 @@ export default function AppRoutes() {
             <Route path="/asignarIP" element={<AsignaIP />} />
 
             <Route path="/datosredEdit" element={<EditDatos_red />} />
-            <Route path="/historial" element={<DataTableHistorial />} />
+            <Route path="/historial" element={<MostHistorial />} />
             <Route path="/registrarHistorial" element={<FormHistorial />} />
             <Route path="/historialEdit" element={<EditHistorial />} />
             <Route
@@ -85,7 +84,7 @@ export default function AppRoutes() {
               component={<EditarDispositivo />}
             />
             <Route path="/tabla" element={<TablaPage />} />
-            <Route path="/tabla2" element={<ExampleComponent />} />
+            <Route path="/tabla2" element={<FormComputadoraExample />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>

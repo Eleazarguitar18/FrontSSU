@@ -8,10 +8,22 @@ import {
   BotonHistorial,
   BotonEliminar,
 } from "./tools/BotonesCRUD.jsx";
+import { generarPDF_PC } from "./pdfs/generarPDF_PC.js";
 const MostComputadora = () => {
   // const url_base = "http://localhost:3000";
   const [datos, setDatos] = useState(null);
-
+  function objetoAString(row) {
+    const dato = `
+    Tipo: ${row.Tipo} \n
+    Nombre del Equipo: ${row.NombreDelEquipo} \n
+    Marca: ${row.Marca} \n
+    Unidad: ${row.Unidad} \n
+    Estado: ${row.Estado} \n
+    Numero Activo: ${row.NroActivo} \n
+    Numero de Serie: ${row.NroSerie}  \n
+    `;
+    return dato;
+  }
   useEffect(() => {
     fetchData();
   }, []);
@@ -56,8 +68,9 @@ const MostComputadora = () => {
             rowData={row}
             fetchData={fetchData}
             routeComponent={"pc"}
+            objetoAString={objetoAString}
           />
-          <BotonGenerarPDF rowData={row} />
+          <BotonGenerarPDF rowData={row} funtionPDF={generarPDF_PC} />
         </div>
       ),
     },

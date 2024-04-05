@@ -20,9 +20,9 @@ export default function RegistrarRed() {
   const { dataRed } = useData();
   console.log("id del dispositivo es:", dataRed);
   const [initialValues, setInitialValues] = useState({
-    DireccionIP: dataAsignacion,
+    DireccionIP: dataAsignacion || "", // Si dataAsignacion es null, asigna una cadena vacía
     DireccionMAC: "",
-    id_Dispositivo: dataRed,
+    id_Dispositivo: dataRed || "", // Si dataRed es null, asigna una cadena vacía
   });
 
   const validationSchema = Yup.object().shape({

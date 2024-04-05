@@ -4,16 +4,20 @@ import DataTableMantenimiento from "./DataTableMatenimiento.jsx";
 import { url_base } from "./data/base.routes.js";
 import { useNavigate } from "react-router-dom";
 import PlantillaTabla from "./tools/PlantillaTabla.jsx";
+import { useData } from "./context/DataContext";
 import {
   BotonEditar,
   BotonGenerarPDF,
   BotonHistorial,
   BotonEliminar,
+  BotonPosponer,
 } from "./tools/BotonesCRUD.jsx";
+import { generarPDF_Mant } from "./pdfs/generarPDF_Mant.js";
 const MostMantenimiento = () => {
   // const url_base = "http://localhost:3000";
   const [datos, setDatos] = useState(null);
   const navigate = useNavigate();
+  const { dataMantenimiento } = useData();
 
   const RegistrarMatenimiento = () => {
     navigate("/registrarMant");
@@ -24,11 +28,12 @@ const MostMantenimiento = () => {
   }, []);
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${url_base}/pc`);
+      const response = await axios.get(`${url_base}/mantenimiento`);
       console.log(response.data);
       const datosCombinados = response.data.map((item) => ({
         ...item,
         ...item.Dispositivo,
+        TipoEquipo: item.Dispositivo.Tipo,
       }));
       setDatos(datosCombinados);
     } catch (error) {
@@ -38,7 +43,42 @@ const MostMantenimiento = () => {
   if (!datos) {
     return <div>Cargando datos...</div>;
   }
-
+  const columns = [
+    { name: "fecha_inicial", key: "fecha_inicial", sortable: true },
+    { name: "actividad", key: "actividad", sortable: true },
+    { name: "fecha_final", key: "fecha_final", sortable: true },
+    { name: "estado", key: "estado", sortable: true },
+    { name: "Detalles", key: "Detalles", sortable: true },
+    { name: "tipo", key: "tipo", sortable: true },
+    { name: "Unidad", key: "Unidad", sortable: true },
+    { name: "Marca", key: "Marca", sortable: true },
+    { name: "TipoEquipo", key: "TipoEquipo", sortable: true },
+    { name: "Ubicacion", key: "Ubicacion", sortable: true },
+    {
+      name: "Acciones",
+      key: "acciones",
+      render: (row) => (
+        <div className="space-y-2">
+          <BotonPosponer rowData={row} urlEdit={"/posponerMantenimiento"} />
+          {/* <BotonEliminar
+            rowData={row}
+            fetchData={fetchData}
+            routeComponent={"mantenimiento"}
+          /> */}
+          <BotonGenerarPDF rowData={row} funtionPDF={generarPDF_Mant} />
+        </div>
+      ),
+    },
+    {
+      name: "Historial",
+      key: "Historial",
+      render: (row) => (
+        <div className="space-y-2 items-center">
+          <BotonHistorial rowData={row} />
+        </div>
+      ),
+    },
+  ];
   return (
     <div>
       <h2>Detalles del Mantenimiento</h2>
@@ -49,7 +89,7 @@ const MostMantenimiento = () => {
         <PlantillaTabla
           data={datos}
           columns={columns}
-          title={"Detalles de Computadoras"}
+          title={"Detalles de Mantenimiento"}
         />
       </div>
     </div>

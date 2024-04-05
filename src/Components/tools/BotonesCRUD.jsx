@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { useData } from "../context/DataContext.jsx";
+import { useFormSubmit } from "../context/DispositivoContext.jsx";
 import { url_base } from "../data/base.routes.js";
-import { generarPDF } from "./generarPDF.js";
+import { useNavigate } from "react-router-dom";
+// import { generarPDF_PC } from "../pdfs/generarPDF_PC.js";
 import { MensajeEliminar } from "../componenes_emergentes/MensajeEliminar.jsx";
 
 export const BotonEditar = ({ rowData, urlEdit }) => {
@@ -25,21 +27,37 @@ export const BotonEditar = ({ rowData, urlEdit }) => {
     </NavLink>
   );
 };
-
-export const BotonEliminar = ({ rowData, fetchData, routeComponent }) => {
+export const BotonPosponer = ({ rowData, urlEdit }) => {
+  console.log("estoy enviando esto:", rowData);
+  const navigate = useNavigate();
+  const { setDataMantenimiento, setDataDispositivo } = useData();
+  const { editarMantenimiento } = useFormSubmit();
+  // const handleClick = () => {
+  //   console.log("Editar clickeado", rowData);
+  // };
+  const posponerMantenimiento = (datosDispositivo) => {
+    setDataMantenimiento(datosDispositivo);
+    navigate("/editarMantenimiento");
+  };
+  return (
+    <NavLink to={urlEdit}>
+      <button
+        className="bg-green-700 text-white font-semibold p-2 rounded hover:bg-green-600"
+        onClick={() => posponerMantenimiento(rowData)}
+      >
+        Posponer
+      </button>
+    </NavLink>
+  );
+};
+export const BotonEliminar = ({
+  rowData,
+  fetchData,
+  routeComponent,
+  objetoAString,
+}) => {
   // const actualizar = ();
-  function objetoAString(row) {
-    const dato = `
-    Tipo: ${row.Tipo} \n
-    Nombre del Equipo: ${row.NombreDelEquipo} \n
-    Marca: ${row.Marca} \n
-    Unidad: ${row.Unidad} \n
-    Estado: ${row.Estado} \n
-    Numero Activo: ${row.NroActivo} \n
-    Numero de Serie: ${row.NroSerie}  \n
-    `;
-    return dato;
-  }
+
   const handleDelete = async (row_id) => {
     try {
       await axios.delete(`${url_base}/${routeComponent}/${row_id}`);
@@ -49,10 +67,6 @@ export const BotonEliminar = ({ rowData, fetchData, routeComponent }) => {
       console.error("Error al eliminar la fila:", error);
     }
   };
-  const handleClick = () => {
-    console.log("Eliminar clickeado", rowData);
-  };
-
   return (
     <MensajeEliminar
       mensaje={"¿Está seguro de eliminar?"}
@@ -63,14 +77,14 @@ export const BotonEliminar = ({ rowData, fetchData, routeComponent }) => {
   );
 };
 
-export const BotonGenerarPDF = ({ rowData }) => {
+export const BotonGenerarPDF = ({ rowData, funtionPDF }) => {
   const handleClick = () => {
     console.log("PDF clickeado", rowData);
   };
 
   return (
     <button
-      onClick={() => generarPDF(rowData)}
+      onClick={() => funtionPDF(rowData)}
       className="bg-red-900 text-white font-semibold p-2 rounded hover:bg-red-700"
     >
       PDF
@@ -79,14 +93,15 @@ export const BotonGenerarPDF = ({ rowData }) => {
 };
 
 export const BotonHistorial = (rowData) => {
-  const handleClick = () => {
-    console.log("Historial clickeado", rowData);
+  const { setDataDispositivo } = useData();
+  const handleEdit = (datosDispositivo) => {
+    setDataDispositivo(datosDispositivo);
   };
 
   return (
     <NavLink to={`/historial`}>
       <button
-        onClick={() => handleEdit(row)}
+        onClick={() => handleEdit(rowData.rowData)}
         className="bg-slate-800 text-white font-semibold p-2 rounded hover:bg-slate-700"
       >
         Historial
