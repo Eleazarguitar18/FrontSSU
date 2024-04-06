@@ -14,8 +14,8 @@ export const generarPDF_Mant = (row) => {
 
   // Agregar imagen al lado derecho de la cabecera
   const imgData = ssu_lapaz;
-  const imgWidth = 40; // Ajusta el ancho de la imagen según tu necesidad
-  const imgHeight = 45; // Ajusta la altura de la imagen según tu necesidad
+  const imgWidth = 35; // Ajusta el ancho de la imagen según tu necesidad
+  const imgHeight = 40; // Ajusta la altura de la imagen según tu necesidad
   const headerHeight = doc.getTextDimensions(topHeaders[0][0]).h; // Obtener la altura del primer elemento del top header
   doc.addImage(
     imgData,
@@ -48,7 +48,7 @@ export const generarPDF_Mant = (row) => {
   // Fuente que incluye el caracter '▢'
   //   doc.setFont("Arial Unicode MS");
 
-  const fallaReportada = [["mostrar TipoFalla"]];
+  const fallaReportada = [["mostrar TipoFalla", row.Detalles]];
   const Firmas = [
     [
       "___________________________                        ",
@@ -59,7 +59,7 @@ export const generarPDF_Mant = (row) => {
       "Usuario " + row.PersonalSSU.Nombre + " " + row.PersonalSSU.Apellido,
     ],
   ];
-  const Detalles = [[row.Detalles]];
+  const Recomendaciones = [[row.Recomendaciones]];
   // Genera las tablas
   doc.autoTable({
     startY: 30, // Cambia la posición de inicio según el espacio ocupado por la cabecera
@@ -90,7 +90,7 @@ export const generarPDF_Mant = (row) => {
 
   doc.autoTable({
     startY: doc.previousAutoTable.finalY + 10,
-    head: [["FALLA REPORTADA", "  "]],
+    head: [["FALLA REPORTADA", " DETALLES"]],
     body: fallaReportada,
     tableWidth: "wrap",
     autoWidth: true,
@@ -98,21 +98,21 @@ export const generarPDF_Mant = (row) => {
 
   doc.autoTable({
     startY: doc.previousAutoTable.finalY + 10,
-    head: [["DETALLES"]],
-    body: Detalles,
+    head: [["RECOMENDACIONES"]],
+    body: Recomendaciones,
     tableWidth: "wrap",
     autoWidth: true,
     // Establece el color de relleno en blanco para todas las filas
   });
 
   doc.autoTable({
+    theme: "plain",
     startY: doc.previousAutoTable.finalY + 30,
     body: Firmas,
     tableWidth: "wrap",
     autoWidth: true,
-    didParseCell(data) {
-      // Establece el fondo blanco para todas las filas
-      data.cell.styles.fillColor = "#FFFFFF";
+    bodyStyles: {
+      halign: "center", // Centra el texto horizontalmente
     },
   });
 

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { url_base } from "../data/base.routes.js";
 import { AsignaIP } from "./AsignarIP.jsx";
+import DynamicForm from "../tools/FormularioPlantilla.jsx";
 export default function RegistrarRed() {
   const navigate = useNavigate();
 
@@ -39,7 +40,7 @@ export default function RegistrarRed() {
       .required("La dirección MAC es requerida"),
     // id_Dispositivo: Yup.string().require("El campo es obligatorio"),
   });
-  const crearDatoRed = async (values, { setSubmitting, resetForm }) => {
+  const crearDatoRed = async (values, { resetForm }) => {
     try {
       if (values.DireccionIP === "") {
         values.DireccionIP = "0.0.0.0";
@@ -51,7 +52,6 @@ export default function RegistrarRed() {
       if (respuesta.status == 201) {
         console.log("La IP se actualizado exitosamente");
         // initialValues = null;
-        setSubmitting(false);
         resetForm();
         MostrarIP();
       }
@@ -60,31 +60,84 @@ export default function RegistrarRed() {
       console.error("Error al actualizar el dispositivo:", error);
     }
   };
+  const fields = [
+    { name: "Direccion IP", label: "DireccionIP" },
+    { name: "Direccion MAC", label: "DireccionMAC" },
+  ];
   return (
-    <div>
-      <h2>Restrar los datos de Red el Equipo</h2>
-
+    <div className="bg-slate-300 p-5 m-7 rounded-lg shadow-md">
+      <h2 className="text-center font-bold text-3xl my-4">
+        Registrar los datos de Red del Equipo
+      </h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={crearDatoRed}
       >
-        <Form>
+        <Form className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="DireccionIP">Dirección IP:</label>
-            <Field type="text" id="DireccionIP" name="DireccionIP" />
-            <ErrorMessage name="DireccionIP" component="div" />
-            <button onClick={asignarip}>Asignar IP</button>
+            <label htmlFor="DireccionIP" className="block font-semibold mb-1">
+              Dirección IP:
+            </label>
+            <Field
+              type="text"
+              id="DireccionIP"
+              name="DireccionIP"
+              className="w-full border border-gray-300 rounded px-3 py-2"
+            />
+            <ErrorMessage
+              name="DireccionIP"
+              component="div"
+              className="text-red-600"
+            />
+            <button
+              type="button"
+              className="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded mr-2"
+              onClick={asignarip}
+            >
+              Asignar IP
+            </button>
           </div>
           <div>
-            <label htmlFor="DireccionMAC">Dirección MAC:</label>
-            <Field type="text" id="DireccionMAC" name="DireccionMAC" />
-            <ErrorMessage name="DireccionMAC" component="div" />
+            <label htmlFor="DireccionMAC" className="block font-semibold mb-1">
+              Dirección MAC:
+            </label>
+            <Field
+              type="text"
+              id="DireccionMAC"
+              name="DireccionMAC"
+              className="w-full border border-gray-300 rounded px-3 py-2"
+            />
+            <ErrorMessage
+              name="DireccionMAC"
+              component="div"
+              className="text-red-600"
+            />
           </div>
-          <button type="submit">Registrar</button>
-          <button onClick={MostrarIP}>Cancelar</button>
+          <div className="col-span-2 flex justify-end">
+            <button
+              type="submit"
+              className="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded mr-2"
+            >
+              Registrar
+            </button>
+            <button
+              type="button"
+              className="bg-red-800 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              onClick={MostrarIP}
+            >
+              Cancelar
+            </button>
+          </div>
         </Form>
       </Formik>
     </div>
+
+    // <DynamicForm
+    //   fields={fields}
+    //   onSubmit={crearDatoRed}
+    //   // validaciones={validationSchema}
+    //   // valoresIniciales={initialValues}
+    // />
   );
 }
