@@ -4,6 +4,7 @@ import DataTableMantenimiento from "./DataTableMatenimiento.jsx";
 import { url_base } from "./data/base.routes.js";
 import { useNavigate } from "react-router-dom";
 import PlantillaTabla from "./tools/PlantillaTabla.jsx";
+import { MensajeCarga } from "./tools/MensajeCarga.jsx";
 import { useData } from "./context/DataContext";
 import {
   BotonEditar,
@@ -41,7 +42,7 @@ const MostMantenimiento = () => {
     }
   };
   if (!datos) {
-    return <div>Cargando datos...</div>;
+    return <MensajeCarga />;
   }
   const columns = [
     { name: "fecha_inicial", key: "fecha_inicial", sortable: true },

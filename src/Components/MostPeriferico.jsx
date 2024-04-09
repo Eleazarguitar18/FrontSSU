@@ -4,6 +4,7 @@ import DataTablePeriferico from "./DataTablePeriferico";
 import { url_base } from "./data/base.routes.js";
 import PlantillaTabla from "./tools/PlantillaTabla.jsx";
 import { generarPDF_periferico } from "./pdfs/generarPDF_periferico.js";
+import { MensajeCarga } from "./tools/MensajeCarga.jsx";
 import {
   BotonEditar,
   BotonGenerarPDF,
@@ -43,7 +44,7 @@ const MostComputadora = () => {
   }, []);
 
   if (!datos) {
-    return <div>Cargando datos...</div>;
+    return <MensajeCarga />;
   }
   const columns = [
     { name: "ID Dispositivo", key: "id_Dispositivo", sortable: true },
