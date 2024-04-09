@@ -31,22 +31,15 @@ const PlantillaTabla = ({ columns, data, title }) => {
     );
   });
 
-  const sortData = (data) => {
-    if (orderBy === "") return data;
-    return data.slice().sort((a, b) => {
-      if (order === "asc") {
-        return a[orderBy] > b[orderBy] ? 1 : -1;
-      } else {
-        return a[orderBy] < b[orderBy] ? 1 : -1;
-      }
-    });
-  };
-
-  const sortedData = sortData(filteredData);
+  const sortedData = filteredData.slice().sort((a, b) => {
+    if (orderBy === "") return 0;
+    const comparison = a[orderBy].localeCompare(b[orderBy]);
+    return order === "asc" ? comparison : -comparison;
+  });
 
   useEffect(() => {
-    setPage(0); // Reset page when data changes
-  }, [filteredData]);
+    setPage(0); // Reset page only when search term changes
+  }, [searchTerm]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -59,11 +52,11 @@ const PlantillaTabla = ({ columns, data, title }) => {
 
   return (
     <div className="p-7 w-full">
-      <h2 className="text-slate-950 font-bold  text-center p-2 mb-3 text-2xl">
+      <h2 className="text-slate-950 font-bold text-center p-2 mb-3 text-2xl">
         {title}
       </h2>
       <p className="m-2">
-        Intruzca algun indicio de la computadora para buscarla
+        Ingrese algún indicio de la computadora para buscarla
       </p>
       <div className="mb-4">
         <TextField
@@ -113,7 +106,7 @@ const PlantillaTabla = ({ columns, data, title }) => {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 50]}
         component="div"
-        count={filteredData.length}
+        count={sortedData.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

@@ -7,6 +7,7 @@ const FormularioPlantilla = ({
   onSubmit,
   validaciones,
   valoresIniciales,
+  titulo,
 }) => {
   // Definir el esquema de validación utilizando Yup
   const schema =
@@ -31,9 +32,7 @@ const FormularioPlantilla = ({
   return (
     <div className="bg-gray-100 min-h-screen flex justify-center items-center">
       <div className="bg-white w-full m-8 p-8 rounded-lg shadow-lg">
-        <h1 className="text-2xl font-bold text-center mb-6">
-          Registro de Equipo de Computadora
-        </h1>
+        <h1 className="text-2xl font-bold text-center mb-6">{titulo}</h1>
         <Formik
           initialValues={initialValues}
           validationSchema={schema}
@@ -50,7 +49,14 @@ const FormularioPlantilla = ({
                     >
                       {field.label}:
                     </label>
-                    {field.options ? (
+                    {field.type === "date" ? (
+                      <Field
+                        type="date"
+                        id={field.name}
+                        name={field.name}
+                        className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-indigo-500"
+                      />
+                    ) : field.options ? (
                       <Field
                         as="select"
                         id={field.name}

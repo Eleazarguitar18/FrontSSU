@@ -27,6 +27,11 @@ import { AsignaIP } from "../Components/red/AsignarIP";
 // import DataTablePlantilla from "../Components/tools/DataTablePlantilla.jsx";
 import TablaPage from "../Components/tools/TablaPage";
 import { FormComputadoraExample } from "../Components/tools/FormComputadoraExample";
+import { AsignarPersonal } from "../Components/PersonalSSU/AsignarPersonal";
+import { RegistroPersonal } from "../Components/PersonalSSU/RegistroPersonal";
+import { MostrarPersonal } from "../Components/PersonalSSU/MostrarPersonal";
+import { EditarPersonal } from "../Components/PersonalSSU/EditarPersonal";
+// import AsignarDispositivo from "../Components/tools/AsignarDispositivo";
 
 export default function AppRoutes() {
   return (
@@ -57,12 +62,23 @@ export default function AppRoutes() {
             <Route path="/mostrarperi" element={<MostPeriferico />} />
             <Route path="/pcEdit" element={<EditarDispositivo />} />
             <Route path="/perifericoEdit" element={<EditarPeriferico />} />
+
+            <Route path="/registroPersonal" element={<RegistroPersonal />} />
+            <Route path="/mostrarPersonal" element={<MostrarPersonal />} />
+            <Route path="/asignarPersonal" element={<AsignarPersonal />} />
+            <Route path="/editarPersonal" element={<EditarPersonal />} />
+
             <Route path="/mostrarMant" element={<MostMantenimiento />} />
             <Route path="/registrarMant" element={<RegistrarMantenimiento />} />
             <Route
               path="/posponerMantenimiento"
               element={<PosponerMantenimiento />}
             />
+            {/* <Route
+              path="/asignarDispositivoMant"
+              element={<AsignarDispositivo />}
+            /> */}
+
             <Route path="/mostrarAsig" element={<MostAsignacion />} />
             <Route path="/registrarAsig" element={<FormAsignacion />} />
             <Route path="/editarAsignacion" element={<EditAsignacion />} />

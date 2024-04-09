@@ -163,6 +163,52 @@ const FormSubmitProvider = ({ children }) => {
       throw error;
     }
   };
+  // * CRUD DE PERSONAL SSU
+  const crearPersonalSSU = async (values) => {
+    try {
+      // Realizar la solicitud POST al backend con Axios
+      // console.log("listo para enviar", values);
+
+      const response = await axios.post(`${url_base}/personalSSU`, values);
+      console.log("Respuesta del backend para personalSSU:", response.data);
+      return response.data; // Devuelve la respuesta del backend si es necesario
+    } catch (error) {
+      console.error("Error al enviar el formulario para personalSSU:", error);
+      throw error; // Lanza el error para que los componentes puedan manejarlo según sea necesario
+    }
+  };
+  const editarPersonalSSU = async (values) => {
+    try {
+      // Realizar la solicitud POST al backend con Axios
+      console.log("listo para enviar", values.id_PersonalSSU);
+
+      const response = await axios.put(
+        `${url_base}/personalSSU/${values.id_PersonalSSU}`,
+        values
+      );
+      console.log("Respuesta del backend para PersonalSSU:", response.data);
+      return response.data; // Devuelve la respuesta del backend si es necesario
+    } catch (error) {
+      console.error("Error al enviar el formulario para PersonalSSU:", error);
+      throw error; // Lanza el error para que los componentes puedan manejarlo según sea necesario
+    }
+  };
+  const eliminarPersonalSSU = async (values) => {
+    try {
+      // Realizar la solicitud POST al backend con Axios
+      // console.log("listo para enviar", values);
+
+      const response = await axios.delete(
+        `${url_base}/personalSSU/${values.id_PersonalSSU}`,
+        values
+      );
+      console.log("Respuesta del backend para PersonalSSU:", response.data);
+      return response.data; // Devuelve la respuesta del backend si es necesario
+    } catch (error) {
+      console.error("Error al enviar el formulario para PersonalSSU:", error);
+      throw error; // Lanza el error para que los componentes puedan manejarlo según sea necesario
+    }
+  };
   return (
     <FormSubmitContext.Provider
       value={{
@@ -178,6 +224,9 @@ const FormSubmitProvider = ({ children }) => {
         nuevoAsignacion,
         editarAsignacion,
         eliminarAsignacion,
+        crearPersonalSSU,
+        editarPersonalSSU,
+        eliminarPersonalSSU,
       }}
     >
       {children}

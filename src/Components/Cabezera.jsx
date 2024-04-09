@@ -33,11 +33,12 @@ const Cabezera = () => {
         <BotonSimple to="/datosred">Datos Red</BotonSimple>
 
         <BotonSimple to="/historialGeneral">Historial</BotonSimple>
-
+        <BotonSimple to="/mostrarPersonal">Personal</BotonSimple>
         <SliderButton
           nombreContenedor={`Mantenimientos`}
           botones={[
-            { enlace: "/registrarMant", nombre: "Registrar" },
+            // { enlace: "/registrarMant", nombre: "Registrar" },
+            { enlace: "/asignarPersonal", nombre: "Registrar" },
             { enlace: "/mostrarMant", nombre: "Mostrar" },
           ]}
         />

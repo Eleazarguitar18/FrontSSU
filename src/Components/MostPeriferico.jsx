@@ -46,6 +46,7 @@ const MostComputadora = () => {
     return <div>Cargando datos...</div>;
   }
   const columns = [
+    { name: "ID Dispositivo", key: "id_Dispositivo", sortable: true },
     { name: "Numero de serie", key: "NroSerie" },
     { name: "NroActivo", key: "NroActivo" },
     { name: "Estado", key: "Estado" },

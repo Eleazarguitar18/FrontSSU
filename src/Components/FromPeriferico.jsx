@@ -30,7 +30,13 @@ const FormPeriferico = () => {
     { name: "Tipo", label: "Tipo" },
     { name: "Descripcion", label: "Descripcion" },
   ];
-  return <DynamicForm fields={fields} onSubmit={enviarFormulario} />;
+  return (
+    <DynamicForm
+      fields={fields}
+      onSubmit={enviarFormulario}
+      titulo={"Registro de Perifericos"}
+    />
+  );
 };
 
 export default FormPeriferico;

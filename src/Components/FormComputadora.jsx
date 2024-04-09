@@ -40,14 +40,14 @@ const FormComputadora = () => {
       ],
     },
     { name: "Ubicacion", label: "Ubicación" },
-    {
-      name: "Unidad",
-      label: "Unidad",
-      options: [
-        { value: "unidad1", label: "Unidad 1" },
-        { value: "unidad2", label: "Unidad 2" },
-      ],
-    },
+    // {
+    //   name: "Unidad",
+    //   label: "Unidad",
+    //   options: [
+    //     { value: "unidad1", label: "Unidad 1" },
+    //     { value: "unidad2", label: "Unidad 2" },
+    //   ],
+    // },
     { name: "Unidad", label: "Unidad" },
     { name: "Marca", label: "Marca" },
     { name: "Detalle", label: "Detalle" },
@@ -57,9 +57,16 @@ const FormComputadora = () => {
     { name: "RAM", label: "RAM" },
     { name: "MemoriaInterna", label: "MemoriaInterna" },
     { name: "SistemaOperativo", label: "SistemaOperativo" },
+
     // Agrega más campos según sea necesario
   ];
-  return <DynamicForm fields={fields} onSubmit={enviarFormulario} />;
+  return (
+    <DynamicForm
+      fields={fields}
+      onSubmit={enviarFormulario}
+      titulo={"Registro de Computadoras"}
+    />
+  );
 };
 
 export default FormComputadora;
