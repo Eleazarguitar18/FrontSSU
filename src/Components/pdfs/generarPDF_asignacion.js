@@ -57,7 +57,7 @@ export const generarPDF_asignacion = (row) => {
       "___________________________",
     ],
     [
-      "Encargado " + "                        ",
+      "Encargado " + row.Encargado + "                        ",
       "Usuario " + row.PersonalSSU.Nombres + " " + row.PersonalSSU.ApellidoPaterno + " " + row.PersonalSSU.ApellidoMaterno,
     ],
   ];
@@ -113,5 +113,5 @@ export const generarPDF_asignacion = (row) => {
 
   // Continúa este patrón para otras secciones de tu PDF
 
-  doc.save("fila_seleccionada.pdf");
+  doc.save("Informe_Asignacion.pdf");
 };
