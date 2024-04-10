@@ -1,3 +1,4 @@
+import BotonSimple from "../tools/BotonSimple.jsx";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { url_base } from "../data/base.routes.js";
@@ -71,17 +72,11 @@ export const MostrarPersonal = () => {
 
   return (
     <div>
-      <button
-        onClick={NuevoPersonal}
-        className="bg-green-700 hover:bg-green-500 text-white font-bold py-2 px-4 rounded ml-2 mt-16 mb-0"
-      >
-        Nuevo Personal
-      </button>
-
       <PlantillaTabla
         columns={columns}
         data={datos}
         title={"Datos de Personal"}
+        boton={<BotonSimple to="/registroPersonal">Nuevo Personal</BotonSimple>}
       />
     </div>
   );

@@ -12,7 +12,7 @@ import {
   TableSortLabel,
 } from "@mui/material";
 
-const PlantillaTabla = ({ columns, data, title }) => {
+const PlantillaTabla = ({ columns, data, title, boton }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -55,18 +55,25 @@ const PlantillaTabla = ({ columns, data, title }) => {
       <h2 className="text-slate-950 font-bold text-center p-2 mb-3 text-2xl">
         {title}
       </h2>
+
       <p className="m-2">
         Ingrese algún indicio de la computadora para buscarla
       </p>
-      <div className="mb-4">
-        <TextField
-          label="Buscar"
-          variant="outlined"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          fullWidth
-          className="max-w-lg mx-auto mb-4"
-        />
+
+      <div className="flex justify-between items-center">
+        <div className="mb-4 w-full">
+          <TextField
+            label="Buscar"
+            variant="outlined"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            fullWidth
+            className="max-w-lg mx-auto mb-4"
+          />
+        </div>
+        <div className="bg-green-700 hover:bg-none text-center rounded w-60 ml-2 mb-4">
+          {boton}
+        </div>
       </div>
       <TableContainer component={Paper}>
         <Table>

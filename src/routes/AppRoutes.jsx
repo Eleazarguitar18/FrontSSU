@@ -40,18 +40,6 @@ export default function AppRoutes() {
         <div>
           <Cabezera />
         </div>
-        {/* <Tabla
-        columnas={[
-          "ID",
-          "Nombre",
-          "Descripción",
-          "Precio",
-          "Stock",
-          "Acciones",
-          "Otro",
-          "Otra columna",
-        ]}
-      /> */}
         <div>
           <Routes>
             {/* Estilo en línea con objeto de estilo */}

@@ -5,6 +5,7 @@ import { url_base } from "./data/base.routes.js";
 import { useNavigate } from "react-router-dom";
 import PlantillaTabla from "./tools/PlantillaTabla.jsx";
 import { MensajeCarga } from "./tools/MensajeCarga.jsx";
+import BotonSimple from "./tools/BotonSimple.jsx";
 import { useData } from "./context/DataContext";
 import {
   BotonEditar,
@@ -82,15 +83,14 @@ const MostMantenimiento = () => {
   ];
   return (
     <div>
-      <h2>Detalles del Mantenimiento</h2>
-
-      <button onClick={RegistrarMatenimiento}>Nuevo Mantenimiento</button>
-
       <div className="bg-slate-300 flex justify-center items-center">
         <PlantillaTabla
           data={datos}
           columns={columns}
           title={"Detalles de Mantenimiento"}
+          boton={
+            <BotonSimple to="/registrarMant">Nuevo mantenimiento</BotonSimple>
+          }
         />
       </div>
     </div>

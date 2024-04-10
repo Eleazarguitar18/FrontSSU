@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { url_base } from "./data/base.routes.js";
 import PlantillaTabla from "./tools/PlantillaTabla.jsx";
+import BotonSimple from "./tools/BotonSimple.jsx";
 import { MensajeCarga } from "./tools/MensajeCarga.jsx";
 import {
   BotonEditar,
@@ -92,6 +93,7 @@ const MostComputadora = () => {
         data={datos}
         columns={columns}
         title={"Detalles de Computadoras"}
+        boton={<BotonSimple to="/pc">Nueva Computadora</BotonSimple>}
       />
     </div>
   );

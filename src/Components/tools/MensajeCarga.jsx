@@ -2,7 +2,7 @@ import React from "react";
 
 export const MensajeCarga = () => {
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen relative">
       <div className="text-center">
         <svg
           className="animate-spin h-10 w-10 mr-3 text-indigo-500 inline-block"

@@ -4,6 +4,7 @@ import DataTablePeriferico from "./DataTablePeriferico";
 import { url_base } from "./data/base.routes.js";
 import PlantillaTabla from "./tools/PlantillaTabla.jsx";
 import { generarPDF_periferico } from "./pdfs/generarPDF_periferico.js";
+import BotonSimple from "./tools/BotonSimple.jsx";
 import { MensajeCarga } from "./tools/MensajeCarga.jsx";
 import {
   BotonEditar,
@@ -87,6 +88,7 @@ const MostComputadora = () => {
         data={datos}
         columns={columns}
         title={"Detalles de Perifericos"}
+        boton={<BotonSimple to="/periferico">Nuevo Periferico</BotonSimple>}
       />
     </div>
   );

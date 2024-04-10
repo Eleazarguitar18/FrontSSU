@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <div className="p-10 ">
       <div>
-        <h1 style={{ fontSize: "36px", color: "#fff" }}>
+        <h1 className="text-slate-900 p-1 font-semibold text-2xl">
           Gestiona el mantenimiento de tus equipos!!
         </h1>
       </div>
