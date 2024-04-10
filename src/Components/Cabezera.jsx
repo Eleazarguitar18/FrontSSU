@@ -67,7 +67,7 @@ const Cabezera = () => {
       {menuOpen && (
         <div
           onClick={toggleMenu}
-          className="fixed z-50  w-full bg-gradient-to-r from-slate-800  to-red-800 space-y-1 border-t py-3 -ml-4 pt-2 md:hidden "
+          className="fixed z-50  w-full bg-gradient-to-r from-slate-800 to-red-800 space-y-1 border-t py-3 -ml-4 pt-2 md:hidden "
         >
           <BotonSimple to="/mostrarpc">Computadoras</BotonSimple>
           <BotonSimple to="/mostrarperi">Perifericos</BotonSimple>

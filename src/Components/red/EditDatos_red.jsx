@@ -13,18 +13,43 @@ export default function EditDatos_red() {
   const MostrarIP = () => {
     navigate("/datosred");
   };
-  const { dataRed, setDataRed } = useData();
-  console.log("id del dispositivo a editar es:", dataRed);
+  const { dataDispositivo, setDataDispositivo } = useData();
+  console.log("id del dispositivo a editar es:", dataDispositivo);
 
   const initialValues = {
-    id_Datos_red: dataRed.id_Datos_red,
-    DireccionIP: dataRed.DireccionIP,
-    DireccionMAC: dataRed.DireccionMAC,
-    id_Dispositivo: dataRed.id_Dispositivo,
-    Unidad: dataRed.Unidad,
-    Marca: dataRed.Marca,
-    Tipo: dataRed.Tipo,
-    Ubicacion: dataRed.Ubicacion,
+    id_Datos_red: dataDispositivo.id_Datos_red,
+    DireccionIP: dataDispositivo.DireccionIP,
+    DireccionMAC: dataDispositivo.DireccionMAC,
+    id_Dispositivo: dataDispositivo.id_Dispositivo,
+    Unidad: dataDispositivo.Unidad,
+    Marca: dataDispositivo.Marca,
+    Tipo: dataDispositivo.Tipo,
+    Ubicacion: dataDispositivo.Ubicacion,
+  };
+
+  const DatosEquipo = () => {
+    return (
+      <div className=" bg-gray-100 rounded-md p-4">
+        <div className="grid grid-cols-1 gap-4">
+          <div className="flex justify-start items-center gap-4">
+            <h2 className="text-lg font-semibold">Unidad:</h2>
+            <p>{dataDispositivo.Unidad}</p>
+          </div>
+          <div className="flex justify-start items-center gap-4">
+            <h2 className="text-lg font-semibold">Marca:</h2>
+            <p>{dataDispositivo.Marca}</p>
+          </div>
+          <div className="flex justify-start items-center gap-4">
+            <h2 className="text-lg font-semibold">Tipo:</h2>
+            <p>{dataDispositivo.Tipo}</p>
+          </div>
+          <div className="flex justify-start items-center gap-4">
+            <h2 className="text-lg font-semibold">Ubicación:</h2>
+            <p>{dataDispositivo.Ubicacion}</p>
+          </div>
+        </div>
+      </div>
+    );
   };
   const validationSchema = Yup.object().shape({
     // id_Datos_red: Yup.string().require("El campo es obligatorio"),
@@ -67,47 +92,71 @@ export default function EditDatos_red() {
     }
   };
   return (
-    <div>
-      <h2>Cambiar direccion IP del equipo</h2>
-
+    <div className="max-w-md mx-auto bg-white rounded p-8 my-4">
+      <h2 className="text-2xl font-bold mb-4">
+        Cambiar dirección IP del equipo
+      </h2>
+      <DatosEquipo />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={cambiarIP}
       >
-        <Form>
-          <div>
-            <label htmlFor="DireccionIP">Dirección IP:</label>
-            <Field type="text" id="DireccionIP" name="DireccionIP" />
-            <ErrorMessage name="DireccionIP" component="div" />
+        <Form className="space-y-4">
+          <div className="flex flex-col">
+            <label htmlFor="DireccionIP" className="text-sm font-semibold mb-1">
+              Dirección IP:
+            </label>
+            <Field
+              type="text"
+              id="DireccionIP"
+              name="DireccionIP"
+              className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-400"
+            />
+            <ErrorMessage
+              name="DireccionIP"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
-          <div>
-            <label htmlFor="DireccionMAC">Dirección MAC:</label>
-            <Field type="text" id="DireccionMAC" name="DireccionMAC" readOnly />
-            <ErrorMessage name="DireccionMAC" component="div" />
+
+          <div className="flex flex-col">
+            <label
+              htmlFor="DireccionMAC"
+              className="text-sm font-semibold mb-1"
+            >
+              Dirección MAC:
+            </label>
+            <Field
+              type="text"
+              id="DireccionMAC"
+              name="DireccionMAC"
+              className="border border-gray-300 rounded-md py-2 px-3 bg-gray-100 cursor-not-allowed"
+              readOnly
+            />
+            <ErrorMessage
+              name="DireccionMAC"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
-          <div>
-            <label htmlFor="Unidad">Unidad:</label>
-            <Field type="text" id="Unidad" name="Unidad" readOnly />
-            <ErrorMessage name="Unidad" component="div" />
+
+          {/* Repeat this structure for other fields */}
+
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            >
+              Enviar
+            </button>
+            <button
+              onClick={MostrarIP}
+              className="ml-2 bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
+            >
+              Cancelar
+            </button>
           </div>
-          <div>
-            <label htmlFor="Marca">Marca:</label>
-            <Field type="text" id="Marca" name="Marca" readOnly />
-            <ErrorMessage name="Marca" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Tipo">Tipo:</label>
-            <Field type="text" id="Tipo" name="Tipo" readOnly />
-            <ErrorMessage name="Tipo" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Ubicacion">Ubicación:</label>
-            <Field type="text" id="Ubicacion" name="Ubicacion" readOnly />
-            <ErrorMessage name="Ubicacion" component="div" />
-          </div>
-          <button type="submit">Enviar</button>
-          <button onClick={MostrarIP}>Cancelar</button>
         </Form>
       </Formik>
     </div>

@@ -3,17 +3,9 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { url_base } from "../data/base.routes.js";
 import { useData } from "../context/DataContext.jsx";
-import FormHistorial from "./FormHistorial.jsx";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from "@mui/material";
-
+// import FormHistorial from "./FormHistorial.jsx";}
+import PlantillaTabla from "../tools/PlantillaTabla.jsx";
+import { MensajeCarga } from "../tools/MensajeCarga.jsx";
 export default function Historial() {
   const { setDataHistorial, dataDispositivo, setDataDispositivo } = useData();
   console.log("traendo datos", dataDispositivo);
@@ -21,7 +13,7 @@ export default function Historial() {
     setDataDispositivo(datos);
   };
   // setDataHistorial(dataDispositivo.id_Dispositivo);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -47,80 +39,23 @@ export default function Historial() {
     }
   };
 
-  const handleDelete = async (row_id) => {
-    try {
-      const respuesta = await axios.delete(`${url_base}/historial/${row_id}`);
-      console.log(`Eliminando fila con id ${row_id}`);
-      if (respuesta.status === 204) {
-        console.log("eliminacion exitosa");
-      }
-      fetchData();
-    } catch (error) {
-      console.error("Error al eliminar la fila:", error);
-    }
-  };
-
-  const columns = [
-    "id_Historial",
-    "Fecha",
-    "Detalles",
-    "Encargado",
-    "Motivo",
-    "id_Dispositivo",
-    "Historial",
+  const fields = [
+    // { name: "id_Historial", key: "id_Historial" },
+    { name: "Fecha", key: "Fecha" },
+    { name: "Detalles", key: "Detalles" },
+    { name: "Encargado", key: "Encargado" },
+    { name: "Motivo", key: "Motivo" },
+    { name: "ID Dispositivo", key: "id_Dispositivo" },
+    { name: "Historial", key: "Historial" },
   ];
-
+  if (!data) {
+    return <MensajeCarga />;
+  }
   return (
-    <div>
-      <div>
-        <h1>Historial General</h1>
-      </div>
-      <TableContainer
-        style={{ backgroundColor: "#242424" }}
-        component={Paper}
-        className="TableContainer table-wrapper"
-      >
-        <Table className="fl-table">
-          <TableHead className="TableHead">
-            <TableRow className="TableRow">
-              {columns.map((column) => (
-                <TableCell
-                  key={column}
-                  style={{ color: "white" }}
-                  className="fl-table thead th"
-                >
-                  {column}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((row) => (
-              <TableRow key={row.id_Historial}>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column}
-                    style={{ color: "white" }}
-                    className="fl-table td"
-                  >
-                    {column === "Historial" ? (
-                      <div>
-                        <NavLink to={`/historial`}>
-                          <button onClick={() => handleEdit(row)}>
-                            Historial
-                          </button>
-                        </NavLink>
-                      </div>
-                    ) : (
-                      row[column]
-                    )}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+    <PlantillaTabla
+      data={data}
+      columns={fields}
+      title={"Historial General de Equipos"}
+    />
   );
 }

@@ -1,0 +1,60 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
+import { url_base } from "../data/base.routes.js";
+import { useData } from "../context/DataContext";
+import PlantillaTabla from "../tools/PlantillaTabla.jsx";
+import { MensajeCarga } from "../tools/MensajeCarga.jsx";
+
+const fields = [
+  // { name: "id_Datos_red", key: "id_Datos_red" },
+  { name: "Direccion IP", key: "DireccionIP" },
+  { name: "Direccion MAC", key: "DireccionMAC" },
+  { name: "ID Dispositivo", key: "id_Dispositivo" },
+  { name: "Unidad", key: "Unidad" },
+  { name: "Marca", key: "Marca" },
+  { name: "Tipo", key: "Tipo" },
+  { name: "Ubicacion", key: "Ubicacion" },
+  { name: "Acciones", key: "Acciones" }, // Agregamos una nueva columna "Eliminar",
+  { name: "Historial", key: "Historial" }, // Agregamos una nueva columna "Eliminar",
+];
+
+const Datos_red = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${url_base}/datos_red`);
+      console.log("Me llego esto", response);
+      if (response.data.length !== 0) {
+        const datosCombinados = response.data.map((item) => ({
+          ...item,
+          ...item.Dispositivo,
+        }));
+        console.log(datosCombinados);
+        setData(datosCombinados);
+        // nuevoHistorial(datosCombinados.id_Dispositivo);
+        return;
+      }
+      console.log("no existen datos");
+    } catch (error) {
+      console.error("Error al obtener los datos:", error);
+    }
+  };
+  if (!data) {
+    return <MensajeCarga />;
+  }
+  return (
+    <PlantillaTabla
+      columns={fields}
+      data={data}
+      title={"Datos de red de Equipos"}
+    />
+  );
+};
+
+export default Datos_red;

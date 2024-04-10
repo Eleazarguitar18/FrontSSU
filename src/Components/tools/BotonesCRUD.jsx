@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 // import { generarPDF_PC } from "../pdfs/generarPDF_PC.js";
 import { MensajeEliminar } from "../componenes_emergentes/MensajeEliminar.jsx";
 
-export const BotonEditar = ({ rowData, urlEdit }) => {
+export const BotonEditar = ({ rowData, urlEdit, titulo = "Modificar" }) => {
   const { setDataDispositivo } = useData();
   // const handleClick = () => {
   //   console.log("Editar clickeado", rowData);
@@ -22,7 +22,7 @@ export const BotonEditar = ({ rowData, urlEdit }) => {
         className="bg-green-700 text-white font-semibold p-2 rounded hover:bg-green-600"
         onClick={() => handleEdit(rowData)}
       >
-        Modificar
+        {titulo}
       </button>
     </NavLink>
   );

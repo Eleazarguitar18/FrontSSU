@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { url_base } from "./data/base.routes.js";
 import PlantillaTabla from "./tools/PlantillaTabla.jsx";
+import { MensajeCarga } from "./tools/MensajeCarga.jsx";
+import { useData } from "./context/DataContext.jsx";
 import {
   BotonEditar,
   BotonGenerarPDF,
@@ -10,6 +12,7 @@ import {
 } from "./tools/BotonesCRUD.jsx";
 import { generarPDF_PC } from "./pdfs/generarPDF_PC.js";
 export const MostHistorial = () => {
+  const { setDataHistorial, dataDispositivo } = useData();
   const [datos, setDatos] = useState(null);
 
   useEffect(() => {
@@ -29,6 +32,9 @@ export const MostHistorial = () => {
     }
   };
   function objetoAString(row) {
+    if (!datos) {
+      return <MensajeCarga />;
+    }
     const dato = `
     Fecha: ${row.Fecha} \n
     Detalles del Equipo: ${row.Detalles} \n
@@ -36,9 +42,6 @@ export const MostHistorial = () => {
     Motivo: ${row.Motivo} \n
     `;
     return dato;
-  }
-  if (!datos) {
-    return <div>Cargando datos...</div>;
   }
 
   const columns = [
@@ -65,12 +68,15 @@ export const MostHistorial = () => {
       ),
     },
   ];
+  if (!datos) {
+    return <MensajeCarga />;
+  }
   return (
     <div className="bg-slate-300 flex justify-center items-center">
       <PlantillaTabla
         data={datos}
         columns={columns}
-        title={"Historial de Dispositivo"}
+        title={`Historial del dispositivo ${dataDispositivo.id_Dispositivo}`}
       />
     </div>
   );

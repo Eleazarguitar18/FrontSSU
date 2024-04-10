@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import { url_base } from "../data/base.routes.js";
 import { useData } from "../context/DataContext.jsx";
 import FormHistorial from "./FormHistorial.jsx";
+import PlantillaTabla from "../tools/PlantillaTabla.jsx";
+import BotonsSimple from "../tools/BotonSimple.jsx";
 import {
   Table,
   TableBody,
@@ -62,76 +64,84 @@ export default function Historial() {
     }
   };
 
-  const columns = [
-    "id_Historial",
-    "Fecha",
-    "Detalles",
-    "Encargado",
-    "Motivo",
-    "id_Dispositivo",
-    "Acciones",
+  const fields = [
+    // { name: "id_Historial", key: "id_Historial" },
+    { name: "Fecha", key: "Fecha" },
+    { name: "Detalles", key: "Detalles" },
+    { name: "Encargado", key: "Encargado" },
+    { name: "Motivo", key: "Motivo" },
+    { name: "id_Dispositivo", key: "id_Dispositivo" },
+    { name: "Acciones", key: "Acciones" },
   ];
-
   return (
-    <div>
-      {/* <NavLink to={`/registrarHistorial`}>
-        <button className="ButtonEditar">Crear historial</button>
-      </NavLink> */}
-      <TableContainer
-        style={{ backgroundColor: "#242424" }}
-        component={Paper}
-        className="TableContainer table-wrapper"
-      >
-        <Table className="fl-table">
-          <TableHead className="TableHead">
-            <TableRow className="TableRow">
-              {columns.map((column) => (
-                <TableCell
-                  key={column}
-                  style={{ color: "white" }}
-                  className="fl-table thead th"
-                >
-                  {column}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((row) => (
-              <TableRow key={row.id_Historial}>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column}
-                    style={{ color: "white" }}
-                    className="fl-table td"
-                  >
-                    {column === "Acciones" ? (
-                      <div>
-                        <button
-                          onClick={() => handleDelete(row.id_Historial)}
-                          className="ButtonEliminar"
-                        >
-                          Eliminar
-                        </button>
-                        <NavLink to={`/historialEdit`}>
-                          <button
-                            onClick={() => handleEdit(row)}
-                            className="ButtonEditar"
-                          >
-                            Modificar
-                          </button>
-                        </NavLink>
-                      </div>
-                    ) : (
-                      row[column]
-                    )}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+    <PlantillaTabla
+      data={data}
+      columns={fields}
+      title={`Historial del dispositivo ${dataDispositivo.id_Dispositivo}`}
+      // boton={<BotonsSimple></BotonsSimple>}
+    />
   );
 }
+
+//return (
+//   <div>
+//     {/* <NavLink to={`/registrarHistorial`}>
+//       <button className="ButtonEditar">Crear historial</button>
+//     </NavLink> */}
+//     <TableContainer
+//       style={{ backgroundColor: "#242424" }}
+//       component={Paper}
+//       className="TableContainer table-wrapper"
+//     >
+//       <Table className="fl-table">
+//         <TableHead className="TableHead">
+//           <TableRow className="TableRow">
+//             {columns.map((column) => (
+//               <TableCell
+//                 key={column}
+//                 style={{ color: "white" }}
+//                 className="fl-table thead th"
+//               >
+//                 {column}
+//               </TableCell>
+//             ))}
+//           </TableRow>
+//         </TableHead>
+//         <TableBody>
+//           {data.map((row) => (
+//             <TableRow key={row.id_Historial}>
+//               {columns.map((column) => (
+//                 <TableCell
+//                   key={column}
+//                   style={{ color: "white" }}
+//                   className="fl-table td"
+//                 >
+//                   {column === "Acciones" ? (
+//                     <div>
+//                       <button
+//                         onClick={() => handleDelete(row.id_Historial)}
+//                         className="ButtonEliminar"
+//                       >
+//                         Eliminar
+//                       </button>
+//                       <NavLink to={`/historialEdit`}>
+//                         <button
+//                           onClick={() => handleEdit(row)}
+//                           className="ButtonEditar"
+//                         >
+//                           Modificar
+//                         </button>
+//                       </NavLink>
+//                     </div>
+//                   ) : (
+//                     row[column]
+//                   )}
+//                 </TableCell>
+//               ))}
+//             </TableRow>
+//           ))}
+//         </TableBody>
+//       </Table>
+//     </TableContainer>
+//   </div>
+// );

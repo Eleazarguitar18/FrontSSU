@@ -56,9 +56,7 @@ const PlantillaTabla = ({ columns, data, title, boton }) => {
         {title}
       </h2>
 
-      <p className="m-2">
-        Ingrese algún indicio de la computadora para buscarla
-      </p>
+      <p className="m-2">Ingrese algún indicio para buscar en la lista</p>
 
       <div className="flex justify-between items-center">
         <div className="mb-4 w-full">
