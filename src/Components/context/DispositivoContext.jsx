@@ -130,10 +130,10 @@ const FormSubmitProvider = ({ children }) => {
   const nuevoAsignacion = async (values) => {
     try {
       const response = await axios.post(`${url_base}/asignacion`, values);
-      console.log("Respuesta del Backend para Mantenimiento", response);
+      console.log("Respuesta del Backend para Asignacion", response);
       return response;
     } catch (error) {
-      console.error("Error al enviar el formulario para Mantenimiento:", error);
+      console.error("Error al enviar el formulario para Asignacion:", error);
       throw error;
     }
   };

@@ -6,11 +6,16 @@ import * as Yup from "yup";
 import axios from "axios";
 import { url_base } from "./data/base.routes.js";
 import { useNavigate } from "react-router-dom";
+import DynamicForm from "./tools/FormularioPlantilla.jsx";
+
 const EditarDispositivo = () => {
   const navigate = useNavigate();
 
   const MostrarPC = () => {
     navigate("/mostrarpc");
+  };
+  const RegistrarHistorial = () => {
+    navigate("/registrarHistorial");
   };
   const { dataDispositivo } = useData();
   console.log("id del dispositivo a editar es:", dataDispositivo);
@@ -61,6 +66,7 @@ const EditarDispositivo = () => {
         setSubmitting(false);
         resetForm();
         MostrarPC();
+        RegistrarHistorial();
       }
       // Puedes redirigir al usuario a otra página o realizar otras acciones después de la edición exitosa
     } catch (error) {
@@ -68,114 +74,37 @@ const EditarDispositivo = () => {
     }
   };
 
+  const fields = [
+    { name: "NroSerie", label: "Número de Serie" },
+    { name: "NroActivo", label: "Número de Activo" },
+    {
+      name: "Estado",
+      label: "Estado",
+      options: [
+        { value: "activo", label: "Activo" },
+        { value: "inactivo", label: "Inactivo" },
+      ],
+    },
+    { name: "Ubicacion", label: "Ubicación" },
+    { name: "Unidad", label: "Unidad" },
+    { name: "Marca", label: "Marca" },
+    { name: "Detalle", label: "Detalle" },
+    { name: "Tipo", label: "Tipo" },
+    { name: "NombreDelEquipo", label: "NombreDelEquipo" },
+    { name: "Procesador", label: "Procesador" },
+    { name: "RAM", label: "RAM" },
+    { name: "MemoriaInterna", label: "MemoriaInterna" },
+    { name: "SistemaOperativo", label: "SistemaOperativo" },
+
+    // Agrega más campos según sea necesario
+  ];
   return (
-    <div>
-      <h2>Editar Dispositivo</h2>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            <div>
-              <label htmlFor="NroSerie">Número de Serie:</label>
-              <Field type="text" name="NroSerie" />
-              <ErrorMessage name="NroSerie" component="div" className="error" />
-            </div>
-            <div>
-              <label htmlFor="NroActivo">Número Activo:</label>
-              <Field type="text" name="NroActivo" />
-              <ErrorMessage
-                name="NroActivo"
-                component="div"
-                className="error"
-              />
-            </div>
-            <div>
-              <label htmlFor="Estado">Estado:</label>
-              <Field type="text" name="Estado" />
-              <ErrorMessage name="Estado" component="div" className="error" />
-            </div>
-            <div>
-              <label htmlFor="Ubicacion">Ubicación:</label>
-              <Field type="text" name="Ubicacion" />
-              <ErrorMessage
-                name="Ubicacion"
-                component="div"
-                className="error"
-              />
-            </div>
-            <div>
-              <label htmlFor="Unidad">Unidad:</label>
-              <Field type="text" name="Unidad" />
-              <ErrorMessage name="Unidad" component="div" className="error" />
-            </div>
-            <div>
-              <label htmlFor="Marca">Marca:</label>
-              <Field type="text" name="Marca" />
-              <ErrorMessage name="Marca" component="div" className="error" />
-            </div>
-            <div>
-              <label htmlFor="Detalle">Detalle:</label>
-              <Field type="text" name="Detalle" />
-              <ErrorMessage name="Detalle" component="div" className="error" />
-            </div>
-            <div>
-              <label htmlFor="Tipo">Tipo:</label>
-              <Field type="text" name="Tipo" />
-              <ErrorMessage name="Tipo" component="div" className="error" />
-            </div>
-            <div>
-              <label htmlFor="NombreDelEquipo">Nombre del Equipo:</label>
-              <Field type="text" name="NombreDelEquipo" />
-              <ErrorMessage
-                name="NombreDelEquipo"
-                component="div"
-                className="error"
-              />
-            </div>
-            <div>
-              <label htmlFor="Procesador">Procesador:</label>
-              <Field type="text" name="Procesador" />
-              <ErrorMessage
-                name="Procesador"
-                component="div"
-                className="error"
-              />
-            </div>
-            <div>
-              <label htmlFor="RAM">RAM:</label>
-              <Field type="text" name="RAM" />
-              <ErrorMessage name="RAM" component="div" className="error" />
-            </div>
-            <div>
-              <label htmlFor="MemoriaInterna">Memoria Interna:</label>
-              <Field type="text" name="MemoriaInterna" />
-              <ErrorMessage
-                name="MemoriaInterna"
-                component="div"
-                className="error"
-              />
-            </div>
-            <div>
-              <label htmlFor="SistemaOperativo">Sistema Operativo:</label>
-              <Field type="text" name="SistemaOperativo" />
-              <ErrorMessage
-                name="SistemaOperativo"
-                component="div"
-                className="error"
-              />
-            </div>
-            <NavLink to={"/registrarHistorial"}>
-              <button type="submit" disabled={isSubmitting}>
-                Guardar Cambios
-              </button>
-            </NavLink>
-          </Form>
-        )}
-      </Formik>
-    </div>
+    <DynamicForm
+      fields={fields}
+      onSubmit={handleSubmit}
+      titulo={"Registro de Computadoras"}
+      valoresIniciales={initialValues}
+    />
   );
 };
 

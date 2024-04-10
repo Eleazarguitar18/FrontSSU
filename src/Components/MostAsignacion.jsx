@@ -3,6 +3,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import DataTableAsignacion from "./DataTableAsignacion.jsx";
 import { url_base } from "./data/base.routes.js";
+import BotonSimple from "./tools/BotonSimple.jsx";
 import DataTable from "./tools/PlantillaTabla.jsx";
 import { generarPDF_asignacion } from "./pdfs/generarPDF_asignacion.js";
 import {
@@ -14,7 +15,7 @@ import {
 import { MensajeCarga } from "./tools/MensajeCarga.jsx";
 const MostAsignacion = () => {
   // const url_base = "http://localhost:3000";
-  const [datos, setDatos] = useState(null);
+  const [datos, setDatos] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -94,6 +95,7 @@ const MostAsignacion = () => {
       data={datos}
       columns={fields}
       title={"Detalles de la Asignacion"}
+      boton={<BotonSimple to="/registrarAsig">Nueva Asignacion</BotonSimple>}
     />
   );
   //(

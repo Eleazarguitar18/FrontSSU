@@ -5,46 +5,45 @@ import axios from "axios";
 import { useFormSubmit } from "../context/DispositivoContext";
 import { url_base } from "../data/base.routes";
 
-const initialValues = {
-  Nro: "",
-  fecha_salida: "",
-  fecha_regreso: "",
-  hora_salida: "",
-  hora_llegada: "",
-  encargado_de_entrega: "",
-  encargado_de_recepcion: "",
-  TipoAsignacion: "",
-  datos_solicitante: "",
-  observaciones: "",
-  id_Dispositivo: "",
-};
-
-const validationSchema = Yup.object().shape({
-  Nro: Yup.string().required("Campo requerido"),
-  fecha_salida: Yup.date().required("Campo requerido"),
-  fecha_regreso: Yup.date().required("Campo requerido"),
-  hora_salida: Yup.string().required("Campo requerido"),
-  hora_llegada: Yup.string().required("Campo requerido"),
-  encargado_de_entrega: Yup.string().required("Campo requerido"),
-  encargado_de_recepcion: Yup.string().required("Campo requerido"),
-  TipoAsignacion: Yup.string().required("Campo requerido"),
-  datos_solicitante: Yup.string().required("Campo requerido"),
-  observaciones: Yup.string(),
-  id_Dispositivo: Yup.number().required("Campo requerido"),
-});
-
-const onSubmit = (values) => {
-  axios
-    .post(`${url_base}/asignacion`, values)
-    .then((response) => {
-      console.log("Datos enviados correctamente:", response.data);
-    })
-    .catch((error) => {
-      console.error("Error al enviar datos:", error);
-    });
-};
-
 const FormAsignacion = () => {
+  const { nuevoAsignacion } = useFormSubmit();
+
+  const initialValues = {
+    Nro: "",
+    fecha_salida: "",
+    fecha_regreso: "",
+    hora_salida: "",
+    hora_llegada: "",
+    encargado_de_entrega: "",
+    encargado_de_recepcion: "",
+    TipoAsignacion: "",
+    datos_solicitante: "",
+    observaciones: "",
+    id_Dispositivo: "",
+  };
+
+  const validationSchema = Yup.object().shape({
+    Nro: Yup.string().required("Campo requerido"),
+    fecha_salida: Yup.date().required("Campo requerido"),
+    fecha_regreso: Yup.date().required("Campo requerido"),
+    hora_salida: Yup.string().required("Campo requerido"),
+    hora_llegada: Yup.string().required("Campo requerido"),
+    encargado_de_entrega: Yup.string().required("Campo requerido"),
+    encargado_de_recepcion: Yup.string().required("Campo requerido"),
+    TipoAsignacion: Yup.string().required("Campo requerido"),
+    datos_solicitante: Yup.string().required("Campo requerido"),
+    observaciones: Yup.string(),
+    id_Dispositivo: Yup.number().required("Campo requerido"),
+  });
+  const onSubmit = async (values) => {
+    console.log("valores a enviar", values);
+    try {
+      const response = await nuevoAsignacion(values);
+      console.log("RESPUESTA", response);
+    } catch (error) {
+      console.error("Error al enviar datos:", error);
+    }
+  };
   return (
     <div>
       <h1>Formulario de Asignación</h1>
@@ -161,7 +160,11 @@ const FormAsignacion = () => {
               />
             </div>
 
-            <button type="submit" disabled={isSubmitting}>
+            <button
+              className="p-4 bg-slate-600"
+              type="submit"
+              disabled={isSubmitting}
+            >
               Enviar
             </button>
           </Form>
