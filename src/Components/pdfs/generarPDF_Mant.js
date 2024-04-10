@@ -28,8 +28,11 @@ export const generarPDF_Mant = (row) => {
 
   // Datos del usuario
   const datosUsuario = [
-    ["NOMBRES:", row.PersonalSSU.Nombre],
-    ["APELLIDOS:", row.PersonalSSU.Apellido],
+    ["NOMBRES:", row.PersonalSSU.Nombres],
+    [
+      "APELLIDOS:",
+      row.PersonalSSU.ApellidoPaterno + " " + row.PersonalSSU.ApellidoMaterno,
+    ],
     ["UNIDAD / SERVICIO:", row.PersonalSSU.Unidad],
     ["CARGO:", row.PersonalSSU.Cargo],
     ["FECHA Y HORA INICIO:", row.fecha_inicial],
@@ -48,18 +51,23 @@ export const generarPDF_Mant = (row) => {
   // Fuente que incluye el caracter '▢'
   //   doc.setFont("Arial Unicode MS");
 
-  const fallaReportada = [["mostrar TipoFalla", row.Detalles]];
+  const fallaReportada = [[row.tipo_falla, row.Detalles]];
   const Firmas = [
     [
       "___________________________                        ",
       "___________________________",
     ],
     [
-      "Encargado " + "                        ",
-      "Usuario " + row.PersonalSSU.Nombre + " " + row.PersonalSSU.Apellido,
+      "Encargado " + row.encargadoMant + "                        ",
+      "Usuario " +
+        row.PersonalSSU.Nombres +
+        " " +
+        row.PersonalSSU.ApellidoPaterno +
+        " " +
+        row.PersonalSSU.ApellidoMaterno,
     ],
   ];
-  const Recomendaciones = [[row.Recomendaciones]];
+  const Recomendaciones = [[row.recomendaciones]];
   // Genera las tablas
   doc.autoTable({
     startY: 30, // Cambia la posición de inicio según el espacio ocupado por la cabecera
@@ -118,5 +126,5 @@ export const generarPDF_Mant = (row) => {
 
   // Continúa este patrón para otras secciones de tu PDF
 
-  doc.save("fila_seleccionada.pdf");
+  doc.save("Informe_Mantenimiento.pdf");
 };
