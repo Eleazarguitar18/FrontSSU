@@ -56,6 +56,7 @@ const MostMantenimiento = () => {
     { name: "Marca", key: "Marca", sortable: true },
     { name: "TipoEquipo", key: "TipoEquipo", sortable: true },
     { name: "Ubicacion", key: "Ubicacion", sortable: true },
+    { name: "Recomendaciones", key: "recomendaciones" },
     {
       name: "Acciones",
       key: "acciones",

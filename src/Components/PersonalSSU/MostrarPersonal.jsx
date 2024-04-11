@@ -47,6 +47,7 @@ export const MostrarPersonal = () => {
     return <MensajeCarga />;
   }
   const columns = [
+    { name: "ID PesonalSSU", key: "id_PersonalSSU" },
     { name: "Nombres", key: "Nombres" },
     { name: "Apellido Paterno", key: "ApellidoPaterno" },
     { name: "Apellido Materno", key: "ApellidoMaterno" },
