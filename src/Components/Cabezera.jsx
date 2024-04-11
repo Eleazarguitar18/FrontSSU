@@ -36,7 +36,7 @@ const Cabezera = () => {
             <div className="hover:bg-none w-16 ">
               <NavLink to={"/"}>
                 <img
-                  src="/src/image/logoEyG2.png"
+                  src="/src/assets/LogoMant.svg"
                   alt="Logo de nuestra institución"
                 />
               </NavLink>
