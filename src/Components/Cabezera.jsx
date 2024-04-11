@@ -41,7 +41,7 @@ const Cabezera = () => {
             </div>
           </div>
           <div>
-            <h1>ASTIC</h1>
+            <h1>ASTIC DEV</h1>
           </div>
 
           <div className="justify-end hidden md:flex w-full">
