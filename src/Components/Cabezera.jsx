@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import SliderButton from "./tools/SliderButton";
 import BotonSimple from "./tools/BotonSimple";
-
+import LogoSVG from "../assets/LogoMant.svg";
 const Cabezera = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -33,23 +33,10 @@ const Cabezera = () => {
         </button>
         <div className="flex items-center w-full justify-center">
           <div className="hover:rotate-6">
-            <div className="hover:bg-none w-16 ">
+            <div className="hover:bg-none w-14 ">
               <NavLink to={"/"}>
                 {/* <img src="/src/assets/LogoMant.svg" alt="Logo" /> */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
-                  />
-                </svg>
+                <img src={LogoSVG} alt="Logo" />
               </NavLink>
             </div>
           </div>
@@ -221,4 +208,20 @@ export default Cabezera;
             src="https://ui-avatars.com/api?name=Eleazar+Cruz"
             alt="Eleazar Cruz"
           /> */
+}
+{
+  /* <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-14 h-14"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
+                  />
+                </svg> */
 }
