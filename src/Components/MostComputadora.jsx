@@ -9,6 +9,7 @@ import {
   BotonGenerarPDF,
   BotonHistorial,
   BotonEliminar,
+  BotonMatenimiento,
 } from "./tools/BotonesCRUD.jsx";
 import { generarPDF_PC } from "./pdfs/generarPDF_PC.js";
 const MostComputadora = () => {
@@ -83,6 +84,15 @@ const MostComputadora = () => {
       render: (row) => (
         <div className="space-y-2 items-center">
           <BotonHistorial rowData={row} />
+        </div>
+      ),
+    },
+    {
+      name: "Mantenimiento",
+      key: "Mantenimiento",
+      render: (row) => (
+        <div className="space-y-2 items-center">
+          <BotonMatenimiento rowData={row} />
         </div>
       ),
     },

@@ -8,7 +8,7 @@ import DynamicForm from "../tools/FormularioPlantilla";
 import { useData } from "../context/DataContext"; // Asegúrate de importar tu contexto de datos
 // const navigate = useNavigate();
 const RegistrarMantenimiento = () => {
-  const { dataMantenimiento, setDataMantenimiento } = useData();
+  const { dataMantenimiento, dataDispositivo } = useData();
   //   const { agregarMantenimiento } = useContext(DataContext); // Obtener función para agregar mantenimiento desde el contexto
   console.log("logre conseguir el id", dataMantenimiento);
   const initialValues = {
@@ -18,7 +18,7 @@ const RegistrarMantenimiento = () => {
     estado: "",
     Detalles: "",
     tipo: "",
-    id_Dispositivo: "",
+    id_Dispositivo: dataDispositivo.id_Dispositivo || "",
     id_PersonalSSU: dataMantenimiento || "",
   };
 
