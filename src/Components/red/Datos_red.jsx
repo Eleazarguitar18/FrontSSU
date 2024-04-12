@@ -75,7 +75,7 @@ const Datos_red = () => {
           <BotonEliminar
             rowData={row}
             fetchData={fetchData}
-            routeComponent={"periferico"}
+            routeComponent={"datos_red"}
             objetoAString={objetoAString}
           />
           <BotonGenerarPDF rowData={row} funtionPDF={genrarPDF_Datos_red} />

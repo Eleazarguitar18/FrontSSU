@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { useFormSubmit } from "../context/DispositivoContext";
 import { useData } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
-import Historial from "./DataTableHistorial";
+import TablaHistorial from "../tools/FormularioPlantilla";
 
 function formatearFecha(fecha) {
   fecha = new Date(fecha);
@@ -23,8 +23,18 @@ function formatearFecha(fecha) {
 }
 const EditHistorial = () => {
   const { editarHistorial } = useFormSubmit();
-  const { dataHistorial } = useData();
+  const { dataDispositivo } = useData();
   //   console.log("tengo estos datos", dataHistorial);
+  const initialValues = {
+    id_Historial: dataDispositivo.id_Historial,
+    Fecha: dataDispositivo.Fecha
+      ? new Date(dataDispositivo.Fecha).toISOString().substring(0, 10)
+      : "",
+    Detalles: dataDispositivo.Detalles,
+    Encargado: dataDispositivo.Encargado,
+    Motivo: dataDispositivo.Motivo,
+    id_Dispositivo: dataDispositivo.id_Dispositivo,
+  };
   const validationSchema = Yup.object().shape({
     Fecha: Yup.date().required(),
     Detalles: Yup.string().nullable(),
@@ -47,55 +57,60 @@ const EditHistorial = () => {
       // Manejar el error de envío del formulario
     }
   };
-
+  const fiedls = [
+    { name: "Fecha", label: "Fecha", type: "date" },
+    { name: "Detalles", label: "Detalles" },
+    { name: "Encargado", label: "Encargado" },
+    { name: "Motivo", label: "Motivo" },
+  ];
   return (
-    <div>
-      <h1>Historial</h1>
-      <Formik
-        initialValues={{
-          id_Historial: dataHistorial.id_Historial,
-          Fecha: dataHistorial.Fecha
-            ? new Date(dataHistorial.Fecha).toISOString().substring(0, 10)
-            : "",
-          Detalles: dataHistorial.Detalles,
-          Encargado: dataHistorial.Encargado,
-          Motivo: dataHistorial.Motivo,
-          id_Dispositivo: dataHistorial.id_Dispositivo,
-        }}
-        validationSchema={validationSchema}
-        onSubmit={enviarFormulario}
-      >
-        <Form>
-          <div>
-            <label htmlFor="Fecha">Fecha:</label>
-            <Field type="date" id="Fecha" name="Fecha" />
-            <ErrorMessage name="Fecha" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Detalles">Detalles:</label>
-            <Field type="text" id="Detalles" name="Detalles" />
-            <ErrorMessage name="Detalles" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Encargado">Encargado:</label>
-            <Field type="text" id="Encargado" name="Encargado" />
-            <ErrorMessage name="Encargado" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Motivo">Motivo:</label>
-            <Field type="text" id="Motivo" name="Motivo" />
-            <ErrorMessage name="Motivo" component="div" />
-          </div>
-
-          <button type="submit">Enviar</button>
-
-          <button onClick={MostrarHistorial} className="header-button">
-            Cancelar
-          </button>
-        </Form>
-      </Formik>
-    </div>
+    <TablaHistorial
+      fields={fiedls}
+      valoresIniciales={initialValues}
+      validaciones={validationSchema}
+      titulo={"Editar datos de historial"}
+      onSubmit={enviarFormulario}
+    />
   );
+  // return (
+  //   <div>
+  //     <h1>Historial</h1>
+  //     <Formik
+  //       initialValues={initialValues}
+  //       validationSchema={validationSchema}
+  //       onSubmit={enviarFormulario}
+  //     >
+  //       <Form>
+  //         <div>
+  //           <label htmlFor="Fecha">Fecha:</label>
+  //           <Field type="date" id="Fecha" name="Fecha" />
+  //           <ErrorMessage name="Fecha" component="div" />
+  //         </div>
+  //         <div>
+  //           <label htmlFor="Detalles">Detalles:</label>
+  //           <Field type="text" id="Detalles" name="Detalles" />
+  //           <ErrorMessage name="Detalles" component="div" />
+  //         </div>
+  //         <div>
+  //           <label htmlFor="Encargado">Encargado:</label>
+  //           <Field type="text" id="Encargado" name="Encargado" />
+  //           <ErrorMessage name="Encargado" component="div" />
+  //         </div>
+  //         <div>
+  //           <label htmlFor="Motivo">Motivo:</label>
+  //           <Field type="text" id="Motivo" name="Motivo" />
+  //           <ErrorMessage name="Motivo" component="div" />
+  //         </div>
+
+  //         <button type="submit">Enviar</button>
+
+  //         <button onClick={MostrarHistorial} className="header-button">
+  //           Cancelar
+  //         </button>
+  //       </Form>
+  //     </Formik>
+  //   </div>
+  // );
 };
 
 export default EditHistorial;

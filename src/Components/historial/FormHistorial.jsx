@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-
+import TablaHistorial from "../tools/FormularioPlantilla";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useFormSubmit } from "../context/DispositivoContext";
@@ -23,6 +23,13 @@ const obtenerFechaActual = () => {
 const FormHistorial = () => {
   const { crearHistorial } = useFormSubmit();
   const { dataHistorial, dataDispositivo } = useData();
+  const initialValues = {
+    Fecha: obtenerFechaActual(),
+    Detalles: "",
+    Encargado: "",
+    Motivo: "",
+    id_Dispositivo: dataDispositivo.id_Dispositivo,
+  };
   const validationSchema = Yup.object().shape({
     Fecha: Yup.date().required(),
     Detalles: Yup.string().nullable(),
@@ -34,6 +41,12 @@ const FormHistorial = () => {
   const MostrarHistorial = () => {
     navigate("/historial");
   };
+  const fiedls = [
+    { name: "Fecha", label: "Fecha", type: "date" },
+    { name: "Detalles", label: "Detalles" },
+    { name: "Encargado", label: "Encargado" },
+    { name: "Motivo", label: "Motivo" },
+  ];
   const enviarFormulario = async (values, { resetForm }) => {
     try {
       // console.log("Tengo esto", values);
@@ -47,48 +60,13 @@ const FormHistorial = () => {
   };
 
   return (
-    <div>
-      <h1>Historial</h1>
-      <Formik
-        initialValues={{
-          Fecha: obtenerFechaActual(),
-          Detalles: "",
-          Encargado: "",
-          Motivo: "",
-          id_Dispositivo: dataDispositivo.id_Dispositivo,
-        }}
-        validationSchema={validationSchema}
-        onSubmit={enviarFormulario}
-      >
-        <Form>
-          <div>
-            <label htmlFor="Fecha">Fecha:</label>
-            <Field type="date" id="Fecha" name="Fecha" />
-            <ErrorMessage name="Fecha" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Detalles">Detalles:</label>
-            <Field type="text" id="Detalles" name="Detalles" />
-            <ErrorMessage name="Detalles" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Encargado">Encargado:</label>
-            <Field type="text" id="Encargado" name="Encargado" />
-            <ErrorMessage name="Encargado" component="div" />
-          </div>
-          <div>
-            <label htmlFor="Motivo">Motivo:</label>
-            <Field type="text" id="Motivo" name="Motivo" />
-            <ErrorMessage name="Motivo" component="div" />
-          </div>
-
-          <button type="submit">Enviar</button>
-          <NavLink to={`/historial`}>
-            <button className="header-button">Cancelar</button>
-          </NavLink>
-        </Form>
-      </Formik>
-    </div>
+    <TablaHistorial
+      fields={fiedls}
+      valoresIniciales={initialValues}
+      validaciones={validationSchema}
+      titulo={"Editar Registro de historial"}
+      onSubmit={enviarFormulario}
+    />
   );
 };
 
