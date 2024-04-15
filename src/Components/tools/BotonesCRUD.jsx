@@ -109,7 +109,7 @@ export const BotonHistorial = (rowData) => {
     </NavLink>
   );
 };
-export const BotonMatenimiento = (rowData) => {
+export const BotonMatenimiento = ({ rowData, titulo = "Mantenimiento" }) => {
   const { setDataDispositivo } = useData();
   const handleEdit = (datosDispositivo) => {
     setDataDispositivo(datosDispositivo);
@@ -118,10 +118,10 @@ export const BotonMatenimiento = (rowData) => {
   return (
     <NavLink to={`/asignarPersonal`}>
       <button
-        onClick={() => handleEdit(rowData.rowData)}
+        onClick={() => handleEdit(rowData)}
         className="bg-orange-950 text-white font-semibold p-2 rounded hover:bg-slate-700"
       >
-        Mantenimiento
+        {titulo}
       </button>
     </NavLink>
   );

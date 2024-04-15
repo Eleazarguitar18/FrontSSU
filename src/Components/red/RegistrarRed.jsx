@@ -90,13 +90,13 @@ export default function RegistrarRed() {
               component="div"
               className="text-red-600"
             />
-            <button
+            {/* <button
               type="button"
               className="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded mr-2"
               onClick={asignarip}
             >
               Asignar IP
-            </button>
+            </button> */}
           </div>
           <div>
             <label htmlFor="DireccionMAC" className="block font-semibold mb-1">

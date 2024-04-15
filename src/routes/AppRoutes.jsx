@@ -31,16 +31,19 @@ import { AsignarPersonal } from "../Components/PersonalSSU/AsignarPersonal";
 import { RegistroPersonal } from "../Components/PersonalSSU/RegistroPersonal";
 import { MostrarPersonal } from "../Components/PersonalSSU/MostrarPersonal";
 import { EditarPersonal } from "../Components/PersonalSSU/EditarPersonal";
+import { AsignarMantenimiento } from "../Components/Mantenimiento/AsignarMantenimiento";
+import ElijePC from "../Components/Mantenimiento/ElijePC";
+import ElijePeriferico from "../Components/Mantenimiento/ElijePeriferico";
 // import AsignarDispositivo from "../Components/tools/AsignarDispositivo";
 
 export default function AppRoutes() {
   return (
-    <div className="bg-slate-200 text-slate-800">
+    <div className="bg-slate-200 text-slate-800 h-screen">
       <BrowserRouter>
         <div>
           <Cabezera />
         </div>
-        <div>
+        <div className="">
           <Routes>
             {/* Estilo en línea con objeto de estilo */}
             <Route path="/" element={<HomePage />} />
@@ -55,9 +58,14 @@ export default function AppRoutes() {
             <Route path="/mostrarPersonal" element={<MostrarPersonal />} />
             <Route path="/asignarPersonal" element={<AsignarPersonal />} />
             <Route path="/editarPersonal" element={<EditarPersonal />} />
+            {/* MANTENIMIENTO  */}
 
             <Route path="/mostrarMant" element={<MostMantenimiento />} />
             <Route path="/registrarMant" element={<RegistrarMantenimiento />} />
+            {}
+            <Route path="/nuevoMant" element={<AsignarMantenimiento />} />
+            <Route path="/elegirpc" element={<ElijePC />} />
+            <Route path="/elegirperiferico" element={<ElijePeriferico />} />
             <Route
               path="/posponerMantenimiento"
               element={<PosponerMantenimiento />}

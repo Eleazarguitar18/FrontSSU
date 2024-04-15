@@ -89,7 +89,7 @@ const MostMantenimiento = () => {
           data={datos}
           columns={columns}
           title={"Detalles de Mantenimiento"}
-          boton={<BotonSimple to="/mostrarpc">Nuevo mantenimiento</BotonSimple>}
+          boton={<BotonSimple to="/nuevoMant">Nuevo mantenimiento</BotonSimple>}
         />
       </div>
     </div>

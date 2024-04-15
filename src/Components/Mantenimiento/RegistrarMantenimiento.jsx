@@ -10,7 +10,11 @@ import { useData } from "../context/DataContext"; // Asegúrate de importar tu c
 const RegistrarMantenimiento = () => {
   const { dataMantenimiento, dataDispositivo } = useData();
   //   const { agregarMantenimiento } = useContext(DataContext); // Obtener función para agregar mantenimiento desde el contexto
-  console.log("logre conseguir el id", dataMantenimiento);
+  console.log(
+    "logre conseguir el id",
+    dataMantenimiento,
+    dataDispositivo.id_Dispositivo
+  );
   const initialValues = {
     fecha_inicial: "",
     actividad: "",
