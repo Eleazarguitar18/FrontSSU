@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import SliderButton from "./tools/SliderButton";
 import BotonSimple from "./tools/BotonSimple";
 import LogoSVG from "../assets/LogoMant.svg";
+import { useData } from "./context/DataContext";
 const Cabezera = () => {
+  const { dataLogin, setDataLogin } = useData();
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const navigate = useNavigate();
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -34,7 +36,7 @@ const Cabezera = () => {
         <div className="flex items-center w-full justify-center">
           <div className="hover:rotate-6">
             <div className="hover:bg-none w-14 ">
-              <NavLink to={"/"}>
+              <NavLink to={"/home"}>
                 {/* <img src="/src/assets/LogoMant.svg" alt="Logo" /> */}
                 <img src={LogoSVG} alt="Logo" />
               </NavLink>
@@ -53,12 +55,22 @@ const Cabezera = () => {
             <BotonSimple to="/historialGeneral">Historial</BotonSimple>
             <BotonSimple to="/mostrarPersonal">Personal</BotonSimple>
 
-            <BotonSimple to="/mostrarMant">Mantenimientos</BotonSimple>
+            <BotonSimple to="/mostrarMant">
+              Mantenimientos y Soporte
+            </BotonSimple>
             <BotonSimple to="/mostrarAsig">Asignaciones</BotonSimple>
           </div>
         </div>
-        <div className="rounded-full p-4 ml-2 bg-red-700">
-          <button>EC</button>
+        <div>
+          <button
+            className="rounded-full p-4 ml-2 bg-red-700"
+            onClick={() => {
+              setDataLogin(false);
+              navigate("/");
+            }}
+          >
+            EC
+          </button>
         </div>
       </div>
       {/* navegacion movil */}

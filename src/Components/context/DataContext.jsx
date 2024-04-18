@@ -12,6 +12,12 @@ export const DataProvider = ({ children }) => {
   const [confirmDelete, setConfirmDelete] = useState(false);
   // variable para mantenimiento
   const [dataMantenimiento, setDataMantenimiento] = useState(null);
+  const [dataLogin, setDataLogin] = useState(true);
+  const [dataPersonal, setDataPersonal] = useState(null);
+  const [dataPersonalEntrega, setDataPersonalEntrega] = useState(null);
+  const [dataPersonalRecepcion, setDataPersonalRecepcion] = useState(null);
+  const [dataPersonalSolicitante, setDataPersonalSolicitante] = useState(null);
+
   return (
     <DataContext.Provider
       value={{
@@ -27,6 +33,16 @@ export const DataProvider = ({ children }) => {
         setDataAsignacion,
         confirmDelete,
         setConfirmDelete,
+        dataLogin,
+        setDataLogin,
+        dataPersonal,
+        setDataPersonal,
+        dataPersonalEntrega,
+        setDataPersonalEntrega,
+        dataPersonalRecepcion,
+        setDataPersonalRecepcion,
+        dataPersonalSolicitante,
+        setDataPersonalSolicitante,
       }}
     >
       {children}

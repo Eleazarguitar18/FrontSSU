@@ -9,7 +9,7 @@ import {
   BotonGenerarPDF,
   BotonHistorial,
   BotonEliminar,
-  BotonMatenimiento,
+  BotonAsignacionDispositivo,
 } from "./tools/BotonesCRUD.jsx";
 import { generarPDF_PC } from "./pdfs/generarPDF_PC.js";
 const MostComputadora = () => {
@@ -48,20 +48,20 @@ const MostComputadora = () => {
   }
 
   const columns = [
-    { name: "ID Dispositivo", key: "id_Dispositivo", sortable: true },
-    { name: "Numero de serie", key: "NroSerie", sortable: true },
-    { name: "Numero de Activo", key: "NroActivo", sortable: true },
-    { name: "Estado", key: "Estado", sortable: true },
-    { name: "Ubicacion", key: "Ubicacion", sortable: true },
-    { name: "Unidad", key: "Unidad", sortable: true },
-    { name: "Marca", key: "Marca", sortable: true },
-    { name: "Detalle", key: "Detalle", sortable: true },
-    { name: "Tipo", key: "Tipo", sortable: true },
-    { name: "Nombre del Equipo", key: "NombreDelEquipo", sortable: true },
-    { name: "Procesador", key: "Procesador", sortable: true },
-    { name: "RAM", key: "RAM", sortable: true },
-    { name: "Memoria Interna", key: "MemoriaInterna", sortable: true },
-    { name: "Sistema Operativo", key: "SistemaOperativo", sortable: true },
+    { name: "ID Dispositivo", key: "id_Dispositivo" },
+    { name: "Numero de serie", key: "NroSerie" },
+    { name: "Numero de Activo", key: "NroActivo" },
+    { name: "Estado", key: "Estado" },
+    { name: "Ubicacion", key: "Ubicacion" },
+    { name: "Unidad", key: "Unidad" },
+    { name: "Marca", key: "Marca" },
+    { name: "Detalle", key: "Detalle" },
+    { name: "Tipo", key: "Tipo" },
+    { name: "Nombre del Equipo", key: "NombreDelEquipo" },
+    { name: "Procesador", key: "Procesador" },
+    { name: "RAM", key: "RAM" },
+    { name: "Memoria Interna", key: "MemoriaInterna" },
+    { name: "Sistema Operativo", key: "SistemaOperativo" },
     {
       name: "Acciones",
       key: "acciones",
@@ -92,7 +92,7 @@ const MostComputadora = () => {
       key: "Mantenimiento",
       render: (row) => (
         <div className="space-y-2 items-center">
-          <BotonMatenimiento rowData={row} />
+          <BotonAsignacionDispositivo rowData={row} />
         </div>
       ),
     },

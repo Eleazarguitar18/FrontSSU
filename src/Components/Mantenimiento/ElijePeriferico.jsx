@@ -3,8 +3,8 @@ import axios from "axios";
 import { url_base } from "../data/base.routes.js";
 import PlantillaTabla from "../tools/PlantillaTabla.jsx";
 import { MensajeCarga } from "../tools/MensajeCarga.jsx";
-import { BotonMatenimiento } from "../tools/BotonesCRUD.jsx";
-const ElijePeriferico = () => {
+import { BotonAsignacionDispositivo } from "../tools/BotonesCRUD.jsx";
+const ElijePeriferico = ({ urlSiguiente }) => {
   // const url_base = "http://localhost:3000";
   const [datos, setDatos] = useState(null);
   function objetoAString(row) {
@@ -55,7 +55,11 @@ const ElijePeriferico = () => {
       key: "Mantenimiento",
       render: (row) => (
         <div className="space-y-2 items-center">
-          <BotonMatenimiento rowData={row} titulo={"Elegir"} />
+          <BotonAsignacionDispositivo
+            rowData={row}
+            titulo={"Elegir"}
+            urlSiguiente={urlSiguiente}
+          />
         </div>
       ),
     },

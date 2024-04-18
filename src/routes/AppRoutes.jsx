@@ -1,5 +1,11 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import React from "react";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import HomePage from "../Components/HomePage";
 import NotFound from "../Components/Notfound";
 import Cabezera from "../Components/Cabezera";
@@ -31,22 +37,40 @@ import { AsignarPersonal } from "../Components/PersonalSSU/AsignarPersonal";
 import { RegistroPersonal } from "../Components/PersonalSSU/RegistroPersonal";
 import { MostrarPersonal } from "../Components/PersonalSSU/MostrarPersonal";
 import { EditarPersonal } from "../Components/PersonalSSU/EditarPersonal";
-import { AsignarMantenimiento } from "../Components/Mantenimiento/AsignarMantenimiento";
+import { AsignarDispositivo } from "../Components/Mantenimiento/AsignarDispositivo";
 import ElijePC from "../Components/Mantenimiento/ElijePC";
 import ElijePeriferico from "../Components/Mantenimiento/ElijePeriferico";
+import { Login } from "../Components/login/Login";
+import { useData } from "../Components/context/DataContext";
 // import AsignarDispositivo from "../Components/tools/AsignarDispositivo";
 
 export default function AppRoutes() {
+  const { dataLogin, setDataLogin } = useData();
+  const {
+    setDataPersonal,
+    setDataPersonalEntrega,
+    setDataPersonalRecepcion,
+    setDataPersonalSolicitante,
+  } = useData();
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   navigate("/login");
+  // }, []);
   return (
     <div className="bg-slate-200 text-slate-800 h-screen">
       <BrowserRouter>
-        <div>
-          <Cabezera />
-        </div>
+        {dataLogin && (
+          <div>
+            <Cabezera />
+          </div>
+        )}
+
         <div className="">
           <Routes>
+            <Route path="/" element={<Login />} />
             {/* Estilo en línea con objeto de estilo */}
-            <Route path="/" element={<HomePage />} />
+
+            <Route path="/home" element={<HomePage />} />
             <Route path="/pc" element={<FormComputadora />} />
             <Route path="/periferico" element={<FromPeriferico />} />
             <Route path="/mostrarpc" element={<MostComputadora />} />
@@ -56,16 +80,40 @@ export default function AppRoutes() {
 
             <Route path="/registroPersonal" element={<RegistroPersonal />} />
             <Route path="/mostrarPersonal" element={<MostrarPersonal />} />
-            <Route path="/asignarPersonal" element={<AsignarPersonal />} />
+
             <Route path="/editarPersonal" element={<EditarPersonal />} />
             {/* MANTENIMIENTO  */}
 
             <Route path="/mostrarMant" element={<MostMantenimiento />} />
             <Route path="/registrarMant" element={<RegistrarMantenimiento />} />
-            {}
-            <Route path="/nuevoMant" element={<AsignarMantenimiento />} />
-            <Route path="/elegirpc" element={<ElijePC />} />
-            <Route path="/elegirperiferico" element={<ElijePeriferico />} />
+            {/* Asignar dispositivo */}
+            <Route
+              path="/nuevoMant"
+              element={
+                <AsignarDispositivo
+                  urlSiguientePC={"/elegirpc"}
+                  urlSiguientePeriferico={"/elegirperiferico"}
+                />
+              }
+            />
+            <Route
+              path="/elegirpc"
+              element={<ElijePC urlSiguiente={"/asignarPersonal"} />}
+            />
+            <Route
+              path="/elegirperiferico"
+              element={<ElijePeriferico urlSiguiente={"/asignarPersonal"} />}
+            />
+            <Route
+              path="/asignarPersonal"
+              element={
+                <AsignarPersonal
+                  setDataPersonal={setDataPersonal}
+                  urlCancelar={"/mostrarMant"}
+                  urlSiguiente={"/registrarMant"}
+                />
+              }
+            />
             <Route
               path="/posponerMantenimiento"
               element={<PosponerMantenimiento />}
@@ -74,10 +122,60 @@ export default function AppRoutes() {
               path="/asignarDispositivoMant"
               element={<AsignarDispositivo />}
             /> */}
-
+            {/* Asignacion de equipos y perifericos */}
             <Route path="/mostrarAsig" element={<MostAsignacion />} />
             <Route path="/registrarAsig" element={<FormAsignacion />} />
             <Route path="/editarAsignacion" element={<EditAsignacion />} />
+            <Route
+              path="/nuevoAsignacion"
+              element={
+                <AsignarDispositivo
+                  urlSiguientePC={"/elegirpcAsignar"}
+                  urlSiguientePeriferico={"/elegirperifericoAsignar"}
+                />
+              }
+            />
+            <Route
+              path="/elegirpcAsignar"
+              element={<ElijePC urlSiguiente={"/asignaPersonalRecepcion"} />}
+            />
+            <Route
+              path="/elegirperifericoAsignar"
+              element={<ElijePeriferico />}
+            />
+            <Route
+              path="/asignaPersonalRecepcion"
+              element={
+                <AsignarPersonal
+                  urlCancelar={"/mostrarAsig"}
+                  setDataPersonal={setDataPersonalRecepcion}
+                  titulo={"Seleccione al Encargado de la recepcion"}
+                  urlSiguiente={"/asignaPersonalEntrega"}
+                />
+              }
+            />
+            <Route
+              path="/asignaPersonalEntrega"
+              element={
+                <AsignarPersonal
+                  setDataPersonal={setDataPersonalEntrega}
+                  titulo={"Seleccione al Encargado de la entrega"}
+                  urlCancelar={"/mostrarAsig"}
+                  urlSiguiente={"/asignaSolicitante"}
+                />
+              }
+            />
+            <Route
+              path="/asignaSolicitante"
+              element={
+                <AsignarPersonal
+                  setDataPersonal={setDataPersonalSolicitante}
+                  titulo={"Seleccione al personal solicitante"}
+                  urlCancelar={"/mostrarAsig"}
+                  urlSiguiente={"/registrarAsig"}
+                />
+              }
+            />
 
             <Route path="/datosred" element={<Datos_red />} />
             <Route path="/registrarRed" element={<RegistrarRed />} />

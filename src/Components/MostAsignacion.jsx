@@ -95,7 +95,7 @@ const MostAsignacion = () => {
       data={datos}
       columns={fields}
       title={"Detalles de la Asignacion"}
-      boton={<BotonSimple to="/registrarAsig">Nueva Asignacion</BotonSimple>}
+      boton={<BotonSimple to="/nuevoAsignacion">Nueva Asignacion</BotonSimple>}
     />
   );
   //(

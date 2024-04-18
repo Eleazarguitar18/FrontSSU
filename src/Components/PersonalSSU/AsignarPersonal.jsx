@@ -10,7 +10,13 @@ import {
   BotonEliminar,
 } from "../tools/BotonesCRUD.jsx";
 import { BotonAsignarPersonal } from "../tools/ButtonAsignar.jsx";
-export const AsignarPersonal = () => {
+import BotonSimple from "../tools/BotonSimple.jsx";
+export const AsignarPersonal = ({
+  setDataPersonal,
+  urlCancelar,
+  urlSiguiente,
+  titulo = "Datos del Personal",
+}) => {
   const [datos, setDatos] = useState(null);
   // const pasarDatos = (rowData) => {
   //   console.log("me han llegado los datos", rowData);
@@ -58,7 +64,12 @@ export const AsignarPersonal = () => {
       key: "acciones",
       render: (row) => (
         <div className="space-y-2">
-          <BotonAsignarPersonal rowData={row} titleButton={"Asignar"} />
+          <BotonAsignarPersonal
+            rowData={row}
+            titleButton={"Asignar"}
+            setDataPersonal={setDataPersonal}
+            urlSiguiente={urlSiguiente}
+          />
         </div>
       ),
     },
@@ -69,7 +80,10 @@ export const AsignarPersonal = () => {
       <PlantillaTabla
         columns={columns}
         data={datos}
-        title={"Datos de Personal"}
+        title={titulo}
+        boton={
+          <BotonSimple to={urlCancelar} children={"Cancelar Asignacion"} />
+        }
       />
     </div>
   );

@@ -46,15 +46,15 @@ const MostMantenimiento = () => {
     return <MensajeCarga />;
   }
   const columns = [
-    { name: "fecha_inicial", key: "fecha_inicial", sortable: true },
-    { name: "actividad", key: "actividad", sortable: true },
-    { name: "fecha_final", key: "fecha_final", sortable: true },
-    { name: "estado", key: "estado", sortable: true },
+    { name: "Fecha inicial", key: "fecha_inicial", sortable: true },
+    { name: "Actividad", key: "actividad", sortable: true },
+    { name: "Fecha final", key: "fecha_final", sortable: true },
+    { name: "Estado", key: "estado", sortable: true },
     { name: "Detalles", key: "Detalles", sortable: true },
-    { name: "tipo", key: "tipo", sortable: true },
+    { name: "Tipo", key: "tipo", sortable: true },
     { name: "Unidad", key: "Unidad", sortable: true },
     { name: "Marca", key: "Marca", sortable: true },
-    { name: "TipoEquipo", key: "TipoEquipo", sortable: true },
+    { name: "Tipo de Equipo", key: "TipoEquipo", sortable: true },
     { name: "Ubicacion", key: "Ubicacion", sortable: true },
     { name: "Recomendaciones", key: "recomendaciones" },
     {

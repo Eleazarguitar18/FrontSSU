@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
-export const AsignarMantenimiento = () => {
+export const AsignarDispositivo = ({
+  urlSiguientePC,
+  urlSiguientePeriferico,
+}) => {
   const navigate = useNavigate();
   const asignarPC = () => {
-    navigate("/elegirpc");
+    navigate(urlSiguientePC.toString());
   };
   const asignarPeriferico = () => {
-    navigate("/elegirperiferico");
+    navigate(urlSiguientePeriferico.toString());
   };
   return (
     <div>

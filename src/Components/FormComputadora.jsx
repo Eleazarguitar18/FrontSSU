@@ -51,12 +51,19 @@ const FormComputadora = () => {
     { name: "Unidad", label: "Unidad" },
     { name: "Marca", label: "Marca" },
     { name: "Detalle", label: "Detalle" },
-    { name: "Tipo", label: "Tipo" },
-    { name: "NombreDelEquipo", label: "NombreDelEquipo" },
+    {
+      name: "Tipo",
+      label: "Tipo",
+      options: [
+        { value: "Portatil", label: "Portatil" },
+        { value: "Escritorio", label: "Escritorio" },
+      ],
+    },
+    { name: "NombreDelEquipo", label: "Nombre del Equipo" },
     { name: "Procesador", label: "Procesador" },
     { name: "RAM", label: "RAM" },
-    { name: "MemoriaInterna", label: "MemoriaInterna" },
-    { name: "SistemaOperativo", label: "SistemaOperativo" },
+    { name: "MemoriaInterna", label: "Memoria Interna" },
+    { name: "SistemaOperativo", label: "Sistema Operativo" },
 
     // Agrega más campos según sea necesario
   ];

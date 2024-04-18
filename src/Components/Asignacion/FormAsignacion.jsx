@@ -4,22 +4,44 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useFormSubmit } from "../context/DispositivoContext";
 import { url_base } from "../data/base.routes";
-
+import FormularioAsignacion from "../tools/FormularioPlantilla";
+import { useData } from "../context/DataContext";
+import { useNavigate } from "react-router-dom";
 const FormAsignacion = () => {
+  const navigate = useNavigate();
+  const mostrarAsig = () => {
+    navigate("/mostrarAsig");
+  };
+  // ! TODO: SACAR DATOS DEL ENCARGADO DE RECEPCION,ENTREGA,SOLICITANT
   const { nuevoAsignacion } = useFormSubmit();
-
+  const { dataDispositivo } = useData();
+  const {
+    dataPersonal,
+    dataPersonalEntrega,
+    dataPersonalRecepcion,
+    dataPersonalSolicitante,
+  } = useData();
+  console.log("Datos de encargado", dataPersonalEntrega);
+  console.log("Datos del personal de recepcion", dataPersonalRecepcion);
+  console.log("Datos del personal del solicitante", dataPersonalSolicitante);
   const initialValues = {
     Nro: "",
     fecha_salida: "",
     fecha_regreso: "",
     hora_salida: "",
     hora_llegada: "",
-    encargado_de_entrega: "",
-    encargado_de_recepcion: "",
-    TipoAsignacion: "",
-    datos_solicitante: "",
+    encargado_de_entrega:
+      `${dataPersonalEntrega.Nombres} ${dataPersonalEntrega.ApellidoPaterno} ${dataPersonalEntrega.ApellidoMaterno}` ||
+      "",
+    encargado_de_recepcion:
+      `${dataPersonalRecepcion.Nombres} ${dataPersonalRecepcion.ApellidoPaterno} ${dataPersonalRecepcion.ApellidoMaterno}` ||
+      "",
+    TipoAsignacion: "Temporal" || "",
+    datos_solicitante:
+      `${dataPersonalSolicitante.Nombres} ${dataPersonalSolicitante.ApellidoPaterno} ${dataPersonalSolicitante.ApellidoMaterno}` ||
+      "",
     observaciones: "",
-    id_Dispositivo: "",
+    id_Dispositivo: dataDispositivo.id_Dispositivo || "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -35,142 +57,48 @@ const FormAsignacion = () => {
     observaciones: Yup.string(),
     id_Dispositivo: Yup.number().required("Campo requerido"),
   });
-  const onSubmit = async (values) => {
+
+  const fields = [
+    { name: "Nro", label: "Nro" },
+    { name: "fecha_salida", label: "Fecha Salida", type: "date" },
+    { name: "fecha_regreso", label: "Fecha regreso", type: "date" },
+    { name: "hora_salida", label: "Hora salida", type: "time" },
+    { name: "hora_llegada", label: "Hora llegada", type: "time" },
+    { name: "encargado_de_entrega", label: "Encargado de entrega" },
+    { name: "encargado_de_recepcion", label: "Encargado de recepcion" },
+    {
+      name: "TipoAsignacion",
+      label: "Tipo de asignacion",
+      options: [
+        { value: "Temporal", label: "Temporal" },
+        { value: "Indefinido", label: "Indefinido" },
+      ],
+    },
+    {
+      name: "datos_solicitante",
+      label: `Datos del solicitante (nombre - apellido) `,
+    },
+    { name: "observaciones", label: "Observaciones" },
+    { name: "id_Dispositivo", label: "ID Dispositivo" },
+  ];
+  const onSubmit = async (values, { resetForm }) => {
     console.log("valores a enviar", values);
     try {
       const response = await nuevoAsignacion(values);
       console.log("RESPUESTA", response);
+      resetForm();
+      mostrarAsig();
     } catch (error) {
       console.error("Error al enviar datos:", error);
     }
   };
   return (
-    <div>
-      <h1>Formulario de Asignación</h1>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            <div>
-              <label>Nro:</label>
-              <Field type="text" name="Nro" />
-              <ErrorMessage name="Nro" component="div" className="error" />
-            </div>
-
-            <div>
-              <label>Fecha de Salida:</label>
-              <Field type="date" name="fecha_salida" />
-              <ErrorMessage
-                name="fecha_salida"
-                component="div"
-                className="error"
-              />
-            </div>
-
-            <div>
-              <label>Fecha de Regreso:</label>
-              <Field type="date" name="fecha_regreso" />
-              <ErrorMessage
-                name="fecha_regreso"
-                component="div"
-                className="error"
-              />
-            </div>
-
-            <div>
-              <label>Hora de Salida:</label>
-              <Field type="time" name="hora_salida" />
-              <ErrorMessage
-                name="hora_salida"
-                component="div"
-                className="error"
-              />
-            </div>
-
-            <div>
-              <label>Hora de Llegada:</label>
-              <Field type="time" name="hora_llegada" />
-              <ErrorMessage
-                name="hora_llegada"
-                component="div"
-                className="error"
-              />
-            </div>
-
-            <div>
-              <label>Encargado de Entrega:</label>
-              <Field type="text" name="encargado_de_entrega" />
-              <ErrorMessage
-                name="encargado_de_entrega"
-                component="div"
-                className="error"
-              />
-            </div>
-
-            <div>
-              <label>Encargado de Recepción:</label>
-              <Field type="text" name="encargado_de_recepcion" />
-              <ErrorMessage
-                name="encargado_de_recepcion"
-                component="div"
-                className="error"
-              />
-            </div>
-
-            <div>
-              <label>Tipo de Asignación:</label>
-              <Field type="text" name="TipoAsignacion" />
-              <ErrorMessage
-                name="TipoAsignacion"
-                component="div"
-                className="error"
-              />
-            </div>
-
-            <div>
-              <label>Datos del Solicitante:</label>
-              <Field type="text" name="datos_solicitante" />
-              <ErrorMessage
-                name="datos_solicitante"
-                component="div"
-                className="error"
-              />
-            </div>
-
-            <div>
-              <label>Observaciones:</label>
-              <Field type="text" name="observaciones" />
-              <ErrorMessage
-                name="observaciones"
-                component="div"
-                className="error"
-              />
-            </div>
-
-            <div>
-              <label>ID del Dispositivo:</label>
-              <Field type="number" name="id_Dispositivo" />
-              <ErrorMessage
-                name="id_Dispositivo"
-                component="div"
-                className="error"
-              />
-            </div>
-
-            <button
-              className="p-4 bg-slate-600"
-              type="submit"
-              disabled={isSubmitting}
-            >
-              Enviar
-            </button>
-          </Form>
-        )}
-      </Formik>
-    </div>
+    <FormularioAsignacion
+      valoresIniciales={initialValues}
+      fields={fields}
+      titulo={"Asignacion de Dispositivos"}
+      onSubmit={onSubmit}
+    />
   );
 };
 

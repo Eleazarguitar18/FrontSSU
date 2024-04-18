@@ -8,12 +8,16 @@ import { useData } from "./context/DataContext";
 const FormPeriferico = () => {
   // const handleSubmit = handleSubmitPeriferico;
   const { handleSubmitPeriferico } = useFormSubmit();
-
+  const navigate = useNavigate();
+  const mostrarPeriferico = () => {
+    navigate("/mostrarperi");
+  };
   const enviarFormulario = async (values, { resetForm }) => {
     try {
       const response = await handleSubmitPeriferico(values);
       // Realizar acciones adicionales según sea necesario
       resetForm();
+      mostrarPeriferico();
     } catch (error) {
       // Manejar el error de envío del formulario
     }

@@ -8,11 +8,11 @@ import DynamicForm from "../tools/FormularioPlantilla";
 import { useData } from "../context/DataContext"; // Asegúrate de importar tu contexto de datos
 // const navigate = useNavigate();
 const RegistrarMantenimiento = () => {
-  const { dataMantenimiento, dataDispositivo } = useData();
+  const { dataPersonal, dataDispositivo } = useData();
   //   const { agregarMantenimiento } = useContext(DataContext); // Obtener función para agregar mantenimiento desde el contexto
   console.log(
     "logre conseguir el id",
-    dataMantenimiento,
+    dataPersonal,
     dataDispositivo.id_Dispositivo
   );
   const initialValues = {
@@ -23,7 +23,7 @@ const RegistrarMantenimiento = () => {
     Detalles: "",
     tipo: "",
     id_Dispositivo: dataDispositivo.id_Dispositivo || "",
-    id_PersonalSSU: dataMantenimiento || "",
+    id_PersonalSSU: dataPersonal.id_PersonalSSU || "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -55,7 +55,15 @@ const RegistrarMantenimiento = () => {
     { name: "fecha_final", label: "Fecha final", type: "date" },
     { name: "estado", label: "Estado" },
     { name: "Detalles", label: "Detalles" },
-    { name: "tipo", label: "Tipo de Mantenimiento" },
+    {
+      name: "tipo",
+      label: "Tipo de Mantenimiento",
+      options: [
+        { value: "Correctivo", label: "Correctivo" },
+        { value: "Preventivo", label: "Preventivo" },
+        { value: "Soporte", label: "Soporte" },
+      ],
+    },
     { name: "tipo_falla", label: "Tipo de Falla" },
     { name: "encargadoMant", label: "Encargado del mantenimiento" },
     { name: "recomendaciones", label: "Recomendaciones" },

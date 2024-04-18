@@ -11,7 +11,7 @@ import {
   BotonGenerarPDF,
   BotonHistorial,
   BotonEliminar,
-  BotonMatenimiento,
+  BotonAsignacionDispositivo,
 } from "./tools/BotonesCRUD.jsx";
 const MostComputadora = () => {
   // const url_base = "http://localhost:3000";
@@ -87,7 +87,7 @@ const MostComputadora = () => {
       key: "Mantenimiento",
       render: (row) => (
         <div className="space-y-2 items-center">
-          <BotonMatenimiento rowData={row} />
+          <BotonAsignacionDispositivo rowData={row} />
         </div>
       ),
     },
