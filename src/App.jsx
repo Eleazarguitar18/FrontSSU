@@ -9,8 +9,16 @@ function App() {
   return (
     <div className="bg-slate-200 h-screen">
       <AppRoutes />
+      {/* 
+      {if(true){
+        <AppRoutes />
+        <AppRoutes />
+        <AppRoutes />
+      }} */}
     </div>
   );
+  // paquete de auth 
+  //
 }
 
 export default App;
